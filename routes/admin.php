@@ -60,9 +60,10 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('balances', 'WalletBalancesController@index')->name('balances');
 
     // Messages
-    Route::get('messages', 'MessagesController@index')->name('messages');
-    Route::get('messages/{id}', 'MessagesController@view')->name('messages.view');
-    Route::post('messages/{id}', 'MessagesController@update')->name('messages.update');
+    Route::get('messages/{status?}', 'MessagesController@index')->name('messages')->where('status', '[A-Za-z]+');
+    Route::get('messages/{message}', 'MessagesController@show')->name('messages.show')->where('message', '[0-9]+');
+    Route::post('messages/{message}', 'MessagesController@update')->name('messages.update')->where('message', '[0-9]+');
+    Route::delete('messages/{message}', 'MessagesController@destroy')->name('messages.destroy')->where('message', '[0-9]+');
 
     // Users
     Route::get('users', 'UsersController@index')->name('users');

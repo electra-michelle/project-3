@@ -15,6 +15,8 @@ return [
 
     'default' => env('MAIL_MAILER', 'smtp'),
 
+    'logo' => env('MAIL_LOGO', 'https://laravel.com/img/notification-logo.png'),
+
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations

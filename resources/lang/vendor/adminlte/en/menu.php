@@ -14,5 +14,7 @@ return [
     'messages'                  	=> 'Messages',
     'wallet_balances'             	=> 'Wallet Balances',
     'telegram_newsletters'         	=> 'Telegram Newsletters',
-    'messages'                  	=> 'Messages',
+    'unread_messages'               => 'Unread Messages',
+    'read_messages'                 => 'Read Messages',
+    'all_messages'                  => 'All Messages',
 ];

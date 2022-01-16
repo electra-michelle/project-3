@@ -233,8 +233,7 @@ return [
         ],
         [
             'text' => 'deposits',
-            //'route'  => 'admin.deposits',
-            'icon' => 'fas fa-arrow-alt-circle-up',
+            'icon' => 'fas fa-fw fa-arrow-alt-circle-up',
             'submenu' => [
                 [
                     'text' => 'Active Deposits',
@@ -292,9 +291,25 @@ return [
         ],*/
         [
             'text' => 'messages',
-            'route'  => 'admin.messages',
             'icon' => 'fas fa-fw fa-envelope',
             'active' => ['*/messages*'],
+            'submenu' => [
+                [
+                    'text' => 'all_messages',
+                    'route'  => 'admin.messages',
+                    'icon' => 'far fa-fw fa-circle text-success',
+                ],
+                [
+                    'text' => 'unread_messages',
+                    'route'  => ['admin.messages', ['status' => 'unread']],
+                    'icon' => 'far fa-fw fa-circle text-warning',
+                ],
+                [
+                    'text' => 'read_messages',
+                    'route'  => ['admin.messages', ['status' => 'read']],
+                    'icon' => 'far fa-fw fa-circle',
+                ],
+            ]
         ],
         [
             'text' => 'settings',
