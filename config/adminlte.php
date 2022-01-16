@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => true,
-    'dashboard_url' => 'admin.home',
+    'dashboard_url' => 'admin.dashboard',
     'logout_url' => 'admin.logout',
     'login_url' => 'admin.login',
     'register_url' => 'admin.register',
@@ -225,98 +225,81 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
+        ['header' => 'main_navigation'],
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
+            'text' => 'dashboard',
+            'route'  => 'admin.dashboard',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
         [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
-
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'deposits',
+            //'route'  => 'admin.deposits',
+            'icon' => 'fas fa-arrow-alt-circle-up',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Active Deposits',
+                    'route'  => 'admin.deposits',
+                    'icon' => 'far fa-fw fa-circle text-success',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Deposit Requests',
+                    'route'  => ['admin.deposits', ['status' => 'pending']],
+                    'icon' => 'far fa-fw fa-circle text-warning',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Cancelled Deposits',
+                    'route'  => ['admin.deposits', ['status' => 'cancelled']],
+                    'icon' => 'far fa-fw fa-circle text-danger',
                 ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+                [
+                    'text' => 'Finished Deposits',
+                    'route'  => ['admin.deposits', ['status' => 'finished']],
+                    'icon' => 'far fa-fw fa-circle',
+                ],
+            ]
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'payouts',
+            'route'  => 'admin.payouts',
+            'icon' => 'fas fa-arrow-alt-circle-down',
+            'active' => ['*/payouts*'],
+        ],
+        [
+            'text' => 'users',
+            'route'  => 'admin.users',
+            'icon' => 'fas fa-fw fa-users',
+            'active' => ['*/users*'],
+        ],
+        /*[
+            'text' => 'search',
+            'route'  => 'admin.dashboard',
+            'icon' => 'fas fa-fw fa-search',
+        ],*/
+        [
+            'text' => 'wallet_balances',
+            'route'  => 'admin.balances',
+            'icon' => 'fas fa-fw fa-chart-line',
+        ],
+        /*[
+            'text' => 'telegram_newsletters',
+            'route'  => 'admin.dashboard',
+            'icon' => 'fab fa-fw fa-telegram',
+        ],*/
+        /*[
+            'text' => 'news',
+            'route'  => 'admin.news',
+            'icon' => 'fas fa-newspaper',
+        ],*/
+        [
+            'text' => 'messages',
+            'route'  => 'admin.messages',
+            'icon' => 'fas fa-fw fa-envelope',
+            'active' => ['*/messages*'],
+        ],
+        [
+            'text' => 'settings',
+            'route'  => 'admin.settings',
+            'icon' => 'fas fa-fw fa-cogs',
         ],
     ],
 
