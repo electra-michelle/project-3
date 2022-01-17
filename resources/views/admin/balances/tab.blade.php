@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['deposits'] }}</h3>
+                    <h3>{{ $walletData[$key]['deposit_count'] }}</h3>
 
                     <p>Deposit Count</p>
                 </div>
@@ -12,7 +12,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['totalDeposit'] }}</h3>
+                    <h3>{{ $walletData[$key]['total_deposit'] }}</h3>
 
                     <p>{{ $currency }} Deposited</p>
                 </div>
@@ -21,7 +21,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['totalPayout'] ?? '-' }}</h3>
+                    <h3>{{ $walletData[$key]['total_payout'] }}</h3>
 
                     <p>{{ $paymentSystem->currency }} PAID OUT</p>
                 </div>
