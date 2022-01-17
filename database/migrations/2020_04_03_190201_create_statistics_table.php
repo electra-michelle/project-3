@@ -17,7 +17,7 @@ class CreateStatisticsTable extends Migration
             $table->id();
             $table->enum('type', ['total_deposit', 'total_payout', 'total_accounts', 'deposit_count', 'balance']);
 			$table->foreignId('payment_system_id')->nullable()->constrained()->deleteOnCascade();
-			$table->decimal('value', 15, 8)->default();
+			$table->decimal('value', 15, 8)->default(0);
 			$table->timestamps();
         });
     }

@@ -2,58 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Deposit;
 use App\Models\ExchangeRate;
 use App\Models\PaymentSystem;
-use App\Models\Payout;
 use App\PaymentSystems\ePayCore;
 use App\Services\CryptoNodeService;
 use App\Http\Controllers\Controller;
+use App\Services\StatisticsService;
 
 class WalletBalancesController extends Controller
 {
 
-    /**
-     * @param $paymentSystemId
-     * @return mixed
-     */
-    private function getDepositCount($paymentSystemId)
-    {
-        return Deposit::where(fn($query) => (
-            $query->where('status', 'active')
-                ->orWhere('status', 'finished')
-            )
-        )
-        ->where('payment_system_id', $paymentSystemId)
-        ->count();
-    }
-
-    /**
-     * @param null $paymentSystemId
-     * @return mixed
-     */
-    private function getDepositSum($paymentSystemId)
-    {
-        return Deposit::where(fn($query) => (
-            $query->where('status', 'active')
-                ->orWhere('status', 'finished')
-            )
-        )
-        ->where('payment_system_id', $paymentSystemId)
-        ->sum('amount');
-    }
-
-
-    /**
-     * @param null $paymentSystemId
-     * @return mixed
-     */
-    private function getPayoutSum($paymentSystemId)
-    {
-        return Payout::where('status', 'paid')
-        ->where('payment_system_id', $paymentSystemId)
-        ->sum('amount');
-    }
+    public function __construct(private StatisticsService $statisticsService)
+    {}
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -72,9 +32,9 @@ class WalletBalancesController extends Controller
         foreach($paymentSystems as $paymentSystem)
         {
             $walletData[$paymentSystem->value] = [
-                'deposits' => $this->getDepositCount($paymentSystem->id),
-                'totalDeposit' => $this->getDepositSum($paymentSystem->id),
-                'totalPayout' => $this->getPayoutSum($paymentSystem->id),
+                'deposits' => $this->statisticsService->getDepositCount($paymentSystem->id),
+                'totalDeposit' => $this->statisticsService->getDepositSum($paymentSystem->id),
+                'totalPayout' => $this->statisticsService->getPayoutSum($paymentSystem->id),
                 'balance' => 0
             ];
 
