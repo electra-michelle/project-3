@@ -49,4 +49,12 @@ class PaymentSystem extends Model
     {
         return $query->where('is_active', true);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function statistics()
+    {
+        return $this->hasMany(Statistic::class);
+    }
 }

@@ -19,4 +19,12 @@ class Statistic extends Model
         'value',
         'payment_system_id',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paymentSystem()
+    {
+        return $this->belongsTo(PaymentSystem::class);
+    }
 }

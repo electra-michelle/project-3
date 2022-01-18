@@ -40,15 +40,14 @@
     <script>
         $(document).ready(function () {
 
-            var allWalletBalance = {!! $charts['all'] ?? '' !!};
-            @foreach($paymentSystems as $paymentSystem)
-            var {{ $paymentSystem->value }}WalletBalance = {!! $charts[$paymentSystem->value . 'WalletBalance'] ?? "''" !!};
-            new Chart(document.getElementById("{{ $paymentSystem->value }}WalletBalance"), {
+            @foreach($charts as $chartKey => $chart)
+            var {{ $chartKey }}WalletBalance = {!! json_encode($chart['balance'])!!};
+            new Chart(document.getElementById("{{ $chartKey }}WalletBalance"), {
                 "type":"line",
                 "data": {
                     "datasets":[ {
-                        "label": "Wallet Balance in {{ $paymentSystem->currency }}",
-                        "data": {{ $paymentSystem->value }}WalletBalance,
+                        "label": "Wallet Balance in {{ $chart['currency'] }}",
+                        "data": {{ $chartKey }}WalletBalance,
                         "fill": false,
                         "borderColor": "rgb(75, 192, 192)",
                         "lineTension": 0.1
@@ -64,26 +63,6 @@
                 }
             });
             @endforeach
-            new Chart(document.getElementById("allWalletBalance"), {
-                "type":"line",
-                "data": {
-                    "datasets":[ {
-                        "label": "Wallet Balance in USD",
-                        "data": allWalletBalance,
-                        "fill": false,
-                        "borderColor": "rgb(75, 192, 192)",
-                        "lineTension": 0.1
-                    }
-                    ]
-                },
-                "options":  {
-                    scales: {
-                        xAxes: [{
-                            type: 'time'
-                        }]
-                    }
-                }
-            });
         });
     </script>
 @stop
