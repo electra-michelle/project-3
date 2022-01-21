@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class WithdrawController extends Controller
+class DepositsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index($status = null)
     {
-        //
+        $deposits = Deposit::when($status, fn($query) => (
+            $query->where('status', $status)
+        ))
+        ->paginate(15);
+
+        return view('admin.deposits.list', compact('deposits'));
     }
 
     /**

@@ -259,9 +259,25 @@ return [
         ],
         [
             'text' => 'payouts',
-            'route'  => 'admin.payouts',
-            'icon' => 'fas fa-arrow-alt-circle-down',
+            'icon' => 'fas fa-fw fa-arrow-alt-circle-down',
             'active' => ['*/payouts*'],
+            'submenu' => [
+                [
+                    'text' => 'All payouts',
+                    'route'  => 'admin.payouts',
+                    'icon' => 'far fa-fw fa-circle text-success',
+                ],
+                [
+                    'text' => 'Pending',
+                    'route'  => ['admin.payouts', ['status' => 'pending']],
+                    'icon' => 'far fa-fw fa-circle text-warning',
+                ],
+                [
+                    'text' => 'Paid',
+                    'route'  => ['admin.payouts', ['status' => 'paid']],
+                    'icon' => 'far fa-fw fa-circle text-danger',
+                ],
+            ]
         ],
         [
             'text' => 'users',

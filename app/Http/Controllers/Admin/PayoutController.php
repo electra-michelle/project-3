@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Payout;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DepositController extends Controller
+class PayoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($status = null)
     {
-        //
+        $payouts = Payout::latest()
+            ->when($status, fn($query) => (
+                $query->where('status', $status)
+            ))
+            ->paginate(15);
+
+        return view('admin.payouts.list', compact('payouts'));
     }
 
     /**

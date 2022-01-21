@@ -79,8 +79,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('deposits/{id}/recover', 'DepositsController@recover')->name('deposits.recover');
 
     // Payouts
-    Route::get('payouts', 'PayoutsController@index')->name('payouts');
-    Route::get('payouts/{id}', 'PayoutsController@view')->name('payouts.view');
+    Route::get('payouts/{status?}', 'PayoutController@index')->name('payouts')->where('status', '[A-Za-z]+');
+    Route::get('payouts/{payout}', 'PayoutController@view')->name('payouts.view')->where('payout', '[0-9]+');
 });
 
 
