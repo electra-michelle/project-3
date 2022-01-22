@@ -8,6 +8,7 @@ return [
         'password' => env('BITCOIN_RPC_PASSWORD'),
         'port' => env('BITCOIN_RPC_PORT', 8332),
         'wallet' => env('BITCOIN_RPC_WALLET'),
+        'account' => env('BITCOIN_RPC_ACCOUNT'),
     ],
 
     'bitcoincash'	=>	[
@@ -16,6 +17,7 @@ return [
         'password' => env('BITCOIN_CASH_RPC_PASSWORD'),
         'port' => env('BITCOIN_CASH_RPC_PORT', 8332),
         'wallet' => env('BITCOIN_CASH_RPC_WALLET'),
+        'account' => env('BITCOIN_CASH_RPC_ACCOUNT'),
     ],
 
     'litecoin'	=>	[
@@ -23,7 +25,8 @@ return [
         'username' => env('LITECOIN_RPC_USERNAME'),
         'password' => env('LITECOIN_RPC_PASSWORD'),
         'port' => env('LITECOIN_RPC_PORT', 9432),
-        'wallet' => env('BITCOIN_CASH_RPC_WALLET'),
+        'wallet' => env('LITECOIN_RPC_WALLET'),
+        'account' => env('LITECOIN_RPC_ACCOUNT'),
     ],
 
     'dogecoin'	=>	[
@@ -32,6 +35,7 @@ return [
         'password' => env('DOGECOIN_RPC_PASSWORD'),
         'port' => env('DOGECOIN_RPC_PORT', 22555),
         'wallet' => env('DOGECOIN_RPC_WALLET'),
+        'account' => env('DOGECOIN_RPC_ACCOUNT'),
     ],
 
     'dash'	=>	[
@@ -40,5 +44,6 @@ return [
         'password' => env('DASH_RPC_PASSWORD'),
         'port' => env('DASH_RPC_PORT', 9998),
         'wallet' => env('DASH_RPC_WALLET'),
+        'account' => env('DASH_RPC_ACCOUNT'),
     ],
 ];

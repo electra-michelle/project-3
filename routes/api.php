@@ -15,4 +15,4 @@ use App\Http\Controllers\Api\ePayCoreController;
 |
 */
 
-Route::any('epaycore/status', [ePayCoreController::class, 'accept']);
+Route::post('epaycore/status', [ePayCoreController::class, 'accept']);

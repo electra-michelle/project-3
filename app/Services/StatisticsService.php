@@ -92,7 +92,7 @@ class StatisticsService
 
             if($paymentSystem->currency != 'USD') {
                 $exchangeRate = ExchangeRate::where('from', $paymentSystem->currency)->first();
-                $convertedBalance = $walletData[$paymentSystem->value]['balance'] * (json_decode($exchangeRate->rate)->USD ?? 1);
+                $convertedBalance = $walletData[$paymentSystem->value]['balance'] * (json_decode($exchangeRate?->rate)?->USD ?? 1);
             }
 
             $walletData['all']['balance'] += $convertedBalance ?? $walletData[$paymentSystem->value]['balance'];

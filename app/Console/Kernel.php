@@ -15,11 +15,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('disposable:update')->daily();
+
         $schedule->command('exchange:rates')->hourly();
         $schedule->command('store:statistics')->hourly();
+
         $schedule->command('calculate:profit')->everyMinute();
+
+        $schedule->command('crypto:transactions')->everyMinute();
+        $schedule->command('crypto:accept')->everyMinute();
+
+        $schedule->command('payouts:crypto')->everyMinute();
+        $schedule->command('payouts:epaycore')->everyMinute();
 
     }
 

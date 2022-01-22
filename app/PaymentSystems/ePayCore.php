@@ -21,6 +21,34 @@ class ePayCore
         $this->config = config('epaycore.api');
     }
 
+    private function defaultRequestData()
+    {
+        return [
+            'api_id' => $this->config['id'],
+            'api_secret' => $this->config['secret']
+        ];
+    }
+
+    private function makeRequest($uri, $data = [], $method = 'POST')
+    {
+        $data = array_merge(
+            $this->defaultRequestData(),
+            $data
+        );
+
+        $requestOptions = [
+            ($method == 'GET' ? 'query' : 'body') => $method == 'GET' ? $data : json_encode($data),
+            'headers' => [
+                'content-type' => 'application/json',
+                'Accept'    => 'application/json',
+            ]
+        ];
+
+        $response = $this->client->request($method, $uri, $requestOptions);
+
+        return json_decode($response->getBody()->__toString());
+    }
+
     /**
      * @return int
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -28,20 +56,36 @@ class ePayCore
     public function getBalance()
     {
         try {
-            $response = $this->client->post('balance',
-                ['form_params' => [
-                    'api_id' => $this->config['id'],
-                    'api_secret' => $this->config['secret']]
-                ]
-            );
-            $balance = json_decode($response->getBody()->getContents());
+            $balance = $this->makeRequest('balance');
 
             return $balance->total;
 
         } catch (\Exception $exception) {
             return 0;
         }
+    }
 
+    public function transfer($account, $amount, $description = null, $paymentId = null, $currency = null)
+    {
+        $data = [
+            'currency' => $currency ?? config('epaycore.currency'),
+            'account' => $account,
+            'amount' => $amount,
+        ];
+
+        if($description) {
+            $data['descr'] = $description;
+        }
+
+        if($paymentId) {
+            $data['payment_id'] = $paymentId;
+        }
+
+        try {
+            return $this->makeRequest('transfer', $data);
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 
     /**

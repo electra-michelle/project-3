@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 
 class DepositService
 {
+
     /**
      * @param Deposit $deposit
      * @param $transactionId
+     * @return Deposit
      */
     public function acceptDeposit(Deposit $deposit, $transactionId)
     {
@@ -68,6 +70,8 @@ class DepositService
                 ])
             ]);
         }
+
+        return $deposit;
 
     }
 

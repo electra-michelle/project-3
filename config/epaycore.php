@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'currency'  => env('EPC_CURRENCY', 'USD'),
 
     'api' => [
 		'id' => env('EPC_API_ID'),
