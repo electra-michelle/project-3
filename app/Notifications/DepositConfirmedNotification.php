@@ -39,9 +39,9 @@ class DepositConfirmedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Deposit Confirmed')
+            ->subject('Deposit Activated')
             ->greeting('Congratulations, ' . $notifiable->name)
-            ->line('Your deposit of ' . $this->amount . ' ' . $this->currency . ' (' . $this->wallet . ') has been successfully confirmed at ' . $this->plan . '.');
+            ->line('Your deposit of ' . $this->amount . ' ' . $this->currency . ' (' . $this->wallet . ') has been successfully activated at ' . $this->plan . '.');
     }
 
     /**

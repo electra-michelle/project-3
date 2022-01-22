@@ -21,6 +21,9 @@ class ePayCore
         $this->config = config('epaycore.api');
     }
 
+    /**
+     * @return array
+     */
     private function defaultRequestData()
     {
         return [
@@ -29,6 +32,13 @@ class ePayCore
         ];
     }
 
+    /**
+     * @param $uri
+     * @param array $data
+     * @param string $method
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function makeRequest($uri, $data = [], $method = 'POST')
     {
         $data = array_merge(
@@ -65,6 +75,14 @@ class ePayCore
         }
     }
 
+    /**
+     * @param $account
+     * @param $amount
+     * @param null $description
+     * @param null $paymentId
+     * @param null $currency
+     * @return mixed|null
+     */
     public function transfer($account, $amount, $description = null, $paymentId = null, $currency = null)
     {
         $data = [

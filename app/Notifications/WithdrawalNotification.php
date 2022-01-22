@@ -43,7 +43,7 @@ class WithdrawalNotification extends Notification
         return (new MailMessage)
             ->subject('Withdrawal Processed')
             ->greeting('Congratulations, ' . $notifiable->name)
-            ->line('Your withdrawal of ' . $this->amount . ' ' . $this->currency . ' has been successfully sent to your secure ' . $this->wallet . ' Wallet with Transaction ID: ' . $this->transactionId);
+            ->line('Your withdrawal of ' . $this->amount . ' ' . $this->currency . ' has been successfully sent to your ' . $this->wallet . ' Wallet with Transaction ID: ' . $this->transactionId);
     }
 
     /**
