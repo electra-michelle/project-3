@@ -52,9 +52,9 @@ Route::middleware('admin.auth')->group(function () {
     // Settings
     Route::get('settings', 'SettingsController@index')->name('settings');
     Route::post('settings', 'SettingsController@store');
-
-    // News
-    Route::get('news', 'NewsController@index')->name('news');
+//
+//    // News
+//    Route::get('news', 'NewsController@index')->name('news');
 
     // Wallet Balance
     Route::get('balances', 'WalletBalancesController@index')->name('balances');
@@ -66,9 +66,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::delete('messages/{message}', 'MessagesController@destroy')->name('messages.destroy')->where('message', '[0-9]+');
 
     // Users
-    Route::get('users', 'UsersController@index')->name('users');
-    Route::get('users/{id}', 'UsersController@view')->name('users.view');
-    Route::post('users/{id}/edit', 'UsersController@update')->name('users.update');
+    Route::resource('users', 'UsersController');
 
     // Deposits
     Route::get('deposits/{status?}', 'DepositsController@index')->name('deposits')->where('status', '[A-Za-z]+');

@@ -19,7 +19,7 @@ class CreatePlansTable extends Migration
             $table->string('value')->unique();
 			$table->enum('period_type', ['hourly', 'daily', 'weekly','monthly']);
 			$table->boolean('principal_return')->default(false);
-            $table->decimal('affiliate_commission', 8, 2);
+            $table->decimal('affiliate_commission');
         });
     }
 

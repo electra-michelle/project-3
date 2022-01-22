@@ -3,6 +3,7 @@
 namespace App\PaymentSystems;
 
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class ePayCore
 {
@@ -40,6 +41,30 @@ class ePayCore
         } catch (\Exception $exception) {
             return 0;
         }
+
+    }
+
+    /**
+     * @param Request $request
+     * @return false|string
+     */
+    public function generateHash(Request $request)
+    {
+        # sign params
+        $sign = [
+            $request->input('epc_merchant_id'),
+            $request->input('epc_order_id'),
+            $request->input('epc_created_at'),
+            $request->input('epc_amount'),
+            $request->input('epc_currency_code'),
+            $request->input('epc_dst_account'),
+            $request->input('epc_src_account'),
+            $request->input('epc_batch'),
+            config('epaycore.sci.password')
+        ];
+
+        # get sha256 signature
+        return hash('sha256', implode(':', $sign));
 
     }
 

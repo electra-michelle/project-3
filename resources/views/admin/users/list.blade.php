@@ -18,6 +18,7 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Upline</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -34,6 +35,13 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.users.show', $user->id) }}">{{ Str::limit($user->email, 30) }}</a>
+                                    </td>
+                                    <td>
+                                        @if($user->upline)
+                                            <a href="{{ route('admin.users.show', $user->upline) }}">{{ $user->referredBy->username }}</a>
+                                        @else
+                                            N/a
+                                        @endif
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">

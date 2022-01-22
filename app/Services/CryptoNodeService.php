@@ -31,4 +31,14 @@ class CryptoNodeService
         return $balance ?: 0;
     }
 
+    /**
+     * @param $value
+     * @return boolean
+     */
+    public function validateAddress($value)
+    {
+        return $this->node
+                ->validateaddress($value)['isvalid'] ?? false;
+    }
+
 }

@@ -13,7 +13,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(15);
+        $users = User::with('referredBy')
+            ->latest()
+            ->paginate(15);
 
         return view('admin.users.list', compact('users'));
     }
@@ -40,14 +42,14 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $referralCount = $user->referrals()->count();
+
+        return view('admin.users.details', compact('user', 'referralCount'));
     }
 
     /**
