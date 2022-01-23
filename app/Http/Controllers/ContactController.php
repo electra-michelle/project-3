@@ -23,6 +23,6 @@ class ContactController extends Controller
     {
         Message::create($request->validated());
 
-        return redirect()->back()->with(['success' => 'Message has been successfully sent.']);
+        return redirect()->back()->with(['success' => 'Your message has been successfully sent.']);
     }
 }

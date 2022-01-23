@@ -3,23 +3,12 @@
 @section('content')
 @include('layouts.breadcrumb', [
     'title' => 'Contact us',
-    'sections' => [
-        'home' => 'Home',
-        'contact' => 'Contact',
-    ]])
+    'description' => 'If you have any questions, just fill the contact form and we will answer you shortly.'
+])
 
 <!-- Contact Section Start -->
 <section class="contact-section spaceBig">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-intro intro-center">
-                    <h2 class="section-title">Get In Touch With Us<span class="color">.</span></h2>
-                    <p>Lorem Ipsum available the majority have suffered alteration
-                        in some form, by injected humour, or randomised.</p>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="contact-wrap">

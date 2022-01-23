@@ -1312,11 +1312,17 @@ li.nav-item ul.dropdown-menu li.dropdown:hover > .dropdown-menu {
       margin-left: 5px; }
     .header-top .header-social span {
       font-size: 18px; } }
-
+.text-right {
+    text-align: right;
+}
 /* Header 3 CSS */
 .promo-section {
   background: #00415D;
-  padding: 150px 0 100px; }
+  padding: 50px 0 70px; }
+
+.promo-section .promo-wrap p {
+    color: #fff;
+}
   .promo-section.promo-bg::before {
     background: url("../images/header-bg.png") no-repeat;
     left: -8%;
