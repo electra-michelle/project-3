@@ -129,6 +129,7 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'indisposable' => 'Disposable email addresses are not allowed.',
+    'recaptcha' => 'Please, prove that you are not robot.',
 
     /*
     |--------------------------------------------------------------------------

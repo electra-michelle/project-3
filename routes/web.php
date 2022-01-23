@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () {return view('home');})->name('home');
+Route::get('/investments', function () {return view('home');})->name('investments');
+Route::get('/affiliate', function () {return view('home');})->name('affiliate');
+Route::get('/faq', function () {return view('home');})->name('faq');
+
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact', 'show')->name('contact');
+    Route::post('/contact', 'sendMessage');
 });
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
