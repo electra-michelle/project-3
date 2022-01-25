@@ -41,13 +41,18 @@
 <header class="header {{Route::currentRouteName() == 'home' ? 'index-header' : 'header-bg'  }}">
     <div class="header-top">
         <div class="container header-line">
-            <div class="top-info">
-                <ul>
-                    <li><i class="flaticon-pin"></i>234 King Street, Australia</li>
-                    <li><i class="flaticon-phone-call"></i><a href="tel://+1-800-915-6270">+1-800-915-6270</a></li>
-                    <li><i class="flaticon-email"></i><a href="mailto://admin@consulpro.com">admin@consulpro.com</a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header-social">
+                        <ul>
+                            <li><a href="#"><i class="flaticon-facebook"></i></a></li>
+                            <li><a href="#"><i class="flaticon-linkedin"></i></a></li>
+                            <li><a href="#"><i class="flaticon-twitter"></i></a></li>
+                            <li><a href="#"><i class="flaticon-instagram"></i></a></li>
+                            <li><a href="#"><i class="flaticon-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +60,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <!-- Logo Here -->
-                <a class="navbar-brand pl-5" href="index.html"><img src="images/alt-logo.png" alt="Logo"></a>
+                <a class="navbar-brand pl-5" href="{{ route('home') }}"><img src="/images/alt-logo.png" alt="Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -78,11 +83,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <li class="nav-item btn-link">
+                            <a class="nav-link custom-btn" href="{{ route('login') }}">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        <li class="nav-item btn-link">
+                            <a class="nav-link custom-btn" href="{{ route('register') }}">Register</a>
                         </li>
                     </ul>
 
@@ -177,8 +182,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-7">
-                    <p>© 2021 All Rights Reserved by <a href="https://themeforest.net/user/theme-village"
-                                                        rel="noopener" target="_blank">theme-vilage</a></p>
+                    <p>Copyright © {{ now()->format('Y') }}. All Rights Reserved by <a href="{{ route('home') }}">{{ config('app.name') }}</a></p>
                 </div>
                 <div class="col-lg-6 col-sm-5">
                     <nav class="footer-nav">
