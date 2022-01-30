@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function deposits()
     {
-        return $this->hasMany('App\Deposit');
+        return $this->hasMany(Deposit::class);
     }
 
     public function payouts()

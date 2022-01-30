@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/css/venobox.min.css">
     <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
 
     <!-- Style css -->
     <link rel="stylesheet" href="/css/style.css">
