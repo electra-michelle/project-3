@@ -838,7 +838,7 @@ li.nav-item ul.dropdown-menu li.dropdown:hover > .dropdown-menu {
     width: 100%;
     background: transparent; }
     .header.index-header .header-line::before {
-      width: 87.2%; }
+      width: 100%; }
     .header.index-header .primary-navigation {
       position: relative;
       width: 100%;
@@ -852,7 +852,7 @@ li.nav-item ul.dropdown-menu li.dropdown:hover > .dropdown-menu {
       .header.index-header .primary-navigation .nav-item .nav-link {
         padding: 15px 20px; }
       .header.index-header .navbar ul.navbar-nav.mx-auto {
-        padding-right: 85px; } }
+        padding-right: 0; } }
     @media only screen and (min-width: 992px) and (max-width: 1200px) {
       .header.index-header .primary-navigation .nav-item .nav-link {
         padding: 10px 22px;
@@ -1400,7 +1400,7 @@ li.nav-item ul.dropdown-menu li.dropdown:hover > .dropdown-menu {
 4. Footer
 --------------------------------------- */
 .footer {
-  padding: 215px 0 0px;
+  padding: 50px 0 0px;
   background: #002a3c;
   position: relative; }
   .footer::before {
@@ -6119,14 +6119,13 @@ form.form.checkout-form {
   padding-top: 60px; }
   form.form.checkout-form .section-title {
     font-size: 30px;
-    margin-bottom: 40px; }
+    margin-bottom: 15px; }
   form.form.checkout-form .form-inner {
     overflow: hidden; }
   form.form.checkout-form .checkout-billingform {
     padding: 60px 30px 30px;
     background: #ececec;
-    border: 1px solid #c1c1c1;
-    margin-right: 20px; }
+    border: 1px solid #c1c1c1; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       form.form.checkout-form .checkout-billingform {
         margin-bottom: 60px; } }
@@ -6149,6 +6148,10 @@ form.form.checkout-form {
       -ms-border-radius: 5px;
       border-radius: 5px;
       padding: 13px 20px; }
+    form.form.checkout-form .checkout-billingform .form-group input:read-only,
+    form.form.checkout-form .checkout-billingform .form-group select:read-only {
+        background-color: #ddd;
+    }
     form.form.checkout-form .checkout-billingform .form-group select {
       padding: 13px 20px;
       width: 50%;
@@ -6461,3 +6464,125 @@ form.form.checkout-form {
   .case-entry {
     margin-bottom: 90px; } }
 /*# sourceMappingURL=style.css.map */
+
+.pricingTable {
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 0 10px #ababab;
+    padding-bottom: 40px;
+    border-radius: 10px;
+    color: #cad0de;
+    transform: scale(1);
+    transition: all .5s ease 0s
+}
+
+.pricingTable:hover {
+    transform: scale(1.05);
+    z-index: 1
+}
+
+.pricingTable .pricingTable-header {
+    padding: 40px 0;
+    background: #124e68;
+    border-radius: 10px 10px 50% 50%;
+    transition: all .5s ease 0s;
+    margin-bottom: 20px
+}
+
+.pricingTable:hover .pricingTable-header {
+    background: #00415d;
+}
+
+.pricingTable .pricingTable-header i {
+    font-size: 50px;
+    color: #fff;
+    margin-bottom: 10px;
+    transition: all .5s ease 0s
+}
+
+.pricingTable .price-value {
+    font-size: 35px;
+    color: #2fbf8c;
+    font-weight: bold;
+    transition: all .5s ease 0s
+}
+
+.pricingTable .month {
+    font-size: 14px;
+    color: #fff
+}
+
+
+.pricingTable .heading {
+    font-size: 24px;
+    color: #fff;
+    text-transform: uppercase
+}
+
+.pricingTable .pricing-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px
+}
+
+.pricingTable .pricing-content ul li {
+    line-height: 30px;
+    color: #a7a8aa
+}
+
+#calculator label{
+    color: #fff;
+}
+
+#calculator .form-control{
+    background-color: #002a3c;
+    border-color: #002a3c;
+    color: #fff;
+}
+#calculator select.form-control{
+    background: #002a3c url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+#calculator .input-group-append .input-group-text{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background: #002a3c;
+    border-color: #002a3c;
+    color: #fff;
+}
+
+
+#calculator .input-group .form-control{
+    border-right: 1px solid #00415d;
+    padding: unset;
+}
+
+.account-nav {
+    background-color: #002a3c;
+}
+
+.account-nav  .nav-pills .nav-link, .account-nav  .nav-pills .show>.nav-link {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+}
+.account-nav .nav-pills .nav-link.active, .account-nav .nav-pills .nav-link:hover{
+
+    background: #2fbf8c;
+}
+
+.account-nav .nav-pills .nav-link {
+    border-radius: 0;
+}
+
+.mr-auto {
+    margin-right: auto !important;
+}
+.ml-auto {
+    margin-left: auto !important;
+}

@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/account';
 
     /**
      * The controller namespace for the application.
@@ -42,6 +42,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->namespace('App\Http\Controllers\Api')
                 ->group(base_path('routes/api.php'));
+
+            Route::prefix('account')
+                ->middleware(['web', 'auth'])
+                ->as('account.')
+                ->namespace('App\Http\Controllers\Account')
+                ->group(base_path('routes/account.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)

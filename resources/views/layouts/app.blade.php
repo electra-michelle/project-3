@@ -19,6 +19,7 @@
 
     <!-- Style css -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/all.min.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -67,7 +68,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
+                    <ul class="navbar-nav {{Route::currentRouteName() == 'home' ? 'mx-auto' : 'ml-auto'  }}">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
@@ -83,12 +84,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                         </li>
-                        <li class="nav-item btn-link">
-                            <a class="nav-link custom-btn" href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item btn-link">
-                            <a class="nav-link custom-btn" href="{{ route('register') }}">Register</a>
-                        </li>
+                        @guest
+                            <li class="nav-item btn-link">
+                                <a class="nav-link custom-btn" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item btn-link">
+                                <a class="nav-link custom-btn" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @else
+                            <li class="nav-item btn-link">
+                                <a class="nav-link custom-btn" href="{{ route('account.dashboard') }}">Account</a>
+                            </li>
+                            <li class="nav-item btn-link">
+                                <a class="nav-link custom-btn" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @endguest
                     </ul>
 
                 </div>
@@ -108,90 +118,42 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="footer-widget about-footer">
                         <div class="f-logo mb-4">
-                            <a href="index.html"><img src="images/f-logo.png" alt="Logo"></a>
+                            <a href="{{ route('home') }}"><img src="/images/f-logo.png" alt="Logo"></a>
                         </div>
                         <p>Lorem Ipsum available, but the majority suffered alteration in some form, by humour, or
                             randomised words.</p>
-                        <div class="footer-social mt-5">
-                            <span><a href="#"><i class="flaticon-facebook"></i></a></span>
-                            <span><a href="#"><i class="flaticon-linkedin"></i></a></span>
-                            <span><a href="#"><i class="flaticon-twitter"></i></a></span>
-                            <span><a href="#"><i class="flaticon-instagram"></i></a></span>
-                            <span><a href="#"><i class="flaticon-pinterest"></i></a></span>
-
-                        </div>
                     </div>
 
                 </div>
                 <!-- Footer Widget End -->
-                <div class="col-lg-2 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="footer-widget">
                         <h3 class="widget-title">Quick Links <span>.</span></h3>
                         <ul>
                             <li><a href="contact.html">Make Appointment</a></li>
                             <li><a href="service-details.html">Customer Services</a></li>
                             <li><a href="about.html">About Company</a></li>
-                            <li><a href="portfolio-2.html">Our Case Studies</a></li>
-                            <li><a href="contact.html">Free Consultation</a></li>
-                            <li><a href="team.html">Meet Our Experts</a></li>
                         </ul>
                     </div>
                 </div>
                 <!-- Footer Widget End -->
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="footer-widget contact-widget">
-                        <h3 class="widget-title">Contact Info <span>.</span></h3>
+                        <h3 class="widget-title">Follow us <span>.</span></h3>
                         <div class="footer-contact">
-                            <p><i class="flaticon-pin"></i> 1234 King Street, Australia</p>
-                            <p><i class="flaticon-phone-call"></i> <a
-                                    href="tel://+1-800-915-6270">+1-800-915-6270</a></p>
-                            <p><i class="flaticon-email"></i><a
-                                    href="mailto://consulpro@mail.com">consulpro@mail.com</a></p>
+                            <p><a href=""><i class="fab fa-fw fa-facebook-f"></i> Facebook</a></p>
+                            <p><a href=""><i class="fab fa-fw fa-telegram-plane"></i> Telegram</a></p>
                         </div>
                     </div>
                 </div>
-                <!-- Footer Widget End -->
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-widget">
-                        <h3 class="widget-title">Recent Posts <span>.</span></h3>
-                        <div class="latest-posts clearfix">
-                            <div class="ls-single">
-                                <a href="#"><img src="images/ls1.jpg" alt=""></a>
-                            </div>
-                            <div class="ls-single">
-                                <a href="#"><img src="images/ls2.jpg" alt=""></a>
-                            </div>
-                            <div class="ls-single">
-                                <a href="#"><img src="images/ls3.jpg" alt=""></a>
-                            </div>
-                            <div class="ls-single">
-                                <a href="#"><img src="images/ls4.jpg" alt=""></a>
-                            </div>
-                            <div class="ls-single">
-                                <a href="#"><img src="images/ls5.jpg" alt=""></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Widget End -->
             </div>
         </div>
     </div>
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-sm-7">
+                <div class="col-lg-12 text-center">
                     <p>Copyright © {{ now()->format('Y') }}. All Rights Reserved by <a href="{{ route('home') }}">{{ config('app.name') }}</a></p>
-                </div>
-                <div class="col-lg-6 col-sm-5">
-                    <nav class="footer-nav">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.html">Services</a></li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
