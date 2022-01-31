@@ -26,7 +26,7 @@ Route::get('/marketing-tools', [ReferralController::class, 'banners'])->name('ba
 
 Route::get('/deposit', [DepositController::class, 'index'])->name('deposit');
 Route::post('/deposit', [DepositController::class, 'createDeposit']);
-Route::get('/deposit/{deposit}', [DepositController::class, 'createDeposit'])->name('deposit.details');
+Route::get('/deposit/{depositUrl}', [DepositController::class, 'details'])->name('deposit.details');
 
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 Route::post('/settings', [SettingsController::class, 'updateSettings']);

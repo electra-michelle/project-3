@@ -14,6 +14,9 @@ use Illuminate\Support\Str;
 
 class DepositController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $paymentSystems = PaymentSystem::active()->get();
@@ -22,13 +25,29 @@ class DepositController extends Controller
         return view('account.deposit.create', compact('paymentSystems', 'plans'));
     }
 
+    /**
+     * @param $depositUrl
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function details($depositUrl)
+    {
+        $deposit = auth()->user()->deposits()
+            ->where('url', $depositUrl)
+            ->firstOrFail();
+
+        return view('account.deposit.details', compact('deposit'));
+    }
+
+    /**
+     * @param DepositRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createDeposit(DepositRequest $request)
     {
         $user = auth()->user();
         $paymentSystem = PaymentSystem::where('value', $request->input('payment_system'))->first();
         $plan = Plan::where('value', $request->input('investment_plan'))->first();
 
-        // @TODO Generate new deposit address
         $depositAddress = null;
         if(in_array($paymentSystem->value, array_keys(config('crypto'))) && $request->input('payment_method') == 'payment_processor') {
             $nodeService = new CryptoNodeService($paymentSystem->value);
@@ -60,7 +79,7 @@ class DepositController extends Controller
             $walletBalanceService->subBalance($wallet, $request->input('amount'), $paymentSystem->decimals);
         }
 
-        return route('account.deposit.details', ['deposit' => $deposit->url]);
+        return redirect()->route('account.deposit.details', ['depositUrl' => $deposit->url]);
 
     }
 }
