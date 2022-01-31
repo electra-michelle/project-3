@@ -9,7 +9,55 @@
 
     <section class="section-padding">
         <div class="container">
-            asdsad
+            <form action="{{ route('account.deposit') }}" method="POST">
+                @foreach($errors->all() as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+                @csrf
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <div class="input-group">
+                                <input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount', request()->input('amount')) }}">
+                                <div class="input-group-text">USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="amount">Investment plan</label>
+                            <select name="investment_plan" class="form-control">
+                                @foreach($plans as $plan)
+                                    <option value="{{ $plan->value }}">{{ $plan->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="payment_method">Payment method</label>
+                            <select id="payment_method" name="payment_method" class="form-control">
+                                <option value="payment_processor">By Payment Processor</option>
+                                <option value="account_balance">By Account Balance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="amount">Payment System</label>
+                            <select name="payment_system" class="form-control">
+                                @foreach($paymentSystems as $paymentSystem)
+                                    <option value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="custom-btn">Make Investment</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 @endsection

@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <form action="">
+            <form action="{{ route('account.deposit') }}">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">

@@ -20,11 +20,13 @@ use App\Http\Controllers\Account\ReferralController;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/deposit', [DepositController::class, 'index'])->name('deposit');
 Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
 Route::get('/referrals', [ReferralController::class, 'index'])->name('referral');
 Route::get('/marketing-tools', [ReferralController::class, 'banners'])->name('banners');
 
+Route::get('/deposit', [DepositController::class, 'index'])->name('deposit');
+Route::post('/deposit', [DepositController::class, 'createDeposit']);
+Route::get('/deposit/{deposit}', [DepositController::class, 'createDeposit'])->name('deposit.details');
 
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 Route::post('/settings', [SettingsController::class, 'updateSettings']);

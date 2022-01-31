@@ -16,7 +16,7 @@ class DepositService
      * @param $transactionId
      * @return Deposit
      */
-    public function acceptDeposit(Deposit $deposit, $transactionId)
+    public function acceptDeposit(Deposit $deposit, ?string $transactionId = null)
     {
         // Activate Deposit
         $deposit->status = 'active';
@@ -50,8 +50,8 @@ class DepositService
                 ->where('payment_system_id', $deposit->paymentSystem->id)
                 ->firstOrCreate();
 
-            $refBalance->balance =  round($refBalance->balance+$commission, $deposit->paymentSystem->decimals);
-            $refBalance->save();
+            $walletBalanceService = new WalletBalanceService();
+            $walletBalanceService->addBalance($refBalance, $commission, $deposit->paymentSystem->decimals);
 
             $deposit->user->referredBy->notify(new ReferralCommissionNotification(
                 number_format($commission, $deposit->paymentSystem->decimals, '.', ''),
