@@ -21,6 +21,10 @@ class UserAccount extends Model
         'wallet', 'balance', 'payment_system_id', 'user_id'
     ];
 
+    protected $casts = [
+        'balance' => 'float',
+    ];
+
 
     /**
      * Get the user that owns the user account.

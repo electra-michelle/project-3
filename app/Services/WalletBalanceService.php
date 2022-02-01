@@ -24,7 +24,7 @@ class WalletBalanceService
 
     public function subBalance(UserAccount $userAccount, $amount, $decimals)
     {
-        $userAccount->balance =  round($userAccount->balance-$amount, $decimals);
+        $userAccount->balance = number_format(round(($userAccount->balance-$amount), $decimals), $decimals, '.', '');
         $userAccount->save();
 
         return $userAccount;

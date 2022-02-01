@@ -46,9 +46,10 @@ class DepositService
 
             $commission = round($deposit->plan->affiliate_commission*$amount/100, $deposit->paymentSystem->decimals);
 
-            $refBalance = UserAccount::where('user_id', $deposit->user->upline)
-                ->where('payment_system_id', $deposit->paymentSystem->id)
-                ->firstOrCreate();
+            $refBalance = UserAccount::firstOrCreate([
+                    'user_id' => $deposit->user->upline,
+                    'payment_system_id' => $deposit->payment_system_id,
+                ]);
 
             $walletBalanceService = new WalletBalanceService();
             $walletBalanceService->addBalance($refBalance, $commission, $deposit->paymentSystem->decimals);

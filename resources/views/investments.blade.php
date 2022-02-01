@@ -89,8 +89,8 @@
         </div>
     </section>
     <section id="calculator" class="testimonial section-padding">
-        <img src="images/dot-graphic.png" alt="" class="anim-img">
-        <img src="images/dot-graphic.png" alt="" class="anim-img anim-2">
+        <img src="/images/dot-graphic.png" alt="" class="anim-img">
+        <img src="/images/dot-graphic.png" alt="" class="anim-img anim-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -105,8 +105,8 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="method">Investment Method</label>
-                        <select id="method" name="method" class="form-control">
+                        <label for="payment_system">Investment Method</label>
+                        <select id="payment_system" name="payment_system" class="form-control">
                             <option>ePayCore</option>
                             <option>Bitcoin</option>
                             <option>Bitcoin Cash</option>
@@ -128,8 +128,8 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="method">Investment Plan</label>
-                        <select id="method" name="plan" class="form-control">
+                        <label for="investment_plan">Investment Plan</label>
+                        <select id="investment_plan" name="investment_plan" class="form-control">
                             <option>plan 1</option>
                             <option>plan 2</option>
                             <option>plan 3</option>

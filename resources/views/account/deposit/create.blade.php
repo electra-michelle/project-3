@@ -29,7 +29,7 @@
                             <label for="amount">Investment plan</label>
                             <select name="investment_plan" class="form-control">
                                 @foreach($plans as $plan)
-                                    <option value="{{ $plan->value }}">{{ $plan->name }}</option>
+                                    <option {{ old('investment_plan', request()->input('investment_plan')) == $plan->value ? 'selected' : '' }} value="{{ $plan->value }}">{{ $plan->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -38,8 +38,8 @@
                         <div class="form-group">
                             <label for="payment_method">Payment method</label>
                             <select id="payment_method" name="payment_method" class="form-control">
-                                <option value="payment_processor">By Payment Processor</option>
-                                <option value="account_balance">By Account Balance</option>
+                                <option {{ old('payment_method') == 'payment_processor' ? 'selected' : ''}} value="payment_processor">By Payment Processor</option>
+                                <option {{ old('payment_method') == 'account_balance' ? 'selected' : ''}} value="account_balance">By Account Balance</option>
                             </select>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <label for="amount">Payment System</label>
                             <select name="payment_system" class="form-control">
                                 @foreach($paymentSystems as $paymentSystem)
-                                    <option value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
+                                    <option {{ old('payment_system', request()->input('payment_system')) == $paymentSystem->value ? 'selected' : '' }} value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
                                 @endforeach
                             </select>
                         </div>

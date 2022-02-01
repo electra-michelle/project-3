@@ -52,6 +52,12 @@ class DepositController extends Controller
         if(in_array($paymentSystem->value, array_keys(config('crypto'))) && $request->input('payment_method') == 'payment_processor') {
             $nodeService = new CryptoNodeService($paymentSystem->value);
             $depositAddress = $nodeService->node->getnewaddress();
+            if(!$depositAddress) {
+                return redirect()->back()->withInput()
+                    ->withErrors([
+                        'message' => 'This payment method is currently unavailable. Please, try again later.'
+                    ]);
+            }
         }
 
         $unique = false;
@@ -76,7 +82,7 @@ class DepositController extends Controller
             // Reduce balance
             $wallet = $user->wallets()->where('payment_system_id', $paymentSystem->id)->first();
             $walletBalanceService = new WalletBalanceService();
-            $walletBalanceService->subBalance($wallet, $request->input('amount'), $paymentSystem->decimals);
+            $walletBalanceService->subBalance($wallet, $deposit->amount, $paymentSystem->decimals);
         }
 
         return redirect()->route('account.deposit.details', ['depositUrl' => $deposit->url]);
