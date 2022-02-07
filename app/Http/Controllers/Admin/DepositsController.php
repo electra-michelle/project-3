@@ -13,9 +13,11 @@ class DepositsController extends Controller
      */
     public function index($status = null)
     {
-        $deposits = Deposit::when($status, fn($query) => (
+        $deposits = Deposit::with(['paymentSystem', 'plan', 'user'])
+        ->when($status, fn($query) => (
             $query->where('status', $status)
         ))
+        ->latest()
         ->paginate(15);
 
         return view('admin.deposits.list', compact('deposits'));

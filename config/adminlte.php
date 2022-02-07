@@ -237,7 +237,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Active Deposits',
-                    'route'  => 'admin.deposits',
+                    'route'  => ['admin.deposits', ['status' => 'active']],
                     'icon' => 'far fa-fw fa-circle text-success',
                 ],
                 [
@@ -265,7 +265,7 @@ return [
                 [
                     'text' => 'All payouts',
                     'route'  => 'admin.payouts',
-                    'icon' => 'far fa-fw fa-circle text-success',
+                    'icon' => 'far fa-fw fa-circle',
                 ],
                 [
                     'text' => 'Pending',
@@ -275,7 +275,7 @@ return [
                 [
                     'text' => 'Paid',
                     'route'  => ['admin.payouts', ['status' => 'paid']],
-                    'icon' => 'far fa-fw fa-circle text-danger',
+                    'icon' => 'far fa-fw fa-circle text-success',
                 ],
             ]
         ],

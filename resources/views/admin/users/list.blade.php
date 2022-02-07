@@ -28,13 +28,13 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>
-                                        <a href="{{ route('admin.users.show', $user->id) }}">{{ Str::limit($user->name, 30) }}</a>
+                                        {{ Str::limit($user->name, 30) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.users.show', $user->id) }}">{{ Str::limit($user->username, 30) }}</a>
+                                        {{ Str::limit($user->username, 30) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.users.show', $user->id) }}">{{ Str::limit($user->email, 30) }}</a>
+                                        {{ Str::limit($user->email, 30) }}
                                     </td>
                                     <td>
                                         @if($user->upline)

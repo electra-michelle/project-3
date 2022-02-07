@@ -15,9 +15,11 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Method</th>
-                            <th>Wallet</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Plan</th>
                             <th>Amount</th>
+                            <th>User</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -27,21 +29,24 @@
                                 <tr>
                                     <td>{{ $deposit->id }}</td>
                                     <td>
-                                        <a href="{{ route('admin.payouts.view', $deposit->id) }}">{{ $deposit->paymentSystem->name }}</a>
+                                        @if($deposit->status == 'active' || $deposit->status == 'finished')
+                                            {{ $deposit->confirmed_at->diffForHumans() }}
+                                        @else
+                                            {{ $deposit->created_at->diffForHumans() }}
+                                        @endif
                                     </td>
+                                    <td><span class="badge badge-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span></td>
+                                    <td>{{ $deposit->plan->name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.payouts.view', $deposit->id) }}">????</a>
+                                        {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} <small>({{ $deposit->paymentSystem->name }})</small>
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.payouts.view', $deposit->id) }}">
-                                            {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }}
-                                        </a>
-                                    </td>
+                                    <td><a target="_blank" href="{{ route('admin.users.show', $deposit->user_id) }}">{{ $deposit->user->username }}</a></td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">User list is empty</td>
+                                <td colspan="7" class="text-center">User list is empty</td>
                             </tr>
                         @endif
                         </tbody>

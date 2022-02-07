@@ -15,9 +15,10 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Method</th>
-                            <th>Wallet</th>
+                            <th>Date</th>
+                            <th>Status</th>
                             <th>Amount</th>
+                            <th>User</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -26,17 +27,14 @@
                             @foreach($payouts as $payout)
                                 <tr>
                                     <td>{{ $payout->id }}</td>
+                                    <td>{{ $payout->status == 'paid' ? $payout->paid_at->diffForHumans() : $payout->created_at->diffForHumans() }}</td>
+                                    <td><span class="badge badge-{{ CustomHelper::statusColor($payout->status) }}">{{ ucfirst($payout->status) }}</span></td>
                                     <td>
-                                        <a href="{{ route('admin.payouts.view', $payout->id) }}">{{ $payout->paymentSystem->name }}</a>
+                                        {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} <small>({{ $payout->paymentSystem->name }})</small>
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.payouts.view', $payout->id) }}">????</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.payouts.view', $payout->id) }}">
-                                            {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }}
-                                        </a>
-                                    </td>
+
+                                    <td><a target="_blank" href="{{ route('admin.users.show', $payout->user_id) }}">{{ $payout->user->username }}</a></td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                         @else

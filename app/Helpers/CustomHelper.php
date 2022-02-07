@@ -14,4 +14,20 @@ class CustomHelper
         return number_format($amount, $decimals, '.', '');
     }
 
+    public static function statusColor(string $status) {
+        switch ($status) {
+            case 'active':
+            case 'paid':
+                return 'success';
+            case 'pending':
+                return 'warning';
+            case 'cancelled':
+                return 'danger';
+            case 'frozen':
+                return 'primary';
+            case 'finished':
+                return 'secondary';
+        }
+    }
+
 }

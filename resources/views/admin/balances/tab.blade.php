@@ -12,7 +12,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['total_deposit'] }}</h3>
+                    <h3>{{ CustomHelper::formatAmount($walletData[$key]['total_deposit'], ($key == 'all' ? 2 : $paymentSystem->decimals)) }}</h3>
 
                     <p>{{ $currency }} Deposited</p>
                 </div>
@@ -21,7 +21,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['total_payout'] }}</h3>
+                    <h3>{{ CustomHelper::formatAmount($walletData[$key]['total_payout'], ($key == 'all' ? 2 : $paymentSystem->decimals)) }}</h3>
 
                     <p>{{ $paymentSystem->currency }} PAID OUT</p>
                 </div>
@@ -30,7 +30,7 @@
         <div class="col-md-3">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $walletData[$key]['balance'] }}</h3>
+                    <h3>{{ CustomHelper::formatAmount($walletData[$key]['balance'], ($key == 'all' ? 2 : $paymentSystem->decimals)) }}</h3>
 
                     <p>{{ $currency }} in Wallet Balance</p>
                 </div>

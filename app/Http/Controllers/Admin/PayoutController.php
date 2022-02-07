@@ -16,6 +16,7 @@ class PayoutController extends Controller
     public function index($status = null)
     {
         $payouts = Payout::latest()
+            ->with(['paymentSystem', 'user'])
             ->when($status, fn($query) => (
                 $query->where('status', $status)
             ))
