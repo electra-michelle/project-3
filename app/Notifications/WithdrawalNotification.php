@@ -17,9 +17,7 @@ class WithdrawalNotification extends Notification
      * @return void
      */
     public function __construct(private $amount, private $currency, private $wallet, private $transactionId)
-    {
-        //
-    }
+    {}
 
     /**
      * Get the notification's delivery channels.

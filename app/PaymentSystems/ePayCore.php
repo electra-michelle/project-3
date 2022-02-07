@@ -130,4 +130,43 @@ class ePayCore
 
     }
 
+    /**
+     * @param float $amount
+     * @param string|int $orderId
+     * @param array $data
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public static function renderForm(float $amount, string|int $orderId, array $data = [])
+    {
+
+        $params = [
+            'epc_merchant_id' => config('epaycore.sci.id'),
+            'epc_commission' => ($data['epc_commission'] ?? config('epaycore.commission')),
+            'epc_amount' => $amount,
+            'epc_currency_code' => ($data['epc_currency'] ?? config('epaycore.currency')),
+            'epc_order_id' => $orderId,
+            'epc_success_url' => ($data['epc_success_url'] ?? config('epaycore.success_url')),
+            'epc_cancel_url' => ($data['epc_cancel_url'] ?? config('epaycore.cancel_url')),
+            'epc_status_url' => ($data['status_url'] ?? config('epaycore.status_url'))
+        ];
+
+        $description = ($data['epc_descr'] ?? config('epaycore.sci.id'));
+        if($description) {
+            $params['epc_descr'] = $description;
+        }
+
+        # get epc_sign hash
+        $sign = hash('sha256', implode(':', [
+            $params['epc_merchant_id'],
+            $params['epc_amount'],
+            $params['epc_currency_code'],
+            $orderId,
+            config('epaycore.sci.password')
+        ]));
+
+
+        return view('paymentsystems.epaycore', compact('sign', 'params'));
+    }
+
+
 }

@@ -24,6 +24,10 @@ Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
 Route::get('/referrals', [ReferralController::class, 'index'])->name('referral');
 Route::get('/marketing-tools', [ReferralController::class, 'banners'])->name('banners');
 
+
+Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
+Route::post('/withdraw', [WithdrawController::class, 'store']);
+
 Route::get('/deposit', [DepositController::class, 'index'])->name('deposit');
 Route::post('/deposit', [DepositController::class, 'createDeposit']);
 Route::get('/deposit/{depositUrl}', [DepositController::class, 'details'])->name('deposit.details');

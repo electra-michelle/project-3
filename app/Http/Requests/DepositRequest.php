@@ -86,15 +86,17 @@ class DepositRequest extends FormRequest
     public function withValidator($validator)
     {
 
-        $validator->after(function ($validator) {
-            if($this->input('payment_method') == 'account_balance' && $this->paymentSystemId) {
-                $wallet = UserAccount::where('payment_system_id', $this->paymentSystemId)
-                    ->where('user_id', auth()->user()->id)
-                    ->first();
-                if(!$wallet || $wallet->balance < $this->input('amount')) {
-                    $validator->errors()->add('amount', 'Insuffient funds in your account balance.');
+        if($validator->passes()) {
+            $validator->after(function ($validator) {
+                if ($this->input('payment_method') == 'account_balance' && $this->paymentSystemId) {
+                    $wallet = UserAccount::where('payment_system_id', $this->paymentSystemId)
+                        ->where('user_id', auth()->user()->id)
+                        ->first();
+                    if (!$wallet || $wallet->balance < $this->input('amount')) {
+                        $validator->errors()->add('amount', 'Insuffient funds in your account balance.');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }

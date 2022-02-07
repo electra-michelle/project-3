@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="amount">Payment System</label>
+                            <label for="payment_system">Payment System</label>
                             <select name="payment_system" class="form-control">
                                 @foreach($paymentSystems as $paymentSystem)
                                     <option {{ old('payment_system', request()->input('payment_system')) == $paymentSystem->value ? 'selected' : '' }} value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>

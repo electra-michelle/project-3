@@ -61,7 +61,6 @@ class DepositController extends Controller
         }
 
         $unique = false;
-        $url = null;
         while(!$unique) {
             $url = Str::random();
             $unique = Deposit::where('url', $url)->count() == 0;
@@ -71,6 +70,7 @@ class DepositController extends Controller
             'payment_system_id' => $paymentSystem->id,
             'plan_id' => $plan->id,
             'amount' => $request->input('amount'),
+            'payment_type' => $request->input('payment_method') == 'account_balance' ? 'reinvest' : 'invest',
             'url' => $url,
             'deposit_address' => $depositAddress
         ]);
