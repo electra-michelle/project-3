@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\CustomHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentSystem;
+use App\Notifications\NewReferralNotification;
 use App\Notifications\RegistrationNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -166,8 +168,21 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        if(config('hyip.notifications.email_notifications_enabled') && config('hyip.notifications.categories')) {
+        if(CustomHelper::isEmailNotificationEnabled('registered')) {
             $user->notify(new RegistrationNotification());
+        }
+
+        if($user->upline) {
+            if(CustomHelper::isEmailNotificationEnabled('new_referral')) {
+                $user->referredBy->notify(new NewReferralNotification($user->username));
+            }
+
+            $user->referredBy->histories()->create([
+                'action' => 'new_referral',
+                'data' => json_encode([
+                    'username' => $user->username
+                ])
+            ]);
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\CustomHelper;
 use App\Models\Deposit;
 use App\Models\UserAccount;
 use App\Notifications\DepositConfirmedNotification;
@@ -30,7 +31,9 @@ class DepositService
         $currency = $deposit->paymentSystem->currency;
         $plan = $deposit->plan->name;
 
-        $deposit->user->notify(new DepositConfirmedNotification($amount, $currency, $plan, $wallet));
+        if(CustomHelper::isEmailNotificationEnabled('deposit_confirmed')) {
+            $deposit->user->notify(new DepositConfirmedNotification($amount, $currency, $plan, $wallet));
+        }
 
         $deposit->user->histories()->create([
             'action' => 'new_investment',
@@ -54,12 +57,14 @@ class DepositService
             $walletBalanceService = new WalletBalanceService();
             $walletBalanceService->addBalance($refBalance, $commission, $deposit->paymentSystem->decimals);
 
-            $deposit->user->referredBy->notify(new ReferralCommissionNotification(
-                number_format($commission, $deposit->paymentSystem->decimals, '.', ''),
-                $currency,
-                $wallet,
-                $deposit->user->username
-            ));
+            if(CustomHelper::isEmailNotificationEnabled('ref_commission')) {
+                $deposit->user->referredBy->notify(new ReferralCommissionNotification(
+                    number_format($commission, $deposit->paymentSystem->decimals, '.', ''),
+                    $currency,
+                    $wallet,
+                    $deposit->user->username
+                ));
+            }
 
             $deposit->user->referredBy->histories()->create([
                 'action' => 'commission_earned',

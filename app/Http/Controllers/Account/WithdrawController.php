@@ -13,7 +13,7 @@ class WithdrawController extends Controller
 {
     public function index()
     {
-        $payouts = Payout::latest()->paginate(15);
+        $payouts = Payout::with('paymentSystem')->latest()->paginate(15);
         $paymentSystems = PaymentSystem::active()->get();
 
         return view('account.withdraw.form', compact('payouts', 'paymentSystems'));

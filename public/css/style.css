@@ -390,7 +390,7 @@ main.main-content {
 
 .anim-img, .anim-2 {
   position: absolute;
-  top: 2%;
+  top: 8%;
   left: 6%;
   backface-visibility: hidden;
   animation: jumping 5s ease-in-out 2s infinite alternate;
@@ -6625,4 +6625,11 @@ div#checkoutCouponform {
 
 .hljs-section, .hljs-tag {
     color: #2fbf8c;
+}
+
+.badge.bg-warning {
+    background: #e7b212;
+}
+.badge.bg-success {
+    background: #2fbf8c;
 }

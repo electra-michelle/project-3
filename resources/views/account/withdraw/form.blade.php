@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-intro">
-                        <h3 class="section-title">Your withdrawals<span class="color">.</span></h3>
+                        <h3 class="section-title">Withdraw History<span class="color">.</span></h3>
                     </div>
                 </div>
             </div>
@@ -59,9 +59,8 @@
                         <th>#</th>
                         <th>Status</th>
                         <th>Date</th>
-                        <th>Payment System</th>
-                        <th>Transaction ID</th>
                         <th>Amount</th>
+                        <th>Transaction ID</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -69,16 +68,15 @@
                         @foreach($payouts as $payout)
                             <tr>
                                 <td>{{ $payout->id }}</td>
-                                <td>{{ $payout->status }}</td>
+                                <td><span class="badge bg-{{ $payout->status == 'paid' ? 'success' : 'warning' }}">{{ ucfirst($payout->status) }}</span></td>
                                 <td>{{ $payout->status == 'pending' ? $payout->created_at : $payout->paid_at }}</td>
-                                <td>{{ $payout->paymentSystem->name }}</td>
+                                <td>{{ number_format($payout->amount, $payout->paymentSystem->decimals, '.', '' ) }} {{ $payout->paymentSystem->currency }} ({{ $payout->paymentSystem->name }})</td>
                                 <td>{{ $payout->transaction_id }}</td>
-                                <td>{{ number_format($payout->amount, $payout->paymentSystem->decimals, '.', '' ) }} {{ $payout->paymentSystem->currency }}</td>
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td class="text-center" colspan="6">Transactions not found</td>
+                            <td class="text-center" colspan="5">Transactions not found</td>
                         </tr>
                     @endif
                     </tbody>

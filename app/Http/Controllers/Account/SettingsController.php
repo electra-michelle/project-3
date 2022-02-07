@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Helpers\CustomHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSettingsRequest;
 use App\Models\PaymentSystem;
+use App\Notifications\SettingsUpdatedNotification;
 use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
@@ -46,6 +48,10 @@ class SettingsController extends Controller
                     'wallet' => $request->input($paymentSystem->value)
                 ]);
             }
+        }
+
+        if(CustomHelper::isEmailNotificationEnabled('settings_updated')) {
+           $user->notify(new SettingsUpdatedNotification());
         }
 
         return redirect()->back()

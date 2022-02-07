@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\CustomHelper;
 use App\Models\Plan;
 use App\Models\Deposit;
 use App\Models\UserAccount;
@@ -87,7 +88,7 @@ class CalculateProfit extends Command
                         ])
                     ]);
 
-                    if(config('hyip.notifications.profit_added')) {
+                    if(CustomHelper::isEmailNotificationEnabled('profit_added')) {
                         $deposit->user->notify(new ProfitAddedNotification($profit, $deposit->paymentSystem->currency, $deposit->paymentSystem->name));
                     }
                 }

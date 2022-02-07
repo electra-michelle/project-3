@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\CustomHelper;
 use App\Models\Deposit;
 use App\Models\Payout;
 use App\Models\UserAccount;
@@ -26,13 +27,15 @@ class PayoutService
         $payout->paid_at = now();
         $payout->save();
 
-        // Notify Here
-        $payout->user->notify(new WithdrawalNotification(
-            number_format($payout->amount, $payout->paymentSystem->decimals, '.', ''),
-            $payout->paymentSystem->currency,
-            $payout->paymentSystem->name,
-            $transactionId
-        ));
+        // Notify
+        if(CustomHelper::isEmailNotificationEnabled('withdraw')) {
+            $payout->user->notify(new WithdrawalNotification(
+                number_format($payout->amount, $payout->paymentSystem->decimals, '.', ''),
+                $payout->paymentSystem->currency,
+                $payout->paymentSystem->name,
+                $transactionId
+            ));
+        }
 
         $payout->user->histories()->create([
             'action' => 'withdraw_complete',
