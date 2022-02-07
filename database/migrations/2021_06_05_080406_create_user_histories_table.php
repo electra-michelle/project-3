@@ -24,7 +24,8 @@ class CreateUserHistoriesTable extends Migration
                 'new_referral',
                 'plan_finished',
                 'new_investment',
-                'settings_updated'
+                'settings_updated',
+                'principals_returned',
             ]);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('data')->nullable();

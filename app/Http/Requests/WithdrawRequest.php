@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\UserAccount;
 use Illuminate\Foundation\Http\FormRequest;
@@ -41,7 +42,7 @@ class WithdrawRequest extends FormRequest
         if($paymentSystemData) {
             $this->paymentSystem = $paymentSystemData;
             $rules['amount'][] = 'regex:/^\d*(\.\d{1,' . $paymentSystemData->decimals . '})?$/';
-            $rules['amount'][] = 'min:' . number_format($paymentSystemData->withdraw_minimum,  $paymentSystemData->decimals, '.', '');
+            $rules['amount'][] = 'min:' . CustomHelper::formatAmount($paymentSystemData->withdraw_minimum,  $paymentSystemData->decimals);
         }
         //dd($rules, $this->all());
 

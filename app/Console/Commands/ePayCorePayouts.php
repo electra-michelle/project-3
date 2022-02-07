@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\Payout;
 use App\PaymentSystems\ePayCore;
@@ -62,7 +63,7 @@ class ePayCorePayouts extends Command
             $wallet = $payout->user->wallets->first()->wallet;
 
             if($wallet) {
-                $amount =  number_format(round($payout->amount, $paymentSystem->decimals), $paymentSystem->decimals, ".", "");
+                $amount =  CustomHelper::formatAmount(round($payout->amount, $paymentSystem->decimals), $paymentSystem->decimals);
 
                 $transfer = $this->ePayCore->transfer($wallet, $amount, 'description', $payout->id);
                 if(isset($transfer->error) || !$transfer) {

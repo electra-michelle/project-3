@@ -70,7 +70,7 @@
                                 <td>{{ $payout->id }}</td>
                                 <td><span class="badge bg-{{ $payout->status == 'paid' ? 'success' : 'warning' }}">{{ ucfirst($payout->status) }}</span></td>
                                 <td>{{ $payout->status == 'pending' ? $payout->created_at : $payout->paid_at }}</td>
-                                <td>{{ number_format($payout->amount, $payout->paymentSystem->decimals, '.', '' ) }} {{ $payout->paymentSystem->currency }} ({{ $payout->paymentSystem->name }})</td>
+                                <td>{{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} ({{ $payout->paymentSystem->name }})</td>
                                 <td>{{ $payout->transaction_id }}</td>
                             </tr>
                         @endforeach

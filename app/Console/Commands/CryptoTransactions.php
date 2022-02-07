@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\CustomHelper;
 use App\Models\Deposit;
 use App\Services\CryptoNodeService;
 use App\Services\StatisticsService;
@@ -92,7 +93,7 @@ class CryptoTransactions extends Command
                     continue;
                 }
 
-                $amount = number_format($transaction['amount'], $paymentSystem->decimals, '.', '');
+                $amount = CustomHelper::formatAmount($transaction['amount'], $paymentSystem->decimals);
                 if($amount != $deposit->amount)
                 {
                     if($amount >= $deposit->plan->limits->first()->min_amount && $amount <= $deposit->plan->limits->first()->max_amount) {

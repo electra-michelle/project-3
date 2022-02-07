@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Helpers\CustomHelper;
 use App\Models\UserAccount;
 
 class WalletBalanceService
@@ -24,7 +25,7 @@ class WalletBalanceService
 
     public function subBalance(UserAccount $userAccount, $amount, $decimals)
     {
-        $userAccount->balance = number_format(round(($userAccount->balance-$amount), $decimals), $decimals, '.', '');
+        $userAccount->balance = CustomHelper::formatAmount(round(($userAccount->balance-$amount), $decimals), $decimals, '.', '');
         $userAccount->save();
 
         return $userAccount;

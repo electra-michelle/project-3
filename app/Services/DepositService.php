@@ -26,7 +26,7 @@ class DepositService
         $deposit->transaction_id = $transactionId;
         $deposit->save();
 
-        $amount = number_format($deposit->amount, $deposit->paymentSystem->decimals, '.', '');
+        $amount = CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals);
         $wallet = $deposit->paymentSystem->name;
         $currency = $deposit->paymentSystem->currency;
         $plan = $deposit->plan->name;
@@ -59,7 +59,7 @@ class DepositService
 
             if(CustomHelper::isEmailNotificationEnabled('ref_commission')) {
                 $deposit->user->referredBy->notify(new ReferralCommissionNotification(
-                    number_format($commission, $deposit->paymentSystem->decimals, '.', ''),
+                    CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals),
                     $currency,
                     $wallet,
                     $deposit->user->username
@@ -71,7 +71,7 @@ class DepositService
                 'data' => json_encode([
                     'from_user' => $deposit->user->username,
                     'payment_system' => $wallet,
-                    'amount' => number_format($commission, $deposit->paymentSystem->decimals, '.', ''),
+                    'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals),
                     'currency' => $currency,
                 ])
             ]);

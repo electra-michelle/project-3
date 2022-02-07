@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\Payout;
 use App\Notifications\WithdrawalNotification;
@@ -70,7 +71,7 @@ class CryptoPayouts extends Command
                         $amount = round($payout->amount, $paymentSystem->decimals);
                     }
 
-                    $toSend[$wallet] = number_format($amount, $paymentSystem->decimals, ".", "");
+                    $toSend[$wallet] = CustomHelper::formatAmount($amount, $paymentSystem->decimals);
                     $payoutIds[] = $payout->id;
                 }
             }

@@ -10,6 +10,8 @@ return [
             'withdraw' => true,
             'profit_added' => true,
             'deposit_confirmed' => true,
+            'deposit_finished' => true,
+            'principals_returned' => true,
             'ref_commission' => true,
             'new_referral' => true,
         ]

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Helpers\CustomHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WithdrawRequest;
 use App\Models\PaymentSystem;
@@ -41,7 +42,7 @@ class WithdrawController extends Controller
             'data' => json_encode([
                 'id' => $payout->id,
                 'payment_system' => $payout->paymentSystem->name,
-                'amount' => number_format($payout->amount, $payout->paymentSystem->decimals, '.', ''),
+                'amount' => CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals),
                 'currency' => $payout->paymentSystem->currency,
             ])
         ]);

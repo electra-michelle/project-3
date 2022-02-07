@@ -30,7 +30,7 @@ class PayoutService
         // Notify
         if(CustomHelper::isEmailNotificationEnabled('withdraw')) {
             $payout->user->notify(new WithdrawalNotification(
-                number_format($payout->amount, $payout->paymentSystem->decimals, '.', ''),
+                CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals),
                 $payout->paymentSystem->currency,
                 $payout->paymentSystem->name,
                 $transactionId
@@ -41,7 +41,7 @@ class PayoutService
             'action' => 'withdraw_complete',
             'data' => json_encode([
                 'payment_system' => $payout->paymentSystem->name,
-                'amount' => number_format($payout->amount, $payout->paymentSystem->decimals, '.', ''),
+                'amount' => CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals),
                 'currency' => $payout->paymentSystem->currency,
                 'transaction_id' => $transactionId
             ])

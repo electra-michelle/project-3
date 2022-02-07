@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\Plan;
 use App\Models\PlanLimit;
@@ -66,11 +67,11 @@ class DepositRequest extends FormRequest
             $this->paymentSystemId = $paymentSystem->id;
 
             if($planLimit->min_amount != -1) {
-                $rules['amount'][] = 'min:' . number_format($planLimit->min_amount ,$paymentSystem->decimals, '.', '');
+                $rules['amount'][] = 'min:' . CustomHelper::formatAmount($planLimit->min_amount ,$paymentSystem->decimals);
             }
 
             if($planLimit->max_amount != -1) {
-                $rules['amount'][] = 'max:' . number_format($planLimit->max_amount ,$paymentSystem->decimals, '.', '');
+                $rules['amount'][] = 'max:' . CustomHelper::formatAmount($planLimit->max_amount ,$paymentSystem->decimals);
             }
         }
 

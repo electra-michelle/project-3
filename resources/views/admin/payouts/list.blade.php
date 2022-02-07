@@ -34,7 +34,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.payouts.view', $payout->id) }}">
-                                            {{ number_format($payout->amount, $payout->paymentSystem->decimals, '.', '') }} {{ $payout->paymentSystem->currency }}
+                                            {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }}
                                         </a>
                                     </td>
                                 </tr>

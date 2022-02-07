@@ -9,4 +9,9 @@ class CustomHelper
         return config('notifications.email.enabled') && config('notifications.email.categories.' . $name);
     }
 
+    public static function formatAmount(float|int $amount, int $decimals)
+    {
+        return number_format($amount, $decimals, '.', '');
+    }
+
 }
