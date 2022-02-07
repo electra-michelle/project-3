@@ -12,10 +12,10 @@
             <x-adminlte-info-box title="Users" text="{{ $users }}" icon="fas fa-lg fa-users" icon-theme="purple"/>
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Total deposit" text="Soon" icon="fas fa-lg fa-download" icon-theme="green"/>
+            <x-adminlte-info-box title="Total deposit" text="{{ $depositSum }} USD" icon="fas fa-lg fa-download" icon-theme="green"/>
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Total withdraw" text="soon" icon="fas fa-lg fa-upload" icon-theme="red"/>
+            <x-adminlte-info-box title="Total withdraw" text="{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
         </div>
         <div class="col-md-3">
             <x-adminlte-info-box title="Unread Messages" text="{{ $messages }}" icon="fas fa-lg fa-envelope" icon-theme="yellow"/>

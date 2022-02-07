@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminsTableSeeder::class,
-            PaymentSystemsSeeder::class
+            PaymentSystemsSeeder::class,
+            PlansSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

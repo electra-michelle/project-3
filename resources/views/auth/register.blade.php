@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                     <div class="acount-wrap login-wrap">
-                        <form action="{{ route('login') }}" method="post">
+                        <form action="{{ route('register') }}" method="post">
                             @error(recaptchaFieldName())
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

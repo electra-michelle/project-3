@@ -93,12 +93,14 @@ class StatisticsService
             if($paymentSystem->currency != 'USD') {
                 $exchangeRate = ExchangeRate::where('from', $paymentSystem->currency)->first();
                 $convertedBalance = $walletData[$paymentSystem->value]['balance'] * (json_decode($exchangeRate?->rate)?->USD ?? 1);
+                $convertedTotalDeposit = $walletData[$paymentSystem->value]['total_deposit'] * (json_decode($exchangeRate?->rate)?->USD ?? 1);
+                $convertedTotalPayout = $walletData[$paymentSystem->value]['total_payout'] * (json_decode($exchangeRate?->rate)?->USD ?? 1);
             }
 
             $walletData['all']['balance'] += $convertedBalance ?? $walletData[$paymentSystem->value]['balance'];
             $walletData['all']['deposit_count'] += $walletData[$paymentSystem->value]['deposit_count'];
-            $walletData['all']['total_deposit'] += $walletData[$paymentSystem->value]['total_deposit'];
-            $walletData['all']['total_payout'] += $walletData[$paymentSystem->value]['total_payout'];
+            $walletData['all']['total_deposit'] += $convertedTotalDeposit ?? $walletData[$paymentSystem->value]['total_deposit'];
+            $walletData['all']['total_payout'] +=  $convertedTotalPayout ?? $walletData[$paymentSystem->value]['total_payout'];
 
         }
 

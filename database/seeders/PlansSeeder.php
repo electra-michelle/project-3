@@ -15,9 +15,10 @@ class PlansSeeder extends Seeder
      */
     public function run()
     {
-        $plan = Plan::create([
-            'name'	=> '5 Day Plan',
+        $plan = Plan::firstOrCreate([
             'value'	=> 'plan_1',
+        ], [
+            'name'	=> '5 Day Plan',
             'period_type'	=>	'daily',
             'principal_return'	=> false,
             'affiliate_commission'	=> 5
@@ -54,9 +55,10 @@ class PlansSeeder extends Seeder
             'currency'	=>	'DOGE',
         ]);
 
-        $plan = Plan::create([
+        $plan = Plan::firstOrCreate([
+         'value'	=> 'plan_15_days',
+        ], [
             'name'	=> '15 Day Plan',
-            'value'	=> 'plan_15_days',
             'period_type'	=>	'daily',
             'principal_return'	=> false,
             'affiliate_commission'	=> 4
@@ -100,9 +102,10 @@ class PlansSeeder extends Seeder
             'currency'	=>	'DASH',
         ]);
 
-        $plan = Plan::create([
-            'name'	=> '30 Day Plan',
+        $plan = Plan::firstOrCreate([
             'value'	=> 'plan_30_days',
+        ], [
+            'name'	=> '30 Day Plan',
             'period_type'	=>	'daily',
             'principal_return'	=> false,
             'affiliate_commission'	=> 5

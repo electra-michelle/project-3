@@ -81,7 +81,9 @@ class User extends Authenticatable
     {
         return $this->deposits()
             ->join('payment_systems', 'payment_systems.id', '=', 'deposits.payment_system_id')
-            ->where('status', 'active')->orWhere('status', 'finished')
+            ->where(function($subQuery) {
+                return $subQuery->where('status', 'active')->orWhere('status', 'finished');
+            })
             ->selectRaw('user_id, payment_systems.currency as currency, payment_systems.decimals as decimals, payment_system_id, sum(`amount`) as total_deposit')
             ->groupBy('payment_systems.currency');
     }

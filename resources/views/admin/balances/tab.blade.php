@@ -23,7 +23,7 @@
                 <div class="inner">
                     <h3>{{ CustomHelper::formatAmount($walletData[$key]['total_payout'], ($key == 'all' ? 2 : $paymentSystem->decimals)) }}</h3>
 
-                    <p>{{ $paymentSystem->currency }} PAID OUT</p>
+                    <p>{{ $currency }} PAID OUT</p>
                 </div>
             </div>
         </div>
