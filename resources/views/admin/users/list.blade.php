@@ -44,12 +44,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-primary btn-sm">View </a>
-                                            <x-adminlte-button class="btn-sm" type="submit" label="Block" theme="danger"/>
-                                        </form>
+                                        <a href="{{ route('admin.users.show', $user->id) }}" type="button" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

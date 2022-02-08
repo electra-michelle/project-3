@@ -63,4 +63,9 @@ class Deposit extends Model
     {
         return $this->belongsTo(PaymentSystem::class);
     }
+
+    public function planPeriod()
+    {
+        return $this->hasMany(PlanPeriod::class, 'plan_id', 'plan_id');
+    }
 }

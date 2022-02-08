@@ -8,17 +8,23 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-xl-2 col-lg-4">
             <x-adminlte-info-box title="Users" text="{{ $users }}" icon="fas fa-lg fa-users" icon-theme="purple"/>
         </div>
-        <div class="col-md-3">
-            <x-adminlte-info-box title="Total deposit" text="{{ $depositSum }} USD" icon="fas fa-lg fa-download" icon-theme="green"/>
+        <div class="col-xl-2 col-lg-4">
+            <x-adminlte-info-box title="Unread Messages" text="{{ $messages }}" icon="fas fa-lg fa-envelope" icon-theme="secondary"/>
         </div>
-        <div class="col-md-3">
-            <x-adminlte-info-box title="Total withdraw" text="{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
+        <div class="col-xl-2 col-lg-4">
+            <x-adminlte-info-box title="In balances" text="≈{{ $inBalances }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
         </div>
-        <div class="col-md-3">
-            <x-adminlte-info-box title="Unread Messages" text="{{ $messages }}" icon="fas fa-lg fa-envelope" icon-theme="yellow"/>
+        <div class="col-xl-2 col-lg-4">
+            <x-adminlte-info-box title="Total deposit" text="≈{{ $depositSum }} USD" icon="fas fa-lg fa-download" icon-theme="green"/>
+        </div>
+        <div class="col-xl-2 col-lg-4">
+            <x-adminlte-info-box title="Total withdraw" text="≈{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
+        </div>
+        <div class="col-xl-2 col-lg-4">
+            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ $pendingPayouts }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
         </div>
     </div>
     <div class="row">
@@ -54,7 +60,7 @@
                 "type":"line",
                 "data": {
                     "datasets":[ {
-                        "label": "{{ $chartKey  }}",
+                        "label": "{{ ucwords(str_replace('_', ' ', $chartKey))  }}",
                         "data": {{ $chartKey }},
                         "fill": false,
                         "borderColor": "rgb(75, 192, 192)",

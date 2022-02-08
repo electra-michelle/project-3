@@ -14,6 +14,7 @@ class DepositsController extends Controller
     public function index($status = null)
     {
         $deposits = Deposit::with(['paymentSystem', 'plan', 'user'])
+        ->withMax('planPeriod', 'period_end')
         ->when($status, fn($query) => (
             $query->where('status', $status)
         ))

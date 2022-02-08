@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\PaymentSystem;
 use App\Rules\CryptoNodeRule;
+use App\Services\PaymentSystemService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSettingsRequest extends FormRequest
@@ -35,18 +36,13 @@ class UpdateSettingsRequest extends FormRequest
         ];
 
         $paymentSystems = PaymentSystem::active()->get();
+
         foreach ($paymentSystems as $paymentSystem) {
             $rules[$paymentSystem->value] = ['nullable', 'string', 'max:255'];
-            switch($paymentSystem->value) {
-                case 'bitcoin':
-                case 'bitcoincash':
-                case 'litecoin':
-                case 'dash':
-                    $rules[$paymentSystem->value][] = new CryptoNodeRule();
-                    break;
-                case 'epaycore':
-                    $rules[$paymentSystem->value][] = 'regex:/^[Ee][\d]{6,9}$/';
-                    break;
+
+            $rule = PaymentSystemService::getValidationRule($paymentSystem->value);
+            if($rule) {
+                $rules[$paymentSystem->value][] = $rule;
             }
         }
 

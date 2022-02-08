@@ -10,6 +10,7 @@ use App\Notifications\RegistrationNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Rules\CryptoNodeRule;
+use App\Services\PaymentSystemService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -80,8 +81,12 @@ class RegisterController extends Controller
                 case 'epaycore':
                     $rules[$paymentSystem->value][] = 'regex:/^[Ee][\d]{6,9}$/';
                     break;
-
             }
+            $rule = PaymentSystemService::getValidationRule($paymentSystem->value);
+            if($rule) {
+                $rules[$paymentSystem->value][] = $rule;
+            }
+
         }
 
         return Validator::make($data, $rules);

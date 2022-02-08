@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Deposit;
 use App\Models\User;
+use App\Services\StatisticsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -45,11 +47,19 @@ class UsersController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(User $user)
+    public function show(StatisticsService $statisticsService, User $user)
     {
         $referralCount = $user->referrals()->count();
+        $deposits = $user->deposits()
+            ->with(['paymentSystem', 'plan'])
+            ->withMax('planPeriod', 'period_end')
+            ->paginate(15);
 
-        return view('admin.users.details', compact('user', 'referralCount'));
+        $totalDeposit = $statisticsService->convertedDepositSum($user->id);
+        $totalPayout = $statisticsService->convertedPayoutSum($user->id);
+        $availableBalance = $statisticsService->convertedAvailableBalance($user->id);
+
+        return view('admin.users.details', compact('user', 'referralCount', 'deposits', 'totalDeposit', 'totalPayout', 'availableBalance'));
     }
 
     /**

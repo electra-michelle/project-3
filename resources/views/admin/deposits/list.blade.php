@@ -36,7 +36,7 @@
                                         @endif
                                     </td>
                                     <td><span class="badge badge-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span></td>
-                                    <td>{{ $deposit->plan->name }}</td>
+                                    <td>{{ $deposit->plan->name }} <small>({{ $deposit->period_passed }}/{{ $deposit->plan_period_max_period_end }})</small></td>
                                     <td>
                                         {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} <small>({{ $deposit->paymentSystem->name }})</small>
                                     </td>

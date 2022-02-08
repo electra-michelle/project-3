@@ -9,10 +9,11 @@ use App\Models\Statistic;
 use App\Models\User;
 use App\Models\Message;
 use App\Http\Controllers\Controller;
+use App\Services\StatisticsService;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(StatisticsService $statisticsService)
     {
         $data['users'] = User::count();
         $data['messages'] = Message::where('is_read', false)->count();
@@ -32,7 +33,11 @@ class DashboardController extends Controller
             ->get()
             ->reverse();
 
-        $data['charts'] = [];
+        $data['charts'] = [
+            'total_accounts' => [],
+            'deposit_count' => [],
+        ];
+
         foreach ($statistics as $statistic) {
             $data['charts'][$statistic->type][] = [
                 'x' => $statistic->created_at,
@@ -40,41 +45,37 @@ class DashboardController extends Controller
             ];
         }
 
-        $data['depositSum'] = 0;
-        $totalDeposits = Deposit::join('payment_systems', 'payment_systems.id', '=', 'deposits.payment_system_id')
-            ->where(function($subQuery) {
-                return $subQuery->where('status', 'active')->orWhere('status', 'finished');
-            })
-            ->selectRaw('user_id, payment_systems.currency as currency, payment_systems.decimals as decimals, payment_system_id, sum(`amount`) as total_deposit')
-            ->groupBy('payment_systems.currency')
-            ->get();
-
-        foreach ($totalDeposits as $totalDeposit) {
-            if($totalDeposit->currency != 'USD') {
-                $exchangeRate = ExchangeRate::where('from', $totalDeposit->currency)->first();
-                $data['depositSum'] += $totalDeposit->total_deposit * (json_decode($exchangeRate?->rate)?->USD ?? 1);
-            } else {
-                $data['depositSum'] += $totalDeposit->total_deposit;
-            }
-            $data['depositSum'] = round($data['depositSum'], 2);
+        if(empty($data['charts']['total_accounts'])) {
+            $data['charts']['total_accounts'][] = [
+                'x' => now()->subHour(),
+                'y' => 0,
+            ];
         }
 
-        $data['payoutSum'] = 0;
-        $totalPayouts = Payout::join('payment_systems', 'payment_systems.id', '=', 'payouts.payment_system_id')
-            ->where('status', 'paid')
-            ->selectRaw('user_id, payment_systems.currency as currency, payment_systems.decimals as decimals, payment_system_id, sum(`amount`) as total_payout')
-            ->groupBy('payment_systems.currency')
-            ->get();
-
-        foreach ($totalPayouts as $totalPayout) {
-            if($totalPayout->currency != 'USD') {
-                $exchangeRate = ExchangeRate::where('from', $totalPayout->currency)->first();
-                $data['payoutSum'] += $totalPayout->total_payout * (json_decode($exchangeRate?->rate)?->USD ?? 1);
-            } else {
-                $data['payoutSum'] += $totalPayout->total_payout;
-            }
-            $data['payoutSum'] = round($data['payoutSum'], 2);
+        if(empty($data['charts']['deposit_count'])) {
+            $data['charts']['deposit_count'][] = [
+                'x' => now()->subHour(),
+                'y' => 0,
+            ];
         }
+
+        $data['charts']['deposit_count'][] = [
+            'x' => now(),
+            'y' => $data['depositsCount'],
+        ];
+
+        $data['charts']['total_accounts'][] = [
+            'x' => now(),
+            'y' => $data['users'],
+        ];
+
+        $data['depositSum'] = $statisticsService->convertedDepositSum();
+        $data['payoutSum'] =  $statisticsService->convertedPayoutSum();
+        $data['pendingPayouts'] =  $statisticsService->convertedPayoutSum(
+            status: 'pending'
+        );
+
+        $data['inBalances'] = $statisticsService->convertedAvailableBalance();
 
         return view('admin.dashboard', $data);
     }
