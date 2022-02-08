@@ -66,7 +66,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::delete('messages/{message}', 'MessagesController@destroy')->name('messages.destroy')->where('message', '[0-9]+');
 
     // Users
-    Route::resource('users', 'UsersController');
+    Route::resource('users', 'UsersController')->except(['store', 'create', 'edit', 'destroy']);
     Route::post('users/{user}/login', 'UsersController@loginWithUser')->name('users.login');
 
     // Deposits

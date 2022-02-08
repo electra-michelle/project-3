@@ -72,11 +72,16 @@
             <!-- About Me Box -->
             <div class="card">
                 <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+                    @method('PATCH')
+                    @csrf
                     <div class="card-header">
                         <h3 class="card-title">User Wallets</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if(session()->has('wallets_success'))
+                            <div class="alert alert-success">{{ session('wallets_success') }}</div>
+                        @endif
                         @foreach($paymentSystems as $paymentSystem)
                             <x-adminlte-input name="{{ $paymentSystem->value }}"
                                               value="{{ old($paymentSystem->value, ($wallets[$paymentSystem->id] ?? null)) }}"
@@ -98,14 +103,15 @@
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#deposits" data-toggle="tab">Deposits</a></li>
                         <li class="nav-item"><a class="nav-link" href="#payouts" data-toggle="tab">Payouts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#referrals" data-toggle="tab">Referrals</a></li>
                         <li class="nav-item"><a class="nav-link" href="#history" data-toggle="tab">History</a></li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="deposits">
-                            <x-adminlte-datatable id="table-deposits" :heads="['ID','Date','Status','Plan','Amount','Action']">
-                                @foreach($deposits as $deposit)
+                            <x-adminlte-datatable id="table-deposits" :heads="['ID','Date','Status','Plan','Amount','Type','Action']">
+                                @foreach($user->deposits as $deposit)
                                     <tr>
                                         <td>{{ $deposit->id }}</td>
                                         <td>
@@ -120,6 +126,7 @@
                                         <td>
                                             {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} <small>({{ $deposit->paymentSystem->name }})</small>
                                         </td>
+                                        <td>{{ ucfirst($deposit->payment_type) }}</td>
                                         <td></td>
                                     </tr>
                                 @endforeach
@@ -127,7 +134,7 @@
                         </div>
                         <div class="tab-pane" id="payouts">
                             <x-adminlte-datatable id="table-payouts" :heads="['ID','Date','Status', 'Amount','Action']">
-                                @foreach($payouts as $payout)
+                                @foreach($user->payouts as $payout)
                                     <tr>
                                         <td>{{ $payout->id }}</td>
                                         <td>
@@ -146,9 +153,25 @@
                                 @endforeach
                             </x-adminlte-datatable>
                         </div>
+                        <div class="tab-pane" id="referrals">
+                            <x-adminlte-datatable id="table-referrals" :heads="['ID','Joined','Username', 'E-Mail', 'Has Deposits', 'Action']" :config="['ordering' => false]">
+                                @foreach($user->referrals as $referral)
+                                    <tr>
+                                        <td>{{ $referral->id }}</td>
+                                        <td>{{ $referral->created_at->diffForHumans() }}</td>
+                                        <td><a target="_blank" href="{{ route('admin.users.show', $referral->id) }}">{{ $referral->username }}</a></td>
+                                        <td>{{ $referral->email }}</td>
+                                        <td><i class="far {{ $referral->deposits_sum_amount > 0 ? 'fa-check-circle text-success' : 'fa-times-circle text-danger' }}"></i></td>
+                                        <td>
+                                            <a target="_blank" href="{{ route('admin.users.show', $referral->id) }}" type="button" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </x-adminlte-datatable>
+                        </div>
                         <div class="tab-pane" id="history">
                             <x-adminlte-datatable id="table-history" :heads="['ID','Date','Action']" :config="['ordering' => false]">
-                                @foreach($histories as $history)
+                                @foreach($user->histories as $history)
                                     <tr>
                                         <td>{{ $history->id }}</td>
                                         <td>{{ $history->created_at->diffForHumans() }}</td>

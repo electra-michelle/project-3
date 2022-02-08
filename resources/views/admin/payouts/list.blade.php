@@ -8,6 +8,17 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-4">
+            <x-adminlte-info-box title="Total Paid" text="≈{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
+        </div>
+        <div class="col-md-4">
+            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ $pendingPayouts }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
+        </div>
+        <div class="col-md-4">
+            <x-adminlte-info-box title="In balances" text="≈{{ $inBalances }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body table-responsive">

@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Payout;
+use App\Services\StatisticsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PayoutController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param StatisticsService $statisticsService
+     * @param null $status
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index($status = null)
+    public function index(StatisticsService $statisticsService, $status = null)
     {
         $payouts = Payout::latest()
             ->with(['paymentSystem', 'user'])
@@ -22,7 +23,14 @@ class PayoutController extends Controller
             ))
             ->paginate(15);
 
-        return view('admin.payouts.list', compact('payouts'));
+        $payoutSum =  $statisticsService->convertedPayoutSum();
+        $pendingPayouts =  $statisticsService->convertedPayoutSum(
+            status: 'pending'
+        );
+
+        $inBalances = $statisticsService->convertedAvailableBalance();
+
+        return view('admin.payouts.list', compact('payouts', 'payoutSum', 'pendingPayouts', 'inBalances'));
     }
 
     /**

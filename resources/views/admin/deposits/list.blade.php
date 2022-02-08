@@ -8,6 +8,20 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-3">
+            <x-adminlte-info-box title="Deposit Count" text="{{ $depositsCount }}" icon="fas fa-lg fas fa-chart-line" icon-theme="info"/>
+        </div>
+        <div class="col-md-3">
+            <x-adminlte-info-box title="Total Deposited" text="≈{{ $depositSum }} USD" icon="fas fa-lg fa-upload" icon-theme="purple"/>
+        </div>
+        <div class="col-md-3">
+            <x-adminlte-info-box title="Active deposits" text="≈{{ $activeDeposits }} USD" icon="fas fa-lg fa-business-time" icon-theme="success"/>
+        </div>
+        <div class="col-md-3">
+            <x-adminlte-info-box title="Finished Deposits" text="≈{{ $finishedDeposits }} USD" icon="fas fa-lg fa-wallet" icon-theme="secondary"/>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body table-responsive">
@@ -46,7 +60,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="text-center">User list is empty</td>
+                                <td colspan="7" class="text-center">Deposit list is empty</td>
                             </tr>
                         @endif
                         </tbody>

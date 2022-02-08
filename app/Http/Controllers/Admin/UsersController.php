@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Deposit;
 use App\Models\PaymentSystem;
 use App\Models\User;
@@ -25,44 +26,35 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * @param User $user
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(StatisticsService $statisticsService, User $user)
     {
+
+        $user->load([
+            'histories' => fn($subQuery) => (
+                $subQuery->latest()
+            ),
+            'deposits' => fn($subQuery) => (
+                $subQuery->withMax('planPeriod', 'period_end')
+            ),
+            'referrals' => fn($subQuery) => (
+                $subQuery->withSum(['deposits' => fn($query) => (
+                $query->where('status', 'finished')
+                    ->orWhere('status', 'active')
+                )], 'amount')
+            ),
+            'deposits.paymentSystem',
+            'deposits.plan',
+            'payouts.paymentSystem',
+        ]);
+
+
         $data['user'] = $user;
-        $data['histories'] = $user->histories()->latest()->get();
         $data['paymentSystems'] = PaymentSystem::active()->get();
         $data['wallets'] = $user->wallets->pluck('wallet', 'payment_system_id')->toArray();
         $data['referralCount'] = $user->referrals()->count();
-        $data['deposits'] = $user->deposits()
-            ->with(['paymentSystem', 'plan'])
-            ->withMax('planPeriod', 'period_end')
-            ->get();
-        $data['payouts'] = $user->payouts()
-            ->with(['paymentSystem'])
-            ->get();
 
         $data['totalDeposit'] = $statisticsService->convertedDepositSum($user->id);
         $data['totalPayout'] = $statisticsService->convertedPayoutSum($user->id);
@@ -73,26 +65,24 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit($id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
-    }
+        $paymentSystems = PaymentSystem::active()->get();
+        foreach ($paymentSystems as $paymentSystem){
+            if($request->input($paymentSystem->value)) {
+                $user->wallets()->updateOrCreate([
+                    'payment_system_id' => $paymentSystem->id
+                ], [
+                    'wallet' => $request->input($paymentSystem->value)
+                ]);
+            }
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return redirect()->back()->with(['wallets_success' => 'Wallet settings has been successfully updated.']);
     }
 
     /**

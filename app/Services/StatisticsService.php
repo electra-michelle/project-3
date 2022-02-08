@@ -43,14 +43,19 @@ class StatisticsService
             ->sum('amount');
     }
 
-    public function convertedDepositSum($userId = null): float|int
+    public function convertedDepositSum(?int $userId = null, ?string $status = null): float|int
     {
         $depositSum = 0;
         $totalDeposits = Deposit::join('payment_systems', 'payment_systems.id', '=', 'deposits.payment_system_id')
-            ->where(function($subQuery) {
-                return $subQuery->where('status', 'active')
-                    ->orWhere('status', 'finished');
+            ->when(!$status, function ($query) {
+                $query->where(function($subQuery) {
+                    return $subQuery->where('status', 'active')
+                        ->orWhere('status', 'finished');
+                });
             })
+            ->when($status, fn($subQuery) => (
+                $subQuery->where('deposits.status', $status)
+            ))
             ->when($userId, fn($subQuery) => (
                 $subQuery->where('user_id', $userId)
             ))
