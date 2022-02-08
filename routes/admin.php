@@ -71,7 +71,7 @@ Route::middleware('admin.auth')->group(function () {
 
     // Deposits
     Route::get('deposits/{status?}', 'DepositsController@index')->name('deposits')->where('status', '[A-Za-z]+');
-    Route::get('deposits/{id}', 'DepositsController@view')->name('deposits.view')->where('id', '[0-9]+');
+    Route::get('deposits/{id}', 'DepositsController@view')->name('deposits.show')->where('id', '[0-9]+');
     Route::get('deposits/{id}/confirm', 'DepositsController@confirm')->name('deposits.confirm');
     Route::post('deposits/{id}/confirm', 'DepositsController@updateDeposit');
     Route::get('deposits/{id}/cancel', 'DepositsController@cancel')->name('deposits.cancel');

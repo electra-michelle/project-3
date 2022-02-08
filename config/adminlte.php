@@ -234,7 +234,13 @@ return [
         [
             'text' => 'deposits',
             'icon' => 'fas fa-fw fa-arrow-alt-circle-up',
+            'active' => ['*/deposits*'],
             'submenu' => [
+                [
+                    'text' => 'All Deposits',
+                    'route'  => 'admin.deposits',
+                    'icon' => 'far fa-fw fa-circle',
+                ],
                 [
                     'text' => 'Active Deposits',
                     'route'  => ['admin.deposits', ['status' => 'active']],
@@ -439,6 +445,7 @@ return [
                 ],
             ],
         ],
+
     ],
 
     /*

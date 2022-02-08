@@ -9,13 +9,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <x-adminlte-info-box title="Total Paid" text="≈{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
+            <x-adminlte-info-box title="Total Paid" text="≈{{ CustomHelper::formatAmount($payoutSum, 2) }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
         </div>
         <div class="col-md-4">
-            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ $pendingPayouts }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
+            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ CustomHelper::formatAmount($pendingPayouts, 2) }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
         </div>
         <div class="col-md-4">
-            <x-adminlte-info-box title="In balances" text="≈{{ $inBalances }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
+            <x-adminlte-info-box title="In balances" text="≈{{ CustomHelper::formatAmount($inBalances, 2) }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
         </div>
     </div>
     <div class="row">
@@ -30,6 +30,7 @@
                             <th>Status</th>
                             <th>Amount</th>
                             <th>User</th>
+                            <th>Transaction ID</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -45,12 +46,18 @@
                                     </td>
 
                                     <td><a target="_blank" href="{{ route('admin.users.show', $payout->user_id) }}">{{ $payout->user->username }}</a></td>
-                                    <td></td>
+                                    <td>{{ $payout->status == 'paid' ? $payout->transaction_id : 'Processing...' }}</td>
+                                    <td>
+                                        @if($payout->status == 'pending')
+                                            <a class="btn btn-sm btn-success" href="">Accept</a>
+                                            <a class="btn btn-sm btn-danger" href="">Cancel</a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">Payout list is empty</td>
+                                <td colspan="7" class="text-center">Payout list is empty</td>
                             </tr>
                         @endif
                         </tbody>

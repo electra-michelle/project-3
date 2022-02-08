@@ -12,13 +12,13 @@
             <x-adminlte-info-box title="Deposit Count" text="{{ $depositsCount }}" icon="fas fa-lg fas fa-chart-line" icon-theme="info"/>
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Total Deposited" text="≈{{ $depositSum }} USD" icon="fas fa-lg fa-upload" icon-theme="purple"/>
+            <x-adminlte-info-box title="Total Deposited" text="≈{{ CustomHelper::formatAmount($depositSum, 2) }} USD" icon="fas fa-lg fa-upload" icon-theme="purple"/>
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Active deposits" text="≈{{ $activeDeposits }} USD" icon="fas fa-lg fa-business-time" icon-theme="success"/>
+            <x-adminlte-info-box title="Active deposits" text="≈{{ CustomHelper::formatAmount($activeDeposits, 2) }} USD" icon="fas fa-lg fa-business-time" icon-theme="success"/>
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Finished Deposits" text="≈{{ $finishedDeposits }} USD" icon="fas fa-lg fa-wallet" icon-theme="secondary"/>
+            <x-adminlte-info-box title="Finished Deposits" text="≈{{ CustomHelper::formatAmount($finishedDeposits, 2) }} USD" icon="fas fa-lg fa-wallet" icon-theme="secondary"/>
         </div>
     </div>
     <div class="row">
@@ -55,7 +55,14 @@
                                         {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} <small>({{ $deposit->paymentSystem->name }})</small>
                                     </td>
                                     <td><a target="_blank" href="{{ route('admin.users.show', $deposit->user_id) }}">{{ $deposit->user->username }}</a></td>
-                                    <td></td>
+                                    <td>
+                                        @if($deposit->status == 'pending')
+                                            <a class="btn btn-sm btn-success" href="">Accept</a>
+                                            <a class="btn btn-sm btn-danger" href="">Cancel</a>
+                                        @else
+                                            <a class="btn btn-sm btn-info" href="{{ route('admin.deposits.show', $deposit->id) }}">View details</a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
