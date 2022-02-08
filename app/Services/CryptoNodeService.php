@@ -28,7 +28,7 @@ class CryptoNodeService
     {
         $balance = $this->node->getbalance();
 
-        return $balance ?: 1;
+        return $balance ?: 0;
     }
 
     /**
