@@ -15,6 +15,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Joined</th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
@@ -27,6 +28,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
+                                    <td>{{ $user->created_at->diffForHumans() }}</td>
                                     <td>
                                         {{ Str::limit($user->name, 30) }}
                                     </td>
@@ -50,7 +52,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">User list is empty</td>
+                                <td colspan="7" class="text-center">User list is empty</td>
                             </tr>
                         @endif
                         </tbody>

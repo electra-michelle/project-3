@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/felicita';
 
     /**
      * Create a new controller instance.
@@ -72,6 +72,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect()->route('admin.home');
+        return $this->loggedOut($request) ?: redirect()->route('admin.login');
     }
 }

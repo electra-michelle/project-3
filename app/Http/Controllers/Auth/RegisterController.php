@@ -71,17 +71,6 @@ class RegisterController extends Controller
 
         foreach ($this->paymentSystems as $paymentSystem) {
             $rules[$paymentSystem->value] = ['nullable', 'string', 'max:255'];
-            switch($paymentSystem->value) {
-                case 'bitcoin':
-                case 'bitcoincash':
-                case 'litecoin':
-                case 'dash':
-                    $rules[$paymentSystem->value][] = new CryptoNodeRule();
-                    break;
-                case 'epaycore':
-                    $rules[$paymentSystem->value][] = 'regex:/^[Ee][\d]{6,9}$/';
-                    break;
-            }
             $rule = PaymentSystemService::getValidationRule($paymentSystem->value);
             if($rule) {
                 $rules[$paymentSystem->value][] = $rule;
@@ -147,6 +136,10 @@ class RegisterController extends Controller
                 ]);
             }
         }
+
+        $user->histories()->create([
+            'action' => 'registration',
+        ]);
 
         return $user;
     }

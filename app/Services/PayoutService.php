@@ -40,10 +40,10 @@ class PayoutService
         $payout->user->histories()->create([
             'action' => 'withdraw_complete',
             'data' => json_encode([
+                'id' => $payout->id,
                 'payment_system' => $payout->paymentSystem->name,
                 'amount' => CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals),
-                'currency' => $payout->paymentSystem->currency,
-                'transaction_id' => $transactionId
+                'currency' => $payout->paymentSystem->currency
             ])
         ]);
 

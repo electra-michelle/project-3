@@ -38,6 +38,7 @@ class DepositService
         $deposit->user->histories()->create([
             'action' => 'new_investment',
             'data' => json_encode([
+                'id' => $deposit->id,
                 'payment_system' => $wallet,
                 'amount' => $amount,
                 'currency' => $currency,
@@ -69,12 +70,16 @@ class DepositService
             $deposit->user->referredBy->histories()->create([
                 'action' => 'commission_earned',
                 'data' => json_encode([
+                    'from_deposit' => $deposit->id,
+                    'user_id' => $deposit->user->id,
                     'from_user' => $deposit->user->username,
                     'payment_system' => $wallet,
                     'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals),
                     'currency' => $currency,
                 ])
             ]);
+
+            trans();
         }
 
         return $deposit;

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Deposit;
+use App\Models\PaymentSystem;
 use App\Models\User;
 use App\Services\StatisticsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -49,17 +51,25 @@ class UsersController extends Controller
      */
     public function show(StatisticsService $statisticsService, User $user)
     {
-        $referralCount = $user->referrals()->count();
-        $deposits = $user->deposits()
+        $data['user'] = $user;
+        $data['histories'] = $user->histories()->latest()->get();
+        $data['paymentSystems'] = PaymentSystem::active()->get();
+        $data['wallets'] = $user->wallets->pluck('wallet', 'payment_system_id')->toArray();
+        $data['referralCount'] = $user->referrals()->count();
+        $data['deposits'] = $user->deposits()
             ->with(['paymentSystem', 'plan'])
             ->withMax('planPeriod', 'period_end')
-            ->paginate(15);
+            ->get();
+        $data['payouts'] = $user->payouts()
+            ->with(['paymentSystem'])
+            ->get();
 
-        $totalDeposit = $statisticsService->convertedDepositSum($user->id);
-        $totalPayout = $statisticsService->convertedPayoutSum($user->id);
-        $availableBalance = $statisticsService->convertedAvailableBalance($user->id);
+        $data['totalDeposit'] = $statisticsService->convertedDepositSum($user->id);
+        $data['totalPayout'] = $statisticsService->convertedPayoutSum($user->id);
+        $data['availableBalance'] = $statisticsService->convertedAvailableBalance($user->id);
 
-        return view('admin.users.details', compact('user', 'referralCount', 'deposits', 'totalDeposit', 'totalPayout', 'availableBalance'));
+
+        return view('admin.users.details', $data);
     }
 
     /**
@@ -94,5 +104,12 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function loginWithUser(User $user)
+    {
+        Auth::loginUsingId($user->id);
+
+        return redirect()->route('account.dashboard');
     }
 }

@@ -67,6 +67,7 @@ Route::middleware('admin.auth')->group(function () {
 
     // Users
     Route::resource('users', 'UsersController');
+    Route::post('users/{user}/login', 'UsersController@loginWithUser')->name('users.login');
 
     // Deposits
     Route::get('deposits/{status?}', 'DepositsController@index')->name('deposits')->where('status', '[A-Za-z]+');

@@ -3,6 +3,10 @@
 @section('title', 'User details')
 
 @section('content_header')
+    <form action="{{ route('admin.users.login', $user->id) }}" method="POST">
+        @csrf
+        <button class="btn btn-success float-right">Login as user</button>
+    </form>
     <h1 class="m-0 text-dark">User details #{{ $user->id }}</h1>
 @stop
 
@@ -22,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-3">
             <!-- About Me Box -->
             <div class="card">
                 <div class="card-header">
@@ -31,7 +35,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <strong><i class="fas fa-id-card mr-1"></i> Referred by</strong>
                             <p class="text-muted">
                                 @if($user->upline)
@@ -41,19 +45,19 @@
                                 @endif
                             </p><hr>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <strong><i class="fas fa-envelope mr-1"></i> E-Mail</strong>
                             <p class="text-muted">
                                 {{ $user->email }}
                             </p><hr>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <strong><i class="fas fa-user mr-1"></i> Username</strong>
                             <p class="text-muted">
                                 {{ $user->username }}
-                            </p>
+                            </p><hr>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <strong><i class="fas fa-user mr-1"></i> Name</strong>
                             <p class="text-muted">
                                 {{ $user->name }}
@@ -65,28 +69,42 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <!-- About Me Box -->
+            <div class="card">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+                    <div class="card-header">
+                        <h3 class="card-title">User Wallets</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @foreach($paymentSystems as $paymentSystem)
+                            <x-adminlte-input name="{{ $paymentSystem->value }}"
+                                              value="{{ old($paymentSystem->value, ($wallets[$paymentSystem->id] ?? null)) }}"
+                                              label="{{ $paymentSystem->name }}"
+                                              error-key="{{ $paymentSystem->value }}"/>
+                        @endforeach
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Deposits</h3>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#deposits" data-toggle="tab">Deposits</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#payouts" data-toggle="tab">Payouts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#history" data-toggle="tab">History</a></li>
+                    </ul>
                 </div>
-                <div class="card-body table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Plan</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @if(count($deposits))
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="deposits">
+                            <x-adminlte-datatable id="table-deposits" :heads="['ID','Date','Status','Plan','Amount','Action']">
                                 @foreach($deposits as $deposit)
                                     <tr>
                                         <td>{{ $deposit->id }}</td>
@@ -105,13 +123,41 @@
                                         <td></td>
                                     </tr>
                                 @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="7" class="text-center">User list is empty</td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
+                            </x-adminlte-datatable>
+                        </div>
+                        <div class="tab-pane" id="payouts">
+                            <x-adminlte-datatable id="table-payouts" :heads="['ID','Date','Status', 'Amount','Action']">
+                                @foreach($payouts as $payout)
+                                    <tr>
+                                        <td>{{ $payout->id }}</td>
+                                        <td>
+                                            @if($payout->status == 'paid')
+                                                {{ $payout->paid_at->diffForHumans() }}
+                                            @else
+                                                {{ $deposit->created_at->diffForHumans() }}
+                                            @endif
+                                        </td>
+                                        <td><span class="badge badge-{{ CustomHelper::statusColor($payout->status) }}">{{ ucfirst($payout->status) }}</span></td>
+                                        <td>
+                                            {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} <small>({{ $payout->paymentSystem->name }})</small>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                            </x-adminlte-datatable>
+                        </div>
+                        <div class="tab-pane" id="history">
+                            <x-adminlte-datatable id="table-history" :heads="['ID','Date','Action']" :config="['ordering' => false]">
+                                @foreach($histories as $history)
+                                    <tr>
+                                        <td>{{ $history->id }}</td>
+                                        <td>{{ $history->created_at->diffForHumans() }}</td>
+                                        <td>{!! trans('adminlte::histories.' . $history->action, json_decode($history->data, true) ?? [])  !!}</td>
+                                    </tr>
+                                @endforeach
+                            </x-adminlte-datatable>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

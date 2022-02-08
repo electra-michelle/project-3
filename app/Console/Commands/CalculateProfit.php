@@ -85,9 +85,11 @@ class CalculateProfit extends Command
                     $deposit->user->histories()->create([
                         'action' => 'daily_income',
                         'data' => json_encode([
-                            'plan' => $deposit->plan->value,
+                            'deposit_id' => $deposit->deposit_id,
+                            'plan' => $deposit->plan->name,
                             'amount' => CustomHelper::formatAmount($profit, $deposit->paymentSystem->decimals),
-                            'currency' => $deposit->paymentSystem->currency
+                            'currency' => $deposit->paymentSystem->currency,
+                            'payment_system' => $deposit->paymentSystem->name
                         ])
                     ]);
 
@@ -130,6 +132,7 @@ class CalculateProfit extends Command
                             'data' => json_encode([
                                 'deposit_id' => $deposit->id,
                                 'amount' => CustomHelper::formatAmount($deposit->paymentSystem->name, $deposit->paymentSystem->decimals),
+                                'currency' => $deposit->paymentSystem->currency,
                                 'currency' => $deposit->paymentSystem->currency,
                             ])
                         ]);
