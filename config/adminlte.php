@@ -291,26 +291,16 @@ return [
             'icon' => 'fas fa-fw fa-users',
             'active' => ['*/users*'],
         ],
-        /*[
-            'text' => 'search',
-            'route'  => 'admin.dashboard',
-            'icon' => 'fas fa-fw fa-search',
-        ],*/
         [
             'text' => 'wallet_balances',
             'route'  => 'admin.balances',
             'icon' => 'fas fa-fw fa-chart-line',
         ],
-        /*[
-            'text' => 'telegram_newsletters',
-            'route'  => 'admin.dashboard',
-            'icon' => 'fab fa-fw fa-telegram',
-        ],*/
-        /*[
+        [
             'text' => 'news',
-            'route'  => 'admin.news',
+            'route'  => 'admin.news.index',
             'icon' => 'fas fa-newspaper',
-        ],*/
+        ],
         [
             'text' => 'messages',
             'icon' => 'fas fa-fw fa-envelope',
@@ -426,7 +416,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
+                ],
+            ],
+        ],
+        'Axios' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//unpkg.com/axios/dist/axios.min.js',
                 ],
             ],
         ],

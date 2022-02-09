@@ -77,9 +77,13 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('deposits/{id}/cancel', 'DepositsController@cancel')->name('deposits.cancel');
     Route::get('deposits/{id}/recover', 'DepositsController@recover')->name('deposits.recover');
 
+    Route::resource('news', 'NewsController');
+
     // Payouts
     Route::get('payouts/{status?}', 'PayoutController@index')->name('payouts')->where('status', '[A-Za-z]+');
     Route::get('payouts/{payout}', 'PayoutController@view')->name('payouts.view')->where('payout', '[0-9]+');
+    Route::patch('payouts/{payout}', 'PayoutController@send')->name('payouts.update')->where('payout', '[0-9]+');
+    Route::delete('payouts/{payout}', 'PayoutController@cancel')->name('payouts.destroy')->where('payout', '[0-9]+');
 });
 
 
