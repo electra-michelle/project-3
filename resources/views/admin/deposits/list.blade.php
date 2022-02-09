@@ -73,22 +73,7 @@
                                                href="{{ route('admin.users.show', $deposit->user_id) }}">{{ $deposit->user->username }}</a>
                                         </td>
                                         <td>
-                                            @if($deposit->status == 'pending')
-                                                <a class="btn btn-sm btn-success"
-                                                   href="{{ route('admin.deposits.edit', $deposit->id) }}">Accept</a>
-                                                <button data-id="{{ $deposit->id }}"
-                                                        class="btn btn-sm btn-danger cancel">Cancel
-                                                </button>
-                                            @else
-                                                @if($deposit->status == 'cancelled')
-                                                    <button data-id="{{ $deposit->id }}"
-                                                            class="btn btn-sm btn-warning recover">Recover
-                                                    </button>
-                                                @endif
-                                                <a class="btn btn-sm btn-info"
-                                                   href="{{ route('admin.deposits.show', $deposit->id) }}">View
-                                                    details</a>
-                                            @endif
+                                            @include('admin.deposits.__partials.actions', ['deposit' => $deposit])
                                         </td>
                                     </tr>
                                 @endforeach
@@ -111,72 +96,5 @@
     </div>
 @stop
 @push('js')
-    <script>
-        $(document).ready(function () {
-            $('.cancel').click(function () {
-                var depositId = $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure to cancel deposit request #' + depositId + '?',
-                    text: 'Deposit #' + depositId + ' will be cancelled.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Yes, cancel it!',
-                    cancelButtonText: 'Close'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        axios.delete('/felicita/deposits/' + depositId, {}).then((response) => {
-                            Swal.fire({
-                                title: 'Cancelled!',
-                                text: 'Deposit #' + depositId + ' has been cancelled.',
-                                icon: 'success'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload()
-                                }
-                            })
-                        }).catch((error) => {
-                            Swal.fire({
-                                title: 'Whoops! Something went wrong!',
-                                text: 'Unable to cancel withdraw request #' + depositId + '. Message: ' + error.response.data.message,
-                                icon: 'error'
-                            })
-                        });
-                    }
-                })
-            });
-            $('.recover').click(function () {
-                var depositId = $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure to recover deposit request #' + depositId + '?',
-                    text: 'Deposits #' + depositId + ' status will be changed to pending',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Yes, recover it!',
-                    cancelButtonText: 'Close'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        axios.post('/felicita/deposits/' + depositId + '/recover', {}).then((response) => {
-                            Swal.fire({
-                                title: 'Recovered!',
-                                text: 'Deposit #' + depositId + ' has been recovered.',
-                                icon: 'success'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload()
-                                }
-                            })
-                        }).catch((error) => {
-                            Swal.fire({
-                                title: 'Whoops! Something went wrong!',
-                                text: 'Unable to recover withdraw request #' + depositId + '. Message: ' + error.response.data.message,
-                                icon: 'error'
-                            })
-                        });
-                    }
-                })
-            });
-        })
-    </script>
+    @include('admin.deposits.__partials.action_scripts')
 @endpush

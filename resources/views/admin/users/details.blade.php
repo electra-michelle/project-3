@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'User details')
+@section('plugins.Sweetalert2', true)
 
 @section('content_header')
     <form action="{{ route('admin.users.login', $user->id) }}" method="POST">
@@ -128,7 +129,9 @@
                                         </td>
                                         <td>{{ ucfirst($deposit->payment_type) }}</td>
                                         <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
-                                        <td></td>
+                                        <td>
+                                            @include('admin.deposits.__partials.actions')
+                                        </td>
                                     </tr>
                                 @endforeach
                             </x-adminlte-datatable>
@@ -150,7 +153,9 @@
                                             {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} <small>({{ $payout->paymentSystem->name }})</small>
                                         </td>
                                         <td>{{ $payout->status == 'paid' ? $payout->transaction_id : 'Processing...' }}</td>
-                                        <td></td>
+                                        <td>
+                                            @include('admin.payouts.__partials.actions', ['payout' => $payout])
+                                        </td>
                                     </tr>
                                 @endforeach
                             </x-adminlte-datatable>
@@ -188,3 +193,8 @@
         </div>
     </div>
 @stop
+
+@push('js')
+    @include('admin.deposits.__partials.action_scripts')
+    @include('admin.payouts.__partials.action_scripts')
+@endpush

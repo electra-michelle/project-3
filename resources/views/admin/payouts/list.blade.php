@@ -49,10 +49,7 @@
                                     <td><a target="_blank" href="{{ route('admin.users.show', $payout->user_id) }}">{{ $payout->user->username }}</a></td>
                                     <td>{{ $payout->status == 'paid' ? $payout->transaction_id : 'Processing...' }}</td>
                                     <td>
-                                        @if($payout->status == 'pending')
-                                            <button data-id="{{ $payout->id }}" class="btn btn-sm btn-success send">Send</button>
-                                            <button data-id="{{ $payout->id }}" class="btn btn-sm btn-danger cancel">Cancel</button>
-                                        @endif
+                                        @include('admin.payouts.__partials.actions', ['payout' => $payout])
                                     </td>
                                 </tr>
                             @endforeach
@@ -75,73 +72,5 @@
 @stop
 
 @push('js')
-    <script>
-        $(document).ready(function() {
-            $('.cancel').click(function() {
-                var payoutId = $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure to cancel withdraw request #' + payoutId + '?',
-                    text: "Withdrawal request amount will be added to users account balance.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Yes, cancel it!',
-                    cancelButtonText: 'Close'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        axios.delete('/felicita/payouts/' + payoutId, {}).then((response) => {
-                            Swal.fire({
-                                title: 'Cancelled!',
-                                text: 'Payout #' + payoutId + ' has been cancelled and funds has been returned to users available balance.',
-                                icon: 'success'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload()
-                                }
-                            })
-                        }).catch((error) => {
-                            Swal.fire({
-                                title: 'Whoops! Something went wrong!',
-                                text: 'Unable to cancel withdraw request #' + payoutId + '. Message: ' + error.response.data.message,
-                                icon: 'error'
-                            })
-                        });
-                    }
-                })
-            });
-
-            $('.send').click(function() {
-                var payoutId = $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure to process payout #' + payoutId + '?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'Close'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        axios.patch('/felicita/payouts/' + payoutId, {}).then((response) => {
-                            Swal.fire({
-                                title: 'PAID!',
-                                text: 'Payout #' + payoutId + ' has been processed with transaction id: ' +  response.data.transaction_id,
-                                icon: 'success'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload()
-                                }
-                            })
-                        }).catch((error) => {
-                            Swal.fire({
-                                title: 'Whoops! Something went wrong!',
-                                text: 'Unable to cancel withdraw request #' + payoutId + '. Message: ' + error.response.data.message,
-                                icon: 'error'
-                            })
-                        });
-                    }
-                })
-            });
-        })
-    </script>
+    @include('admin.payouts.__partials.action_scripts', ['payout' => $payout])
 @endpush

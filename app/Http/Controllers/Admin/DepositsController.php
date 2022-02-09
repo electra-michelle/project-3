@@ -59,6 +59,8 @@ class DepositsController extends Controller
      */
     public function show(Deposit $deposit)
     {
+        abort_if($deposit->status == 'pending', 404);
+
         $deposit->load(['plan' => fn($query) => (
             $query->withMax('periods', 'period_end')
         )]);
