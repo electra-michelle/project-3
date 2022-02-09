@@ -107,11 +107,9 @@
                     <div class="form-group">
                         <label for="payment_system">Investment Method</label>
                         <select id="payment_system" name="payment_system" class="form-control">
-                            <option>ePayCore</option>
-                            <option>Bitcoin</option>
-                            <option>Bitcoin Cash</option>
-                            <option>Litecoin</option>
-                            <option>Dogecoin</option>
+                            @foreach($paymentSystems as $paymentSystem)
+                                <option value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -130,9 +128,9 @@
                     <div class="form-group">
                         <label for="investment_plan">Investment Plan</label>
                         <select id="investment_plan" name="investment_plan" class="form-control">
-                            <option>plan 1</option>
-                            <option>plan 2</option>
-                            <option>plan 3</option>
+                            @foreach($plans as $plan)
+                                <option value="{{ $plan->value }}">{{ $plan->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

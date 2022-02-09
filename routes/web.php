@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use \App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\InfoPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,6 @@ use \App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {return view('home');})->name('home');
-Route::get('/investments', function () {return view('investments');})->name('investments');
 Route::get('/affiliate', function () {return view('home');})->name('affiliate');
 Route::get('/faq', function () {return view('faq');})->name('faq');
 Route::controller(ContactController::class)->group(function () {
@@ -24,6 +24,7 @@ Route::controller(ContactController::class)->group(function () {
     Route::post('/contact', 'sendMessage');
 });
 
+Route::get('/investments', [InfoPageController::class, 'investments'])->name('investments');
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
