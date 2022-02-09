@@ -29,7 +29,7 @@
                                             {{ $article->id }}
                                         </td>
                                         <td>
-                                            <img src="{{ $article->image }}" alt="" />
+                                            <img height="30" src="/storage/{{ $article->image }}" alt="" />
                                         </td>
                                         <td>{{ Str::limit($article->title, 50) }}</td>
                                         <td>

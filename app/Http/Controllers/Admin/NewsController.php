@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateNewsRequest;
+use App\Http\Requests\Admin\UpdateNewsRequest;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -14,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $articles = News::paginate(15);
+        $articles = News::latest()->paginate(15);
 
         return view('admin.news.list', compact('articles'));
     }
@@ -38,18 +40,16 @@ class NewsController extends Controller
     public function store(CreateNewsRequest $request)
     {
 
+        $filename = Str::uuid() . '.' . $request->file('image')->getClientOriginalExtension();
         $news = News::create([
             'published_from' => $request->input('published_from') ?: now(),
+            'image' => $filename
         ]);
-
-        $filename = $news->id . '.' . $request->file('image')->getClientOriginalExtension();
 
         foreach(config('app.locales') as $key => $locale) {
             $news->translateOrNew($key)->title = $request->input('title.' . $key);
             $news->translateOrNew($key)->content = $request->input('content.' . $key);
         }
-
-        $news->image = $filename;
 
         $news->save();
 
@@ -68,16 +68,28 @@ class NewsController extends Controller
         return view('admin.news.form', compact('news'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(UpdateNewsRequest $request, News $news)
     {
-        //
+        if($request->file('image')) {
+            $filename = Str::uuid() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->storeAs(
+                'public', $filename
+            );
+
+            $news->image = $filename;
+        }
+
+        foreach(config('app.locales') as $key => $locale) {
+            $news->translateOrNew($key)->title = $request->input('title.' . $key);
+            $news->translateOrNew($key)->content = $request->input('content.' . $key);
+        }
+
+        $news->published_from = $request->input('published_from');
+
+        $news->save();
+        return redirect()->back()
+            ->with(['success' => 'News has been succesfully updated']);
     }
 
     /**

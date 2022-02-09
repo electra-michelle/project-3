@@ -6,7 +6,7 @@
 @section('plugins.TempusDominusBs4', true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Create News</h1>
+    <h1 class="m-0 text-dark">{{ Route::currentRouteName() == 'admin.news.create' ? 'Create' : 'Update' }} News</h1>
 @stop
 
 @section('content')
@@ -30,8 +30,11 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ Route::currentRouteName() == 'admin.news.create' ? route('admin.news.store') : route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @if(Route::currentRouteName() != 'admin.news.create')
+                        @method('PUT')
+                    @endif
                     <div class="card-body">
                         @if($errors->any())
                             <div class="alert alert-danger">Woops! There is errors!</div>
@@ -49,11 +52,19 @@
                                         </div>
                                     </x-slot>
                                 </x-adminlte-input-file>
-                                <div id="preview" class="py-3"></div>
+                                <div id="preview" class="py-3">
+                                    @if(Route::currentRouteName() != 'admin.news.create')
+                                        <img height="100" src="/storage/{{ $news->image }}" alt="" />
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <x-adminlte-input-date name="published_from" :config="['format' => 'YYYY-MM-DD HH:mm:ss']" placeholder="Choose a date..."
-                                                       label="Datetime">
+                                <x-adminlte-input-date
+                                    name="published_from"
+                                    :config="['format' => 'YYYY-MM-DD HH:mm:ss']"
+                                    placeholder="Choose a date..."
+                                    value="{{ old('published_from', (Route::currentRouteName() == 'admin.news.create' ? null : $news->published_from)) }}"
+                                    label="Datetime">
                                     <x-slot name="appendSlot">
                                         <x-adminlte-button  icon="fas fa-lg fa-calendar"
                                                            title="Publish from"/>
@@ -88,7 +99,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary" type="submit">Create</button>
+                        <button class="btn btn-primary" type="submit">{{ Route::currentRouteName() == 'admin.news.create' ? 'Create' : 'Update' }}</button>
                     </div>
                 </form>
             </div>
