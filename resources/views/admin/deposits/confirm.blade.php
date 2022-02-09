@@ -17,10 +17,40 @@
                 @if(session()->has('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
-                Date <br>
-                User<br>
-                Plan<br>
-                PaymentSystem<br>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Date:</td>
+                            <td>
+                                {{ $deposit->created_at }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>User:</td>
+                            <td>
+                                <a target="_blank" href="{{ route('admin.users.show', $deposit->user->id) }}">{{ $deposit->user->username }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Plan:</td>
+                            <td>
+                                {{ $deposit->plan->name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Payment System:</td>
+                            <td>
+                                {{ $deposit->paymentSystem->name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deposit Address:</td>
+                            <td>
+                                {{ $deposit->deposit_address ?? 'N/a' }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <hr />
                 <x-adminlte-input name="amount" label="Amount" value="{{ old('amount', CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals)) }}">
                     <x-slot name="appendSlot">

@@ -48,9 +48,13 @@ class DepositsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Deposit $deposit)
     {
-        //
+        $deposit->load(['plan' => fn($query) => (
+            $query->withMax('periods', 'period_end')
+        )]);
+
+        return view('admin.deposits.details', compact('deposit'));
     }
 
     /**
