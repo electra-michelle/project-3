@@ -9,7 +9,7 @@
 
     <section class="section-padding">
         <div class="container">
-            asdsad
+            Affiliate link: {{ route('home', ['ref' => $user->ref_url]) }}
         </div>
     </section>
 @endsection

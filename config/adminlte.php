@@ -300,6 +300,7 @@ return [
             'text' => 'news',
             'route'  => 'admin.news.index',
             'icon' => 'fas fa-newspaper',
+            'active' => ['*/news*'],
         ],
         [
             'text' => 'messages',

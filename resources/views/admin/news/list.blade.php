@@ -3,6 +3,7 @@
 @section('title', 'News')
 
 @section('content_header')
+    <a href="{{ route('admin.news.create') }}" class="btn btn-primary float-right">Create</a>
     <h1 class="m-0 text-dark">News</h1>
 @stop
 
