@@ -25,7 +25,7 @@ return new class extends Migration
 			$table->string('locale')->index();
 
 			$table->string('title');
-			$table->text('article');
+			$table->text('content');
 
 			$table->unique(['news_id','locale']);
 		});

@@ -16,10 +16,14 @@ class UsersController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::with('referredBy')
             ->latest()
+            ->when($request->input('search'), fn($query) => (
+                $query->where('username', 'LIKE', '%' . $request->input('search') . '%')
+                    ->orWhere('email', 'LIKE', '%' . $request->input('search') . '%')
+            ))
             ->paginate(15);
 
         return view('admin.users.list', compact('users'));

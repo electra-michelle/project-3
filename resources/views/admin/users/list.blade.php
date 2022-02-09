@@ -3,7 +3,22 @@
 @section('title', 'Users')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Users</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="m-0 text-dark">Users</h1>
+        </div>
+        <div class="col-md-4">
+            <form action="{{ route('admin.users.index') }}" method="GET">
+                <x-adminlte-input name="search" placeholder="search">
+                    <x-slot name="appendSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </form>
+        </div>
+    </div>
 @stop
 
 @section('content')

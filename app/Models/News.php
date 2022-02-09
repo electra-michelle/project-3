@@ -11,5 +11,5 @@ class News extends Model
     use HasFactory;
     use Translatable;
 
-    public $translatedAttributes = ['title', 'article'];
+    public $translatedAttributes = ['title', 'content'];
 }
