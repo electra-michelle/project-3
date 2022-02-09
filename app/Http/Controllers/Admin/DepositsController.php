@@ -9,7 +9,6 @@ use App\Models\PlanLimit;
 use App\Services\DepositService;
 use App\Services\StatisticsService;
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\Rule;
 
 class DepositsController extends Controller
 {
@@ -42,11 +41,21 @@ class DepositsController extends Controller
         return view('admin.deposits.list', compact('deposits', 'depositsCount', 'depositSum', 'activeDeposits', 'finishedDeposits'));
     }
 
+    public function recover(Deposit $deposit)
+    {
+        if($deposit->status != 'cancelled') {
+            return response()->json(['message' => 'Invalid status'], 422);
+        }
+
+        $deposit->status = 'pending';
+        $deposit->save();
+
+        return response()->json(['status' => 'success']);
+    }
+
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Deposit $deposit
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Deposit $deposit)
     {
@@ -58,10 +67,8 @@ class DepositsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Deposit $deposit
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Deposit $deposit)
     {

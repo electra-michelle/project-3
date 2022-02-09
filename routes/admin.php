@@ -69,6 +69,8 @@ Route::middleware('admin.auth')->group(function () {
     // Deposits
     Route::get('deposits/{status?}', 'DepositsController@index')->name('deposits')->where('status', '[A-Za-z]+');
     Route::resource('deposits', 'DepositsController')->except(['index']);
+    Route::post('deposits/{deposit}/recover', 'DepositsController@recover');
+
     Route::resource('news', 'NewsController')->except(['show', 'create', 'store']);
 
     // Payouts
