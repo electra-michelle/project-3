@@ -47,11 +47,8 @@
                 <div class="col-lg-12">
                     <div class="header-social">
                         <ul>
-                            <li><a href="#"><i class="flaticon-facebook"></i></a></li>
-                            <li><a href="#"><i class="flaticon-linkedin"></i></a></li>
-                            <li><a href="#"><i class="flaticon-twitter"></i></a></li>
-                            <li><a href="#"><i class="flaticon-instagram"></i></a></li>
-                            <li><a href="#"><i class="flaticon-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fab fa-fw fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-fw fa-telegram-plane"></i></a></li>
                         </ul>
                     </div>
                 </div>
