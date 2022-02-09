@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Payouts')
-@section('plugins.Sweetalert2', true);
+@section('plugins.Sweetalert2', true)
 
 @section('content_header')
     <h1 class="m-0 text-dark">Payouts</h1>

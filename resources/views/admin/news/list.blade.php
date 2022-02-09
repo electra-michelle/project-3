@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'News')
+@section('plugins.Sweetalert2', true)
 
 @section('content_header')
     <a href="{{ route('admin.news.create') }}" class="btn btn-primary float-right">Create</a>
@@ -34,6 +35,7 @@
                                         <td>{{ Str::limit($article->title, 50) }}</td>
                                         <td>
                                             <a href="{{ route('admin.news.edit', $article->id) }}" type="button" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                            <button data-id="{{ $article->id }}" type="button" class="btn btn-sm btn-danger delete"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                @endforeach
@@ -54,3 +56,44 @@
         </div>
     </div>
 @stop
+
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.delete').click(function () {
+                var newsId = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure to delete news #' + newsId,
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Close'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete('/felicita/news/' + newsId, {}).then((response) => {
+                            Swal.fire({
+                                title: 'DELETED!',
+                                text: 'News with id #' + newsId + ' has been deleted.',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload()
+                                }
+                            })
+                        }).catch((error) => {
+                            Swal.fire({
+                                title: 'Whoops! Something went wrong!',
+                                text: 'Unable to delete #' + newsId + '. Message: ' + error.response.data.message,
+                                icon: 'error'
+                            })
+                        });
+                    }
+                })
+            });
+        })
+    </script>
+@endpush
