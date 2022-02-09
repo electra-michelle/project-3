@@ -72,5 +72,5 @@
 @stop
 
 @push('js')
-    @include('admin.payouts.__partials.action_scripts', ['payout' => $payout])
+    @include('admin.payouts.__partials.action_scripts')
 @endpush
