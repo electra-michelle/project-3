@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\CreateNewsRequest;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,9 +35,9 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateNewsRequest $request)
     {
-        //
+        News::create($request->validated());
     }
 
     /**
