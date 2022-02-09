@@ -5,29 +5,26 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "astrotomic/laravel-translatable": "^11.10",
-        "biscolab/laravel-recaptcha": "^5.2",
-        "bmatovu/multi-auth": "^10.4",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "guzzlehttp/psr7": "1.*",
-        "irazasyed/telegram-bot-sdk": "^3.4",
+        "fruitcake/laravel-cors": "^2.0.5",
+        "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.7",
-        "laravel/framework": "^8.75",
-        "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
+        "laravel/framework": "^9.0",
+        "laravel/sanctum": "^2.14",
+        "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "predis/predis": "^1.1",
-        "propaganistas/laravel-disposable-email": "^2.1"
+        "propaganistas/laravel-disposable-email": "^2.1",
+        "biscolab/laravel-recaptcha": "dev-l9-compatibility"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
-        "facade/ignition": "^2.5",
+        "spatie/laravel-ignition": "^1",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^5.10",
+        "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
@@ -62,6 +59,12 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/laravel-recaptcha.git"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
