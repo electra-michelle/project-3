@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3f4998e0d9b000e11e8890e071f6057",
+    "content-hash": "3176d3d8264a6c1d8e0bdc4100f7e400",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -195,6 +195,84 @@
                 }
             ],
             "time": "2022-02-05T10:42:52+00:00"
+        },
+        {
+            "name": "biscolab/laravel-recaptcha",
+            "version": "dev-l9-compatibility",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-shift/laravel-recaptcha.git",
+                "reference": "a5e9cccc0293d7b2d69cff5b952d34ac37268c18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-shift/laravel-recaptcha/zipball/a5e9cccc0293d7b2d69cff5b952d34ac37268c18",
+                "reference": "a5e9cccc0293d7b2d69cff5b952d34ac37268c18",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0|^8.0|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "5.*|6.*|^7.0",
+                "phpunit/phpunit": "^9.1"
+            },
+            "suggest": {
+                "biscolab/laravel-authlog": "It allows to handle logged-in users and force log-out if needed"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Biscolab\\ReCaptcha\\ReCaptchaServiceProvider"
+                    ],
+                    "aliases": {
+                        "ReCaptcha": "Biscolab\\ReCaptcha\\Facades\\ReCaptcha"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Biscolab\\ReCaptcha\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Biscolab\\ReCaptcha\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit --colors=always"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roberto Belotti",
+                    "email": "roby.belotti@gmail.com",
+                    "homepage": "https://biscolab.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple and painless Google reCAPTCHA package for Laravel framework",
+            "homepage": "https://biscolab.com/laravel-recaptcha",
+            "keywords": [
+                "captcha",
+                "laravel",
+                "recaptcha",
+                "validation"
+            ],
+            "support": {
+                "source": "https://github.com/laravel-shift/laravel-recaptcha/tree/l9-compatibility"
+            },
+            "time": "2022-02-05T17:39:20+00:00"
         },
         {
             "name": "brick/math",
@@ -8399,7 +8477,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "biscolab/laravel-recaptcha": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
