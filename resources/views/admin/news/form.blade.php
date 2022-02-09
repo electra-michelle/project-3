@@ -3,6 +3,7 @@
 @section('title', 'News')
 
 @section('plugins.Summernote', true)
+@section('plugins.TempusDominusBs4', true)
 
 @section('content_header')
     <h1 class="m-0 text-dark">Create News</h1>
@@ -29,21 +30,37 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <form action="{{ route('admin.news.store') }}" method="POST">
+                <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         @if($errors->any())
                             <div class="alert alert-danger">Woops! There is errors!</div>
                         @endif
+                        @if(session()->has('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
                         {{-- Placeholder, sm size and prepend icon --}}
-                        <x-adminlte-input-file name="image" placeholder="Choose a file..." label="Image">
-                            <x-slot name="prependSlot">
-                                <div class="input-group-text bg-lightblue">
-                                    <i class="fas fa-upload"></i>
-                                </div>
-                            </x-slot>
-                        </x-adminlte-input-file>
-                        <hr/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <x-adminlte-input-file name="image" placeholder="Choose a file..." label="Image">
+                                    <x-slot name="prependSlot">
+                                        <div class="input-group-text bg-lightblue">
+                                            <i class="fas fa-upload"></i>
+                                        </div>
+                                    </x-slot>
+                                </x-adminlte-input-file>
+                                <div id="preview" class="py-3"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <x-adminlte-input-date name="published_from" :config="['format' => 'YYYY-MM-DD HH:mm:ss']" placeholder="Choose a date..."
+                                                       label="Datetime">
+                                    <x-slot name="appendSlot">
+                                        <x-adminlte-button  icon="fas fa-lg fa-calendar"
+                                                           title="Publish from"/>
+                                    </x-slot>
+                                </x-adminlte-input-date>
+                            </div>
+                        </div>
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 @foreach(config('app.locales') as $key => $value)
@@ -78,3 +95,22 @@
         </div>
     </div>
 @stop
+
+@push('js')
+    <script>
+        $('#image').on("change", function(e) {
+            var $preview = $("#preview").empty();
+            if (this.files) $.each(this.files, readAndPreview);
+            function readAndPreview(i, file) {
+                if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
+                    return;
+                } // else...
+                var reader = new FileReader();
+                $(reader).on("load", function() {
+                    $preview.append($("<img/>", {src:this.result, height:100}));
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

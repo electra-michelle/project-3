@@ -11,5 +11,8 @@ class News extends Model
     use HasFactory;
     use Translatable;
 
+    protected $fillable = [
+        'image', 'published_from'
+    ];
     public $translatedAttributes = ['title', 'content'];
 }

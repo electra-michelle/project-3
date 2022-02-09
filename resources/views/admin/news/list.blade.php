@@ -33,7 +33,7 @@
                                         </td>
                                         <td>{{ Str::limit($article->title, 50) }}</td>
                                         <td>
-                                            <a href="{{ route('admin.news.show', $article->id) }}" type="button" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.news.edit', $article->id) }}" type="button" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                @endforeach

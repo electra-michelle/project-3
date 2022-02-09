@@ -37,29 +37,35 @@ class NewsController extends Controller
      */
     public function store(CreateNewsRequest $request)
     {
-        News::create($request->validated());
+
+        $news = News::create([
+            'published_from' => $request->input('published_from') ?: now(),
+        ]);
+
+        $filename = $news->id . '.' . $request->file('image')->getClientOriginalExtension();
+
+        foreach(config('app.locales') as $key => $locale) {
+            $news->translateOrNew($key)->title = $request->input('title.' . $key);
+            $news->translateOrNew($key)->content = $request->input('content.' . $key);
+        }
+
+        $news->image = $filename;
+
+        $news->save();
+
+        $request->file('image')->storeAs(
+            'public', $filename
+        );
+
+        return redirect()->route('admin.news.edit', $news->id)
+            ->with(['success' => 'News has been successfuly created']);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.news.form', compact('news'));
     }
 
     /**

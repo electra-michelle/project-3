@@ -25,6 +25,7 @@ class CreateNewsRequest extends FormRequest
     {
         $rules = [
             'title' => ['required', 'array'],
+            'published_from' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'content' => ['required', 'array'],
             'image' => ['required', 'image'],
         ];

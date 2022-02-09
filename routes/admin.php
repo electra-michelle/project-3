@@ -77,7 +77,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('deposits/{id}/cancel', 'DepositsController@cancel')->name('deposits.cancel');
     Route::get('deposits/{id}/recover', 'DepositsController@recover')->name('deposits.recover');
 
-    Route::resource('news', 'NewsController');
+    Route::resource('news', 'NewsController')->except(['show']);
 
     // Payouts
     Route::get('payouts/{status?}', 'PayoutController@index')->name('payouts')->where('status', '[A-Za-z]+');
