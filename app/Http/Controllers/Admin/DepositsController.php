@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\CustomHelper;
+use App\Http\Requests\Admin\ConfirmDepositRequest;
 use App\Models\Deposit;
+use App\Models\PlanLimit;
+use App\Services\DepositService;
 use App\Services\StatisticsService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class DepositsController extends Controller
 {
@@ -36,6 +40,80 @@ class DepositsController extends Controller
         );
 
         return view('admin.deposits.list', compact('deposits', 'depositsCount', 'depositSum', 'activeDeposits', 'finishedDeposits'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Deposit $deposit)
+    {
+        abort_if($deposit->status != 'pending', 404);
+        return view('admin.deposits.confirm', compact('deposit'));
+    }
+
+    /**
+     * @param DepositService $depositService
+     * @param ConfirmDepositRequest $request
+     * @param Deposit $deposit
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(DepositService $depositService, ConfirmDepositRequest $request, Deposit $deposit)
+    {
+        abort_if($deposit->status != 'pending', 404);
+
+        $planLimit = PlanLimit::where('plan_id', $deposit->plan_id)
+            ->where('currency', $deposit->paymentSystem->currency)
+            ->first();
+
+        $rules = ['amount' => [
+            'numeric', 'regex:/^\d*(\.\d{1,' . $deposit->paymentSystem->decimals . '})?$/',
+        ]];
+
+        if($planLimit->min_amount != -1) {
+            $rules['amount'][] = 'min:' . CustomHelper::formatAmount($planLimit->min_amount, $deposit->paymentSystem->decimals);
+        }
+
+        if($planLimit->max_amount != -1) {
+            $rules['amount'][] = 'max:' . CustomHelper::formatAmount($planLimit->max_amount, $deposit->paymentSystem->decimals);
+        }
+
+        $request->validate($rules);
+
+        $deposit->fill($request->only(['amount', 'comment']));
+        $deposit = $depositService->acceptDeposit($deposit, $request->input('transaction_id'));
+
+        return redirect()
+            ->route('admin.deposits')
+            ->with(['success' => 'Deposit #' . $deposit->id . ' has been confirmed.']);
+
+    }
+
+    /**
+     * @param Deposit $deposit
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Deposit $deposit)
+    {
+        abort_if($deposit->status != 'pending', 404);
+
+        $deposit->status = 'cancelled';
+        $deposit->save();
+
+        return response()->json(['status' => 'success']);
     }
 
 }
