@@ -47,7 +47,9 @@
                                     </td>
 
                                     <td><a target="_blank" href="{{ route('admin.users.show', $payout->user_id) }}">{{ $payout->user->username }}</a></td>
-                                    <td>{{ $payout->status == 'paid' ? $payout->transaction_id : 'Processing...' }}</td>
+                                    <td>
+                                        {{ $payout->transaction_id ?: 'N/a' }}
+                                    </td>
                                     <td>
                                         @include('admin.payouts.__partials.actions', ['payout' => $payout])
                                     </td>

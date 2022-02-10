@@ -128,7 +128,6 @@
                                             {{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} <small>({{ $deposit->paymentSystem->name }})</small>
                                         </td>
                                         <td>{{ ucfirst($deposit->payment_type) }}</td>
-                                        <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
                                         <td>
                                             @include('admin.deposits.__partials.actions')
                                         </td>
@@ -137,7 +136,7 @@
                             </x-adminlte-datatable>
                         </div>
                         <div class="tab-pane" id="payouts">
-                            <x-adminlte-datatable id="table-payouts" :heads="['ID','Date','Status', 'Amount','Transaction ID','Action']">
+                            <x-adminlte-datatable id="table-payouts" :heads="['ID','Date','Status', 'Amount','Action']">
                                 @foreach($user->payouts as $payout)
                                     <tr>
                                         <td>{{ $payout->id }}</td>
@@ -152,7 +151,9 @@
                                         <td>
                                             {{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} <small>({{ $payout->paymentSystem->name }})</small>
                                         </td>
-                                        <td>{{ $payout->status == 'paid' ? $payout->transaction_id : 'Processing...' }}</td>
+                                        <td>
+                                            {{ $payout->transaction_id ?: 'N/a' }}
+                                        </td>
                                         <td>
                                             @include('admin.payouts.__partials.actions', ['payout' => $payout])
                                         </td>
