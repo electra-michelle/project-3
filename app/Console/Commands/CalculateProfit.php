@@ -41,6 +41,8 @@ class CalculateProfit extends Command
 
         foreach ($plans as $plan) {
 
+            $this->info('---- Calculating profit for ' . $plan->name);
+
             switch($plan->period_type) {
                 case 'hourly':
                     $periodStamp = now()->subHour();
@@ -82,6 +84,8 @@ class CalculateProfit extends Command
 
                     $balanceService->addBalance($userAccount, $profit, $deposit->paymentSystem->decimals);
 
+                    $this->info(' Added income of ' . $profit . ' ' . $deposit->paymentSystem->currency . ' from deposit #' . $deposit->id . ' to user #' . $deposit->user_id . ' - ' . $deposit->paymentSysten->username);
+
                     $deposit->user->histories()->create([
                         'action' => 'daily_income',
                         'data' => json_encode([
@@ -111,6 +115,8 @@ class CalculateProfit extends Command
                         ])
                     ]);
 
+                    $this->info('Investment  #' . $deposit->id . ' for user #' . $deposit->user_id . ' - ' . $deposit->user->username . ' has been finished');
+
                     if(CustomHelper::isEmailNotificationEnabled('deposit_finished')) {
                         $deposit->user->notify(new DepositFinishedNotification($deposit->id));
                     }
@@ -127,17 +133,18 @@ class CalculateProfit extends Command
                             $deposit->user->notify(new PrincipalsReturnedNotification($deposit->id, $deposit->paymentSystem->name));
                         }
 
+                        $this->info('Principals (' . $deposit->amount . ' ' . $deposit->paymentSystem->currency . ') from deposit  #' . $deposit->id . ' has been added to users #' . $deposit->user_id . ' - ' . $deposit->user->username . ' account balance');
+
                         $deposit->user->histories()->create([
                             'action' => 'principals_returned',
                             'data' => json_encode([
                                 'deposit_id' => $deposit->id,
                                 'amount' => CustomHelper::formatAmount($deposit->paymentSystem->name, $deposit->paymentSystem->decimals),
                                 'currency' => $deposit->paymentSystem->currency,
-                                'currency' => $deposit->paymentSystem->currency,
+                                'payment_system' => $deposit->paymentSystem->name,
                             ])
                         ]);
 
-                        $this->info("Principals Returned" . $deposit->amount);
                     }
                 }
 

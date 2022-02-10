@@ -15,18 +15,43 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('disposable:update')->daily();
+        $schedule->command('disposable:update')->daily()->withoutOverlapping();
 
-        $schedule->command('exchange:rates')->hourly();
-        $schedule->command('store:statistics')->hourly();
+        $schedule->command('exchange:rates')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/exchange-rates/'. now()->format('d-m-Y') . '.log'));
 
-        $schedule->command('calculate:profit')->everyMinute();
+        $schedule->command('store:statistics')
+            ->hourly()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/calculate/'. now()->format('d-m-Y') . '.log'));
 
-        $schedule->command('crypto:transactions')->everyMinute();
-        $schedule->command('crypto:accept')->everyMinute();
+        $schedule->command('calculate:profit')
+            ->everyMinute()
+            ->withoutOverlapping();
 
-        $schedule->command('payouts:crypto')->everyMinute();
-        $schedule->command('payouts:epaycore')->everyMinute();
+        $schedule->command('crypto:transactions')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/crypto/'. now()->format('d-m-Y') . '-transactions.log'));
+
+        $schedule->command('crypto:accept')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/crypto/'. now()->format('d-m-Y') . '-accept.log'));
+
+
+
+        $schedule->command('payouts:crypto')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-crypto.log'));
+
+        $schedule->command('payouts:epaycore')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-epaycore.log'));
 
     }
 

@@ -1,2 +1,6 @@
 *
 !.gitignore
+!/exchange-rates
+!/payouts
+!/crypto
+!/calculate
