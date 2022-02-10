@@ -3,32 +3,22 @@
 @section('content')
 <!-- Banner Section Start -->
 <section class="banner-section video-banner">
-    <img src="images/grey-dots.png" alt="" class="anim-2">
+    <img src="/images/grey-dots.png" alt="" class="anim-2">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-md-6 col-xl-6 order-md-1">
                 <div class="slide-img">
                     <div class="video-img">
-                        <img src="images/video-promo.jpg" alt="">
+                        <img src="/images/video-promo.jpg" alt="">
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-xl-6">
                 <div class="slide-txt">
-                    <h1 class="banner-title">Grow Your
-                        Financial Wealth<span>.</span></h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                        do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam.</p>
-                    <form action="#" class="mailchimp-sform">
-                        <span class="input-icon"><i class="flaticon-email"></i></span>
-                        <input type="email" name="subscribe" id="subscriber-email" placeholder="Enter your Email"
-                               class="form-control">
-                        <button type="submit" id="subscribe-button" class="custom-btn">Subscribe</button>
-                        <span class="subscription-success text-success"> </span>
-                        <span class="subscription-error text-danger"> </span>
-                        <label class="subscription-label text-white" for="subscriber-email"></label>
-                    </form>
+                    <h1 class="banner-title">Build Your Intelligent Future Portfolio<span>.</span></h1>
+                    <p>We are an experienced team of investing professionals readily available to manage your funds. Leverage the knowledge of our team network we have created.
+                    </p>
+                   <a href="{{ route('investments') }}" class="custom-btn">Discover our plans</a>
                 </div>
             </div>
         </div>
@@ -42,27 +32,26 @@
             <div class="col-lg-4 col-md-4">
                 <div class="service-card">
                     <h3>100% Satisfactions</h3>
-                    <p>Lorem Ipsum available, but the
-                        majority have suffered alteration
-                        some form, by injected.</p>
+                    <p>Customer satisfaction is our #1 priority. We're introducing protection plans for every investment.
+                    </p>
                 </div>
             </div> <!-- service card end -->
             <div class="col-lg-4 col-md-4">
                 <div class="service-card">
-                    <h3>24/7 Solutions</h3>
-                    <p>Lorem Ipsum available, but the
-                        majority have suffered alteration
-                        some form, by injected.</p>
+                    <h3>Expert Insights</h3>
+                    <p>Invest in a portfolio
+                        managed by experts to target the highest long-term returns for your risk appetite.
+                    </p>
                 </div>
             </div> <!-- service card end -->
             <div class="col-lg-4 col-md-4">
                 <div class="service-card">
-                    <h3>Free Consulting</h3>
-                    <p>Lorem Ipsum available, but the
-                        majority have suffered alteration
-                        some form, by injected.</p>
+                    <h3>24/7 Intouch</h3>
+                    <p>Support means customers can get help and find answers to questions
+                        24/7 and in real-time.</p>
                 </div>
             </div> <!-- service card end -->
+
         </div>
     </div>
 </section>
@@ -74,14 +63,14 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-sm-12 order-lg-1">
                 <div class="business-pormo">
-                    <img src="images/serv4.jpg" alt="">
-                    <img class="sm-img" src="images/serv5.jpg" alt="">
-                    <img class="sm-img" src="images/serv6.jpg" alt="">
+                    <img src="/images/serv4.jpg" alt="">
+                    <img class="sm-img" src="/images/serv5.jpg" alt="">
+                    <img class="sm-img" src="/images/serv6.jpg" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="about-business">
-                    <h2 class="section-title">Get Right Solution For Your Business<span class="color">.</span></h2>
+                    <h2 class="section-title">We connect people to opportunities<span class="color">.</span></h2>
                     <p>Lorem Ipsum available the majority have suffered alteration in some form, by injected humour,
                         or randomised</p>
                     <ul>
@@ -101,8 +90,8 @@
 
 <!-- Growth Section Start -->
 <section class="growth-section section-padding">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img anim-2">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img anim-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -156,7 +145,7 @@
         <div class="row">
             <div class="col-lg-6 col-sm-12 order-lg-2">
                 <div class="benifit-img">
-                    <img src="images/benifit-th.jpg" alt="">
+                    <img src="/images/benifit-th.jpg" alt="">
                     <div class="img-meta">
                         <label><span class="counter">26</span>+</label>
                         <p>Years Of Experience</p>
@@ -199,8 +188,8 @@
 
 <!-- Testimonial Section Start -->
 <section class="testimonial-2">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img anim-2">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img anim-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -218,7 +207,7 @@
                     <div class="quote">
                         <div class="quote-head">
                             <div class="quote-thumb">
-                                <img src="images/ts1.jpg" alt="">
+                                <img src="/images/ts1.jpg" alt="">
                             </div>
                             <div class="quote-info">
                                 <h3>Tariqul Islam</h3>
@@ -240,7 +229,7 @@
                     <div class="quote">
                         <div class="quote-head">
                             <div class="quote-thumb">
-                                <img src="images/ts1.jpg" alt="">
+                                <img src="/images/ts1.jpg" alt="">
                             </div>
                             <div class="quote-info">
                                 <h3>David Malan</h3>
@@ -262,7 +251,7 @@
                     <div class="quote">
                         <div class="quote-head">
                             <div class="quote-thumb">
-                                <img src="images/ts1.jpg" alt="">
+                                <img src="/images/ts1.jpg" alt="">
                             </div>
                             <div class="quote-info">
                                 <h3>David Malan</h3>
@@ -318,8 +307,8 @@
 
 <!-- Blog Section Start -->
 <section class="blog blog-2 section-padding">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img">
-    <img src="images/testmonial-shape.png" alt="" class="anim-img anim-2">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img">
+    <img src="/images/testmonial-shape.png" alt="" class="anim-img anim-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -334,7 +323,7 @@
             <div class="col-lg-5 col-sm-12">
                 <article class="single-entry featured-entry">
                     <div class="entry-thumb">
-                        <a href="single-post.html"><img src="images/fbl1.jpg" alt=""></a>
+                        <a href="single-post.html"><img src="/images/fbl1.jpg" alt=""></a>
 
                     </div>
                     <div class="date-meta">
@@ -358,7 +347,7 @@
                     <div class="col-lg-6 col-sm-6">
                         <article class="single-entry">
                             <div class="entry-thumb">
-                                <a href="single-post.html"><img src="images/bl1.jpg" alt=""></a>
+                                <a href="single-post.html"><img src="/images/bl1.jpg" alt=""></a>
                                 <div class="date-meta">
                                     <span>15</span>Jan
                                 </div>
@@ -378,7 +367,7 @@
                     <div class="col-lg-6 col-sm-6">
                         <article class="single-entry">
                             <div class="entry-thumb">
-                                <a href="single-post.html"><img src="images/bl1.jpg" alt=""></a>
+                                <a href="single-post.html"><img src="/images/bl1.jpg" alt=""></a>
                                 <div class="date-meta">
                                     <span>15</span>Jan
                                 </div>
