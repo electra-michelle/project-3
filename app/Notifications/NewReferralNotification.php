@@ -17,7 +17,9 @@ class NewReferralNotification extends Notification  implements ShouldQueue
      * @return void
      */
     public function __construct(public string $referral)
-    {}
+    {
+        $this->onQueue('low');
+    }
 
     /**
      * Get the notification's delivery channels.

@@ -18,7 +18,7 @@ class PrincipalsReturnedNotification extends Notification  implements ShouldQueu
      */
     public function __construct(public $depositId, public $wallet)
     {
-        //
+        $this->onQueue('low');
     }
 
     /**

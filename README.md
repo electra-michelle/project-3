@@ -8,11 +8,10 @@
 
 ## Queue installation
 `sudo apt-get install supervisor`
-
 ```
 [program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /path/to/project/artisan queue:work sqs --sleep=3 --tries=3 --max-time=3600
+command=php /path/to/project/artisan queue:work --queue=high,default,low --tries=2
 autostart=true
 autorestart=true
 stopasgroup=true

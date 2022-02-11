@@ -46,6 +46,16 @@ return [
             'timeout' => null,
         ],
 
+        'support' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_SUPPORT_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_SUPPORT_PORT', 587),
+            'encryption' => env('MAIL_SUPPORT_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_SUPPORT_USERNAME'),
+            'password' => env('MAIL_SUPPORT_PASSWORD'),
+            'timeout' => null,
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
@@ -95,6 +105,11 @@ return [
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
+
+    'support_from' => [
+        'address' => env('MAIL_SUPPORT_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_SUPPORT_FROM_NAME', 'Example'),
     ],
 
     /*

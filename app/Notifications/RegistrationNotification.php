@@ -19,7 +19,7 @@ class RegistrationNotification extends Notification  implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->onQueue('low');
     }
 
     /**

@@ -17,7 +17,9 @@ class ReferralCommissionNotification extends Notification  implements ShouldQueu
      * @return void
      */
     public function __construct(private $amount, private $currency, private $wallet, private $fromUser)
-    {}
+    {
+        $this->onQueue('low');
+    }
 
     /**
      * Get the notification's delivery channels.

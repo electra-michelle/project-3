@@ -16,7 +16,10 @@ class ProfitAddedNotification extends Notification  implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(private $amount, private $currency, private $wallet){}
+    public function __construct(private $amount, private $currency, private $wallet)
+    {
+        $this->onQueue('low');
+    }
 
     /**
      * Get the notification's delivery channels.

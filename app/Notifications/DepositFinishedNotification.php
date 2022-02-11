@@ -18,7 +18,7 @@ class DepositFinishedNotification extends Notification  implements ShouldQueue
      */
     public function __construct(public $depositId)
     {
-        //
+        $this->onQueue('low');
     }
 
     /**
