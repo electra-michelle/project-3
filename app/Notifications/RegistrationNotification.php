@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class RegistrationNotification extends Notification
+class RegistrationNotification extends Notification  implements ShouldQueue
 {
     use Queueable;
 

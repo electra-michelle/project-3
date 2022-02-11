@@ -5,6 +5,7 @@ return [
     'api' => [
 		'id' => env('EPC_API_ID'),
 		'secret' => env('EPC_API_SECRET'),
+        'description' => env('EPC_API_DESCRIPTION')
 	],
 
     'sci' => [

@@ -65,7 +65,12 @@ class ePayCorePayouts extends Command
             if($wallet) {
                 $amount =  CustomHelper::formatAmount(round($payout->amount, $paymentSystem->decimals), $paymentSystem->decimals);
 
-                $transfer = $this->ePayCore->transfer($wallet, $amount, 'description', $payout->id);
+                $transfer = $this->ePayCore->transfer(
+                    $wallet,
+                    $amount,
+                    config('epaycore.api.description') . ' #' . $payouts->id,
+                    $payout->id
+                );
                 if(isset($transfer->error) || !$transfer) {
                     $this->info('PAYOUT #' . $payout->id . ' sending failed with message: ' . $transfer->error ?? '' );
                     continue;

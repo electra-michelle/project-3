@@ -32,26 +32,22 @@ return [
     |             ]
     */
     'bots'                         => [
-        'wallet' => [
-            'username'            => 'TelegramBot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
-            'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
-            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
+        'manager' => [
+            'username'            => env('TELEGRAM_BOT_MANAGER_USERNAME', 'YOUR-BOT-MANAGER-USERNAME'),
+            'token'               => env('TELEGRAM_BOT_MANAGER_TOKEN', 'YOUR-BOT-MANAGER-TOKEN'),
+            'webhook_url'         => env('TELEGRAM_BOT_MANAGER_WEBHOOK_URL', 'YOUR-BOT-MANAGER-WEBHOOK-URL'),
             'commands'            => [
                 //Acme\Project\Commands\MyTelegramBot\BotCommand::class
             ],
         ],
-        'group' => [
-            'username'            => 'TelegramBot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
-            'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
-            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
+        'notifications' => [
+            'username'            => env('TELEGRAM_BOT_NOTIFICATIONS_USERNAME', 'YOUR-BOT-NOTIFICATIONS-USERNAME'),
+            'token'               => env('TELEGRAM_BOT_NOTIFICATIONS_TOKEN', 'YOUR-BOT-NOTIFICATIONS-TOKEN'),
+            'webhook_url'         => env('TELEGRAM_BOT_NOTIFICATIONS_WEBHOOK_URL', 'YOUR-BOT-NOTIFICATIONS-WEBHOOK-URL'),
             'commands'            => [
                 //Acme\Project\Commands\MyTelegramBot\BotCommand::class
             ],
         ],
-
-
     ],
 
     /*
@@ -63,7 +59,7 @@ return [
     | your default bot for regular use.
     |
     */
-    'default'                      => 'mybot',
+    'default'                      => 'manager',
 
     /*
     |--------------------------------------------------------------------------

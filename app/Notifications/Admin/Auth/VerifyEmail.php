@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class VerifyEmail extends Notification
+class VerifyEmail extends Notification  implements ShouldQueue
 {
     /**
      * The callback that should be used to build the mail message.
