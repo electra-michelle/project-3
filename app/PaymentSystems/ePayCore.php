@@ -168,5 +168,14 @@ class ePayCore
         return view('paymentsystems.epaycore', compact('sign', 'params'));
     }
 
+    public function checkStatus()
+    {
+        try {
+            return $this->makeRequest('ping');
+        } catch (\Exception $exception) {
+            return json_decode(json_encode(['error' => $exception->getMessage()]));
+        }
+    }
+
 
 }

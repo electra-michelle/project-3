@@ -6,6 +6,9 @@
 `php artisan db:seed`
 `php artisan storage:link`
 
+#Check payment method status
+`php artisan status:check`
+
 ## Queue installation
 `sudo apt-get install supervisor`
 ```
