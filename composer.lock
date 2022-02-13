@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2162559c5f9aaae48de533dcd68d915",
+    "content-hash": "7bcc31c4f664667199dcdf012f11b910",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -197,6 +197,60 @@
             "time": "2022-02-05T10:42:52+00:00"
         },
         {
+            "name": "bacon/bacon-qr-code",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "0069435e2a01a57193b25790f105a5d3168653c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/0069435e2a01a57193b25790f105a5d3168653c1",
+                "reference": "0069435e2a01a57193b25790f105a5d3168653c1",
+                "shasum": ""
+            },
+            "require": {
+                "dasprid/enum": "^1.0.3",
+                "ext-iconv": "*",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phly/keep-a-changelog": "^2.1",
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "spatie/phpunit-snapshot-assertions": "^4.2.9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "suggest": {
+                "ext-imagick": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BaconQrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "support": {
+                "issues": "https://github.com/Bacon/BaconQrCode/issues",
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.6"
+            },
+            "time": "2022-02-04T20:16:05+00:00"
+        },
+        {
             "name": "biscolab/laravel-recaptcha",
             "version": "v5.3.0",
             "source": {
@@ -326,6 +380,53 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "dasprid/enum",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DASPRiD/Enum.git",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DASPRiD\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 7.1 enum implementation",
+            "keywords": [
+                "enum",
+                "map"
+            ],
+            "support": {
+                "issues": "https://github.com/DASPRiD/Enum/issues",
+                "source": "https://github.com/DASPRiD/Enum/tree/1.0.3"
+            },
+            "time": "2020-10-02T16:03:48+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -697,6 +798,60 @@
                 }
             ],
             "time": "2021-10-11T09:18:27+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
+            },
+            "time": "2020-06-29T00:56:53+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2115,6 +2270,87 @@
             "time": "2021-11-21T11:48:40+00:00"
         },
         {
+            "name": "mews/purifier",
+            "version": "3.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mewebstudio/Purifier.git",
+                "reference": "9844bc82886e4291b3116afbd9ab5f532856662a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/9844bc82886e4291b3116afbd9ab5f532856662a",
+                "reference": "9844bc82886e4291b3116afbd9ab5f532856662a",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "4.13.*",
+                "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.2|^5.5.1",
+                "mockery/mockery": "^1.3.3",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "suggest": {
+                "laravel/framework": "To test the Laravel bindings",
+                "laravel/lumen-framework": "To test the Lumen bindings"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mews\\Purifier\\PurifierServiceProvider"
+                    ],
+                    "aliases": {
+                        "Purifier": "Mews\\Purifier\\Facades\\Purifier"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Mews\\Purifier\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muharrem ERİN",
+                    "email": "me@mewebstudio.com",
+                    "homepage": "https://github.com/mewebstudio",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5/6/7 HtmlPurifier Package",
+            "homepage": "https://github.com/mewebstudio/purifier",
+            "keywords": [
+                "Purifier",
+                "htmlpurifier",
+                "laravel5 HtmlPurifier",
+                "laravel5 Purifier",
+                "laravel5 Security",
+                "laravel6 HtmlPurifier",
+                "laravel6 Purifier",
+                "laravel6 Security",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/mewebstudio/Purifier/issues",
+                "source": "https://github.com/mewebstudio/Purifier/tree/3.3.7"
+            },
+            "time": "2022-02-12T15:54:11+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.3.5",
             "source": {
@@ -3377,6 +3613,74 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "simplesoftwareio/simple-qrcode",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleSoftwareIO/simple-qrcode.git",
+                "reference": "916db7948ca6772d54bb617259c768c9cdc8d537"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleSoftwareIO/simple-qrcode/zipball/916db7948ca6772d54bb617259c768c9cdc8d537",
+                "reference": "916db7948ca6772d54bb617259c768c9cdc8d537",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "^2.0",
+                "ext-gd": "*",
+                "php": ">=7.2|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1",
+                "phpunit/phpunit": "~9"
+            },
+            "suggest": {
+                "ext-imagick": "Allows the generation of PNG QrCodes.",
+                "illuminate/support": "Allows for use within Laravel."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                    ],
+                    "aliases": {
+                        "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SimpleSoftwareIO\\QrCode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simple Software LLC",
+                    "email": "support@simplesoftware.io"
+                }
+            ],
+            "description": "Simple QrCode is a QR code generator made for Laravel.",
+            "homepage": "https://www.simplesoftware.io/#/docs/simple-qrcode",
+            "keywords": [
+                "Simple",
+                "generator",
+                "laravel",
+                "qrcode",
+                "wrapper"
+            ],
+            "support": {
+                "issues": "https://github.com/SimpleSoftwareIO/simple-qrcode/issues",
+                "source": "https://github.com/SimpleSoftwareIO/simple-qrcode/tree/4.2.0"
+            },
+            "time": "2021-02-08T20:43:55+00:00"
         },
         {
             "name": "symfony/console",

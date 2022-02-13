@@ -30,4 +30,11 @@ class CustomHelper
         }
     }
 
+    public static function formatDepositAddress($depositAddress, $paymentSystemValue)
+    {
+        $depositAddress = str_replace($paymentSystemValue . ':', '', $depositAddress);
+
+        return $paymentSystemValue . ':' .$depositAddress;
+    }
+
 }

@@ -11,7 +11,7 @@
         <div class="container">
             Details of {{ $deposit->id }}
             @if(in_array($deposit->paymentSystem->value, array_keys(config('crypto'))))
-                Deposit address: {{ $deposit->deposit_address }}
+                <img src="data:image/png;base64, {!! base64_encode(QrCode::style('round')->format('png')->size(200)->generate( CustomHelper::formatDepositAddress($deposit->deposit_address, $deposit->paymentSystem->value))) !!} " />
             @else
                 @switch($deposit->paymentSystem->value)
                     @case('epaycore')
