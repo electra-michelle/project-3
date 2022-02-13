@@ -1,10 +1,14 @@
 
 ## Installation
 
+`composer install --optimize-autoloader --no-dev`
+
 `php artisan migrate`
 
 `php artisan db:seed`
 `php artisan storage:link`
+
+`* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1`
 
 #Check payment method status
 `php artisan status:check`
