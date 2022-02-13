@@ -16,6 +16,13 @@ class CreateNewsRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'content' => clean($this->content),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
