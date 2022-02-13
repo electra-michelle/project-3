@@ -47,8 +47,8 @@
                     <div class="pricingTable">
                         <div class="pricingTable-header">
                             <h3 class="heading">Standard</h3>
-                            <div class="price-value"> 8.5% <span class="month">daily</span></div>
-                            <div><strong class="month">for 10 days</strong></div>
+                            <div class="price-value"> 7.5% <span class="month">daily</span></div>
+                            <div><strong class="month">for 20 days</strong></div>
                         </div>
                         <div class="pricing-content">
                             <ul>
@@ -68,8 +68,8 @@
                     <div class="pricingTable">
                         <div class="pricingTable-header">
                             <h3 class="heading">Professional</h3>
-                            <div class="price-value"> 5.5% <span class="month">daily</span></div>
-                            <div><strong class="month">for 10 days</strong></div>
+                            <div class="price-value"> 6.5% <span class="month">daily</span></div>
+                            <div><strong class="month">for 30 days</strong></div>
                         </div>
                         <div class="pricing-content">
                             <ul>

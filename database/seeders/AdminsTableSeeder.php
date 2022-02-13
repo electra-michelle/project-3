@@ -19,7 +19,7 @@ class AdminsTableSeeder extends Seeder
             'email' => 'support@forextion.com',
         ], [
             'name' => 'Forextion',
-            'password' => Hash::make('DahujaNaudas123$')
+            'password' => Hash::make('DaudzNaudas123$')
         ]);
     }
 }
