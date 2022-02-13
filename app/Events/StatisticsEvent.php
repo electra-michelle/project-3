@@ -4,20 +4,30 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StatisticsEvent implements  ShouldBroadcastNow
+class StatisticsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * Create a new event instance.
+     * The name of the queue connection to use when broadcasting the event.
      *
-     * @return void
+     * @var string
+     */
+    public $connection = 'redis';
+
+    /**
+     * The name of the queue on which to place the broadcasting job.
+     *
+     * @var string
+     */
+    public $queue = 'statistics';
+
+    /**
+     * @param $data
      */
     public function __construct(public $data)
     {}
@@ -29,10 +39,12 @@ class StatisticsEvent implements  ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return ['statistics'];
+        return new Channel('statistics');
     }
 
     /**
+     * The event's broadcast name.
+     *
      * @return string
      */
     public function broadcastAs()

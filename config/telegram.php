@@ -44,6 +44,7 @@ return [
             'username'            => env('TELEGRAM_BOT_NOTIFICATIONS_USERNAME', 'YOUR-BOT-NOTIFICATIONS-USERNAME'),
             'token'               => env('TELEGRAM_BOT_NOTIFICATIONS_TOKEN', 'YOUR-BOT-NOTIFICATIONS-TOKEN'),
             'webhook_url'         => env('TELEGRAM_BOT_NOTIFICATIONS_WEBHOOK_URL', 'YOUR-BOT-NOTIFICATIONS-WEBHOOK-URL'),
+            'chat_id'             => env('TELEGRAM_BOT_NOTIFICATIONS_CHAT_ID'),
             'commands'            => [
                 //Acme\Project\Commands\MyTelegramBot\BotCommand::class
             ],

@@ -18,20 +18,20 @@ return [
                 'max_amount' => 1000
             ],
             'LTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.08,
+                'max_amount' => 8
             ],
             'BCH' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.03,
+                'max_amount' => 3
             ],
             'BTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.001,
+                'max_amount' => 0.025
             ],
             'DOGE' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 65,
+                'max_amount' => 6500
             ],
         ]
     ],
@@ -50,23 +50,23 @@ return [
         'limits' => [
             'USD' => [
                 'min_amount' => 10,
-                'max_amount' => 1000
+                'max_amount' => 5000
             ],
             'LTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.08,
+                'max_amount' => 40
             ],
             'BCH' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.03,
+                'max_amount' => 15
             ],
             'BTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.001,
+                'max_amount' => 0.125
             ],
             'DOGE' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 65,
+                'max_amount' => 32500
             ],
         ]
     ],
@@ -85,23 +85,23 @@ return [
         'limits' => [
             'USD' => [
                 'min_amount' => 10,
-                'max_amount' => 1000
+                'max_amount' => 10000
             ],
             'LTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.08,
+                'max_amount' => 80
             ],
             'BCH' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.03,
+                'max_amount' => 30
             ],
             'BTC' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 0.001,
+                'max_amount' => 0.25
             ],
             'DOGE' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
+                'min_amount' => 65,
+                'max_amount' => 65000
             ],
         ]
     ],
