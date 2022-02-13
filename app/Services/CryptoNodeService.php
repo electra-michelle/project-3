@@ -9,15 +9,17 @@ class CryptoNodeService
 
     public $node;
 
+    public $config;
+
     public function __construct($value)
     {
-        $config = config('crypto.' . $value);
+        $this->config = config('crypto.' . $value);
         $this->node = new Crypto(
-            $config['username'],
-            $config['password'],
-            $config['host'],
-            $config['port'],
-            $config['wallet'] ?? null
+            $this->config['username'],
+            $this->config['password'],
+            $this->config['host'],
+            $this->config['port'],
+            $this->config['wallet'] ?? null
         );
     }
 
@@ -26,7 +28,9 @@ class CryptoNodeService
      */
     public function getBalance()
     {
-        $balance = $this->node->getbalance();
+        $balance = $this->config['account'] ?
+            $this->node->getbalance($this->config['account']) :
+            $this->node->getbalance();
 
         return $balance ?: 0;
     }

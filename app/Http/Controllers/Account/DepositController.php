@@ -51,7 +51,10 @@ class DepositController extends Controller
         $depositAddress = null;
         if(in_array($paymentSystem->value, array_keys(config('crypto'))) && $request->input('payment_method') == 'payment_processor') {
             $nodeService = new CryptoNodeService($paymentSystem->value);
-            $depositAddress = $nodeService->node->getnewaddress();
+            $depositAddress = $nodeService->config['account'] ?
+                $nodeService->node->getnewaddress($nodeService->config['account']) :
+                $nodeService->node->getnewaddress();
+
             if(!$depositAddress) {
                 return redirect()->back()->withInput()
                     ->withErrors([
