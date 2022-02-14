@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ePayCoreController;
+use App\Http\Controllers\Api\TelegramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,4 @@ use App\Http\Controllers\Api\ePayCoreController;
 */
 
 Route::post('epaycore/status', [ePayCoreController::class, 'accept']);
+Route::any('telegram/setup', [TelegramController::class, 'setupWebhook']);
