@@ -30,5 +30,3 @@ Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-
-Route::get('/test', [App\Http\Controllers\HomeController::class, 'test']);
