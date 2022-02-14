@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\StatisticsEvent;
 use App\Helpers\CustomHelper;
 use App\Models\Plan;
 use App\Models\Deposit;
@@ -12,6 +13,7 @@ use App\Notifications\PrincipalsReturnedNotification;
 use App\Notifications\ProfitAddedNotification;
 use App\Services\WalletBalanceService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class CalculateProfit extends Command
 {
@@ -96,6 +98,19 @@ class CalculateProfit extends Command
                             'payment_system' => $deposit->paymentSystem->name
                         ])
                     ]);
+
+                    if(CustomHelper::isBroadcastNotificationEnabled('income')) {
+                        StatisticsEvent::dispatch([
+                            'type' => 'income',
+                            'amount' => CustomHelper::formatAmount($profit, $deposit->paymentSystem->decimals),
+                            'currency' =>  $deposit->paymentSystem->currency,
+                            'method' => $deposit->paymentSystem->name,
+                            'username' => Str::mask($deposit->user->username, '*', 4),
+                            'timeAgo' => now()->diffForHumans(),
+                            'date' => now(),
+                            'timestamp' => now()->timestamp,
+                        ]);
+                    }
 
                     if(CustomHelper::isEmailNotificationEnabled('profit_added')) {
                         $deposit->user->notify(new ProfitAddedNotification($profit, $deposit->paymentSystem->currency, $deposit->paymentSystem->name));

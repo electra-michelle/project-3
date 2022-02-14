@@ -189,14 +189,28 @@ Javascript
 <script src="/js/custom.js"></script>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
-    toastr.options.closeButton = true;
     toastr.options.positionClass = "toast-bottom-right";
 
     window.Echo.channel('{{ config('database.redis.options.prefix') }}statistics')
         .listen('StatisticsEvent', (e) => {
             var content = e.data;
-            if()
-            toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+            switch (content.type) {
+                case 'new_account':
+                    toastr.success('Someone has just created new account.', content.username)
+                    break;
+                case 'new_deposit':
+                    toastr.success('Someone has just deposited ' + content.amount + ' ' + content.currency + ' with ' + content.method + 'wallet.', content.username)
+                    break;
+                case 'ref_commission':
+                    toastr.success('Someone has just earned ' + content.amount + ' ' + content.currency + ' referral commission.', content.username)
+                    break;
+                case 'withdraw':
+                    toastr.success('Someone has just withdrawn ' + content.amount + ' ' + content.currency + ' with ' + content.method + 'wallet.', content.username)
+                    break;
+                case 'income':
+                    toastr.success('Someone has just received ' + content.amount + ' ' + content.currency + ' daily income to ' + content.method + 'wallet.', content.username)
+                    break;
+            }
         });
 </script>
 @yield('js')

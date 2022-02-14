@@ -54,7 +54,7 @@ class PayoutService
                 'type' => 'withdraw',
                 'amount' => CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals),
                 'currency' => $payout->paymentSystem->currency,
-                'transaction_id' => $transactionId,
+                'transaction_id' => Str::mask($transactionId, '*', 5),
                 'method' => $payout->paymentSystem->name,
                 'username' => Str::mask($payout->user->username, '*', 4),
                 'timeAgo' => now()->diffForHumans(),

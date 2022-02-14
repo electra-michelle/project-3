@@ -44,7 +44,7 @@ class DepositService
                 'type' => 'new_deposit',
                 'amount' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals),
                 'currency' => $deposit->paymentSystem->currency,
-                'transaction_id' => $transactionId,
+                'transaction_id' => Str::mask($transactionId, '*', 5),
                 'method' => $deposit->paymentSystem->name,
                 'username' => Str::mask($deposit->user->username, '*', 4),
                 'timeAgo' => now()->diffForHumans(),

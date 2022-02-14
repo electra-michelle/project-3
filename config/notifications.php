@@ -24,6 +24,7 @@ return [
             'new_deposit' => true,
             'ref_commission' => true,
             'withdraw' => true,
+            'income' => true,
         ]
     ]
 ];
