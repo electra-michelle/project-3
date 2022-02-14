@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/css/venobox.min.css">
     <link rel="stylesheet" href="/css/jquery-ui.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Style css -->
     <link rel="stylesheet" href="/css/style.css">
@@ -183,15 +184,21 @@ Javascript
 <script src="/js/isotope.pkgd.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Custom Js -->
 <script src="/js/custom.js"></script>
 <script src="{{ asset('/js/app.js') }}"></script>
-    <script>
-	window.Echo.channel('{{ config('database.redis.options.prefix') }}statistics')
-    .listen('StatisticsEvent', (e) => {
-        console.log(e.data);
-    });
-    </script>
+<script>
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toast-bottom-right";
+
+    window.Echo.channel('{{ config('database.redis.options.prefix') }}statistics')
+        .listen('StatisticsEvent', (e) => {
+            var content = e.data;
+            if()
+            toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+        });
+</script>
 @yield('js')
 </body>
 

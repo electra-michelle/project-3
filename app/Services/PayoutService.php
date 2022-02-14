@@ -11,6 +11,7 @@ use App\Notifications\DepositConfirmedNotification;
 use App\Notifications\ReferralCommissionNotification;
 use App\Notifications\WithdrawalNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PayoutService
 {
@@ -55,7 +56,7 @@ class PayoutService
                 'currency' => $payout->paymentSystem->currency,
                 'transaction_id' => $transactionId,
                 'method' => $payout->paymentSystem->name,
-                'username' => $payout->user->username,
+                'username' => Str::mask($payout->user->username, '*', 4),
                 'timeAgo' => now()->diffForHumans(),
                 'date' => now(),
                 'timestamp' => now()->timestamp,

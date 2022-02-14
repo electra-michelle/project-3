@@ -9,6 +9,7 @@ use App\Models\UserAccount;
 use App\Notifications\DepositConfirmedNotification;
 use App\Notifications\ReferralCommissionNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Telegram\Bot\Helpers\Emojify;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -45,7 +46,7 @@ class DepositService
                 'currency' => $deposit->paymentSystem->currency,
                 'transaction_id' => $transactionId,
                 'method' => $deposit->paymentSystem->name,
-                'username' => $deposit->user->username,
+                'username' => Str::mask($deposit->user->username, '*', 4),
                 'timeAgo' => now()->diffForHumans(),
                 'date' => now(),
                 'timestamp' => now()->timestamp,
@@ -103,7 +104,7 @@ class DepositService
                     'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals),
                     'currency' => $deposit->paymentSystem->currency,
                     'method' => $deposit->paymentSystem->name,
-                    'username' =>  $deposit->user->referredBy->username,
+                    'username' =>  Str::mask($deposit->user->referredBy->username, '*', 4),
                     'timeAgo' => now()->diffForHumans(),
                     'date' => now(),
                     'timestamp' => now()->timestamp,

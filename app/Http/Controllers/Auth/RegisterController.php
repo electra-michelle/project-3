@@ -174,7 +174,7 @@ class RegisterController extends Controller
         if(CustomHelper::isBroadcastNotificationEnabled('new_account')) {
             StatisticsEvent::dispatch([
                 'type' => 'new_account',
-                'username' => $user->username,
+                'username' => Str::mask($user->username, '*', 4),
                 'timeAgo' => now()->diffForHumans(),
                 'date' => now(),
                 'timestamp' => now()->timestamp,
