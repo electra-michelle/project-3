@@ -47,6 +47,24 @@ stopwaitsecs=3600
 7. Find in logs chat id (starts with minus)
 8. Delete webhook `php artisan telegram:webhook notifications --remove`
 
+##Broadcast setup
+1. `npm install -g laravel-echo-server`
+2. `laravel-echo-server init`
+3. `laravel-echo-server start`
+4. 
+```
+[program:laravel-echo]
+directory=/path/to/project/
+process_name=%(program_name)s_%(process_num)02d
+command=laravel-echo-server start
+autostart=true
+autorestart=true
+user=www-data
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/path/to/project/storage/logs/echo.log
+```
+5.`sudo supervisorctl reread`, `sudo supervisorctl update`, `sudo supervisorctl start laravel-echo:*`
 
 ## Adding paymentSystems
 1. view `deposit/details.blade.php`
