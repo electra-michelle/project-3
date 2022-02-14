@@ -187,15 +187,10 @@ Javascript
 <script src="/js/custom.js"></script>
 <script src="{{ asset('/js/app.js') }}"></script>
     <script>
-	window.Echo.channel('forextion_database_statistics')
-    .listen('statistics', (e) => {
-        console.log('Got event...');
-        console.log(e);
+	window.Echo.channel('{{ config('database.redis.options.prefix') }}statistics')
+    .listen('StatisticsEvent', (e) => {
+        console.log(e.data);
     });
-        Echo.channel('forextion_database_statistics')
-            .listen('statistics', e => {
-                console.log(e)
-            })
     </script>
 @yield('js')
 </body>

@@ -15,9 +15,9 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "socket.io": "^4.4.1"
+        "socket.io": "^2.4.0"
     },
     "dependencies": {
-        "socket.io-client": "^4.4.1"
+        "socket.io-client": "^2.4.0"
     }
 }
