@@ -4,11 +4,11 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StatisticsEvent implements ShouldBroadcast
+class StatisticsEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -43,9 +43,9 @@ class StatisticsEvent implements ShouldBroadcast
     }
 
     /**
-     * The event's broadcast name.
+     * Get the channels the event should broadcast on.
      *
-     * @return string
+     * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastAs()
     {

@@ -185,6 +185,7 @@ Javascript
 <script src="/js/jquery.ajaxchimp.min.js"></script>
 <!-- Custom Js -->
 <script src="/js/custom.js"></script>
+<script src="/js/app.js"></script>
 
 @yield('js')
 </body>
