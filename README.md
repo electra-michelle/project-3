@@ -35,3 +35,14 @@ stopwaitsecs=3600
 `sudo supervisorctl update`
 
 `sudo supervisorctl start laravel-worker:*`
+
+
+##Notification bot setup
+1.Create new bot with BotFather and disable bots privacy mode
+2. Fill `.env` config with `TELEGRAM_BOT_NOTIFICATIONS_TOKEN=` newly generated token
+3. Fill `.env` config with `TELEGRAM_BOT_NOTIFICATIONS_WEBHOOK_URL=https://{domain}/api/telegram/setup`
+4. run `php artisan telegram:webhook notifications --setup`
+5. Add bot to group
+6. Type something that starts with `'/'`
+7. Find in logs chat id (starts with minus)
+8. Delete webhook `php artisan telegram:webhook notifications --remove`
