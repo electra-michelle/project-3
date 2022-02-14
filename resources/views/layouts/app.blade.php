@@ -185,8 +185,18 @@ Javascript
 <script src="/js/jquery.ajaxchimp.min.js"></script>
 <!-- Custom Js -->
 <script src="/js/custom.js"></script>
-<script src="/js/app.js"></script>
-
+<script src="{{ asset('/js/app.js') }}"></script>
+    <script>
+	window.Echo.channel('forextion_database_statistics')
+    .listen('statistics', (e) => {
+        console.log('Got event...');
+        console.log(e);
+    });
+        Echo.channel('forextion_database_statistics')
+            .listen('statistics', e => {
+                console.log(e)
+            })
+    </script>
 @yield('js')
 </body>
 

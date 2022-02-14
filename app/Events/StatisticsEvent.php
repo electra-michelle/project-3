@@ -19,12 +19,6 @@ class StatisticsEvent implements ShouldBroadcastNow
      */
     public $connection = 'redis';
 
-    /**
-     * The name of the queue on which to place the broadcasting job.
-     *
-     * @var string
-     */
-    public $queue = 'statistics';
 
     /**
      * @param $data
