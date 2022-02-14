@@ -31,7 +31,9 @@ class TelegramController extends Controller
                     'text' => Emojify::text($request->input('message')),
                 ]);
 
-            return redirect()->back()->with(['success' => 'Message has been sent.']);
+            return redirect()->back()
+                ->with(['success' => 'Message has been successfuly sent.']);
+
         } catch (\Exception $exception) {
             return redirect()
                 ->back()
@@ -39,8 +41,5 @@ class TelegramController extends Controller
                 ->withErrors(['message' => 'Exception error ' . $exception->getMessage()]);
         }
 
-
-        return redirect()->back()
-            ->with(['success' => 'Message has been successfuly sent.']);
     }
 }
