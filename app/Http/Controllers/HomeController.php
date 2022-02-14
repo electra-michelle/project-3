@@ -22,13 +22,8 @@ class HomeController extends Controller
     public function test()
     {
         StatisticsEvent::dispatch(['test' => time()]);
-		//event(new StatisticsEvent(['test' => time()]));
-		
+
 		return 'ok';
-//        Telegram::bot('notifications')
-//            ->sendMessage([
-//                'chat_id' => config('telegram.bots.notifications.chat_id'),
-//                'text' => Emojify::text('Very good people'),
-//            ]);
+
     }
 }

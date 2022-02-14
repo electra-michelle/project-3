@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\StatisticsEvent;
 use App\Helpers\CustomHelper;
 use App\Models\Deposit;
 use App\Models\UserAccount;
@@ -35,6 +36,20 @@ class DepositService
 
         if(CustomHelper::isEmailNotificationEnabled('deposit_confirmed')) {
             $deposit->user->notify(new DepositConfirmedNotification($amount, $currency, $plan, $wallet));
+        }
+
+        if(CustomHelper::isBroadcastNotificationEnabled('new_deposit')) {
+            StatisticsEvent::dispatch([
+                'type' => 'new_deposit',
+                'amount' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals),
+                'currency' => $deposit->paymentSystem->currency,
+                'transaction_id' => $transactionId,
+                'method' => $deposit->paymentSystem->name,
+                'username' => $deposit->user->username,
+                'timeAgo' => now()->diffForHumans(),
+                'date' => now(),
+                'timestamp' => now()->timestamp,
+            ]);
         }
 
         $deposit->user->histories()->create([
@@ -81,6 +96,20 @@ class DepositService
                     $deposit->user->username
                 ));
             }
+
+            if(CustomHelper::isBroadcastNotificationEnabled('ref_commission')) {
+                StatisticsEvent::dispatch([
+                    'type' => 'ref_commission',
+                    'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals),
+                    'currency' => $deposit->paymentSystem->currency,
+                    'method' => $deposit->paymentSystem->name,
+                    'username' =>  $deposit->user->referredBy->username,
+                    'timeAgo' => now()->diffForHumans(),
+                    'date' => now(),
+                    'timestamp' => now()->timestamp,
+                ]);
+            }
+
 
             if($telegramConfig['chat_id'] && $telegramConfig['token']) {
                 Telegram::bot('notifications')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\StatisticsEvent;
 use App\Helpers\CustomHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentSystem;
@@ -168,6 +169,16 @@ class RegisterController extends Controller
     {
         if(CustomHelper::isEmailNotificationEnabled('registered')) {
             $user->notify(new RegistrationNotification());
+        }
+
+        if(CustomHelper::isBroadcastNotificationEnabled('new_account')) {
+            StatisticsEvent::dispatch([
+                'type' => 'new_account',
+                'username' => $user->username,
+                'timeAgo' => now()->diffForHumans(),
+                'date' => now(),
+                'timestamp' => now()->timestamp,
+            ]);
         }
 
         if($user->upline) {

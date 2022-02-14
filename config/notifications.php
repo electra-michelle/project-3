@@ -15,5 +15,15 @@ return [
             'ref_commission' => true,
             'new_referral' => true,
         ]
+    ],
+    // User for live notifications
+    'broadcast' => [
+        'enabled' => true,
+        'categories' => [
+            'new_account' => true,
+            'new_deposit' => true,
+            'ref_commission' => true,
+            'withdraw' => true,
+        ]
     ]
 ];
