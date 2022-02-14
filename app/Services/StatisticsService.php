@@ -8,7 +8,6 @@ use App\Models\ExchangeRate;
 use App\Models\PaymentSystem;
 use App\Models\Payout;
 use App\Models\UserAccount;
-use App\PaymentSystems\ePayCore;
 
 class StatisticsService
 {

@@ -46,3 +46,13 @@ stopwaitsecs=3600
 6. Type something that starts with `'/'`
 7. Find in logs chat id (starts with minus)
 8. Delete webhook `php artisan telegram:webhook notifications --remove`
+
+
+## Adding paymentSystems
+1. view `deposit/details.blade.php`
+2. Confirm deposit Api/Command 
+3. Payout command (cron)
+4. Payouts in Admin\PayoutController (for custom payouts)
+5. StatusCheck command
+6. Services/PaymentSystemService.php
+7. Seeder for PaymentSystem + PlanLimit
