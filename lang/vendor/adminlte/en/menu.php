@@ -17,4 +17,5 @@ return [
     'unread_messages'               => 'Unread Messages',
     'read_messages'                 => 'Read Messages',
     'all_messages'                  => 'All Messages',
+    'telegram'                      => 'Telegram notification',
 ];

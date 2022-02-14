@@ -56,6 +56,10 @@ Route::middleware('admin.auth')->group(function () {
     // Wallet Balance
     Route::get('balances', 'WalletBalancesController@index')->name('balances');
 
+    // Wallet Balance
+    Route::get('telegram', 'TelegramController@show')->name('telegram');
+    Route::post('telegram', 'TelegramController@send');
+
     // Messages
     Route::get('messages/{status?}', 'MessagesController@index')->name('messages')->where('status', '[A-Za-z]+');
     Route::get('messages/{message}', 'MessagesController@show')->name('messages.show')->where('message', '[0-9]+');

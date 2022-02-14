@@ -8,6 +8,8 @@ use App\Models\UserAccount;
 use App\Notifications\DepositConfirmedNotification;
 use App\Notifications\ReferralCommissionNotification;
 use Illuminate\Http\Request;
+use Telegram\Bot\Helpers\Emojify;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class DepositService
 {
@@ -46,6 +48,19 @@ class DepositService
             ])
         ]);
 
+        $telegramConfig = config('telegram.bots.notifications');
+        if($telegramConfig['chat_id'] && $telegramConfig['token']) {
+            Telegram::bot('notifications')
+                ->sendMessage([
+                    'chat_id' => config('telegram.bots.notifications.chat_id'),
+                    'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_deposit', [
+                            'username' => $deposit->user->username,
+                            'currency' => $deposit->paymentSystem->currency,
+                            'amount' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals)
+                        ])),
+                ]);
+        }
+
         if($deposit->user->upline) {
 
             $commission = round($deposit->plan->affiliate_commission*$amount/100, $deposit->paymentSystem->decimals);
@@ -65,6 +80,19 @@ class DepositService
                     $wallet,
                     $deposit->user->username
                 ));
+            }
+
+            if($telegramConfig['chat_id'] && $telegramConfig['token']) {
+                Telegram::bot('notifications')
+                    ->sendMessage([
+                        'chat_id' => config('telegram.bots.notifications.chat_id'),
+                        'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_commission', [
+                            'username' => $deposit->user->referredBy->username,
+                            'downline' => $deposit->user->username,
+                            'currency' => $deposit->paymentSystem->currency,
+                            'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals)
+                        ])),
+                    ]);
             }
 
             $deposit->user->referredBy->histories()->create([

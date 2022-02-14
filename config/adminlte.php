@@ -329,6 +329,11 @@ return [
             'route'  => 'admin.settings',
             'icon' => 'fas fa-fw fa-cogs',
         ],
+        [
+            'text' => 'telegram',
+            'route'  => 'admin.telegram',
+            'icon' => 'fab fa-fw fa-telegram',
+        ],
     ],
 
     /*
@@ -351,6 +356,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        \App\Filters\MenuFilter::class,
     ],
 
     /*
