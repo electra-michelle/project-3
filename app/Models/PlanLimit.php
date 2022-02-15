@@ -11,6 +11,11 @@ class PlanLimit extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'min_amount' => 'float',
+        'max_amount' => 'float',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

@@ -6531,7 +6531,11 @@ div#checkoutCouponform {
 
 .pricingTable .pricing-content ul li {
     line-height: 30px;
-    color: #a7a8aa
+    color: #00415d
+}
+
+.pricingTable .custom-btn {
+    padding: 11px 23px;
 }
 
 #calculator label{
@@ -6562,7 +6566,11 @@ div#checkoutCouponform {
 
 #calculator .input-group .form-control{
     border-right: 1px solid #00415d;
-    padding: unset;
+    padding: 8px 10px;
+}
+
+#calculator .calculator-data {
+    color: #fff;
 }
 
 .account-nav {
@@ -6632,4 +6640,24 @@ div#checkoutCouponform {
 }
 .badge.bg-success {
     background: #2fbf8c;
+}
+
+
+#limits .btn-primary {
+    background: #124e68;
+    border-color: #124e68;
+}
+#limits .btn-primary.active,
+#limits .btn-primary:hover,
+#limits .btn-primary:active {
+    background: #2fbf8c;
+    border-color:  #2fbf8c;
+    box-shadow: none;
+}
+
+.pricingTable .limits {
+    display: none;
+}
+.pricingTable .limits.active {
+    display: block;
 }
