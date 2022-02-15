@@ -4713,14 +4713,10 @@ section.blog.section-padding.blog-2 {
 
 .quick-call {
   border: 1px solid #D6D6D6;
-  display: flex;
-  padding: 40px 60px;
-  max-width: 430px;
+  padding: 15px;
+  text-align: center;
   margin: 0 auto;
   align-items: center; }
-  @media only screen and (max-width: 767px) {
-    .quick-call {
-      padding: 40px 25px; } }
   .quick-call::before {
     background: url("../images/call-bg.png") no-repeat center center/cover; }
   .quick-call span {
@@ -4735,8 +4731,7 @@ section.blog.section-padding.blog-2 {
     text-align: center;
     line-height: 62px;
     font-size: 20px;
-    color: #fff;
-    margin-right: 20px; }
+    color: #fff;}
   .quick-call .qc-txt p {
     font-size: 18px;
     font-weight: 500;
@@ -6660,4 +6655,25 @@ div#checkoutCouponform {
 }
 .pricingTable .limits.active {
     display: block;
+}
+
+.table {
+    color: #00415D;
+}
+
+.table>thead {
+    background: #33b98a;
+    color: #fff;
+}
+
+.table>:not(:last-child)>:last-child>* {
+    border-color: #33b98a
+}
+
+.table>:not(caption)>*>* {
+    border-color: #33b98a
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background: #d6f1e8;
 }

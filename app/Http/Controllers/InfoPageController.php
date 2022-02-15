@@ -46,4 +46,9 @@ class InfoPageController extends Controller
 
         return view('faq', compact('paymentSystems', 'minDepositLimits', 'maxDepositLimits', 'withdrawMinimums'));
     }
+
+    public function affiliate()
+    {
+        return view('affiliate');
+    }
 }

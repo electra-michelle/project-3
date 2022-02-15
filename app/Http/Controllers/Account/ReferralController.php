@@ -13,9 +13,19 @@ class ReferralController extends Controller
     {
         $referrals = auth()->user()->referrals()
             ->latest()
-            ->paginate(1);
+            ->paginate(15);
 
-        return view('account.referrals', compact('referrals'));
+        $totalReferrals = auth()->user()->referrals()
+            ->count();
+
+        $activeReferrals = auth()->user()->referrals()
+            ->whereHas('deposits', fn($query) => (
+                $query->where('status', 'active')
+                ->orWhere('status', 'finished')
+            ))
+            ->count();
+
+        return view('account.referrals', compact('referrals', 'totalReferrals', 'activeReferrals'));
     }
 
     /**

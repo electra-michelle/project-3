@@ -89,7 +89,7 @@ class RegisterController extends Controller
     {
         $upline = null;
         if(session()->has('ref')) {
-            $upline = User::where('ref_url', '=', session('ref'))->first()?->id;
+            $upline = User::find(session('ref'))?->id;
 
             session()->forget('ref');
         }

@@ -7,7 +7,9 @@
     ])
     @include('account.__partials.nav')
 
-    <section class="checkout-section">
+        <section class="growth-section checkout-section section-padding">
+            <img src="/images/testmonial-shape.png" alt="" class="anim-img">
+            <img src="/images/testmonial-shape.png" alt="" class="anim-img anim-2">
         <div class="container">
             <form action="{{ route('account.settings') }}" method="POST" class="form checkout-form">
                 @csrf
