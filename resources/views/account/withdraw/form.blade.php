@@ -2,13 +2,26 @@
 
 @section('content')
     @include('layouts.breadcrumb', [
-        'title' => 'Referrals',
+        'title' => 'Withdraw',
         'description' => '12321321'
     ])
     @include('account.__partials.nav')
 
     <section class="section-padding">
         <div class="container">
+            <div class="row">
+                @foreach($paymentSystems as $paymentSystem)
+                    <div class="col-lg-4 col-md-3 mb-2">
+                        <div class="quick-call">
+                            <div class="mb-3"><img src="/ps/{{$paymentSystem->value }}.png" alt="{{$paymentSystem->name }}" /></div>
+                            <div class="qc-txt">
+                                <p>Available balance</p>
+                                <h4>{{ CustomHelper::formatAmount($paymentSystem->balance ?? 0, $paymentSystem->decimals) }} {{ $paymentSystem->currency }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
             <form action="{{ route('account.withdraw') }}" method="POST">
                 @csrf
                 @foreach($errors->all() as $error)
@@ -32,7 +45,6 @@
                         <div class="form-group">
                             <label for="payment_system">Payment System</label>
                             <select name="payment_system" class="form-control">
-                                <option value="">Select</option>
                                 @foreach($paymentSystems as $paymentSystem)
                                     <option
                                         {{ old('payment_system') == $paymentSystem->value ? 'selected' : '' }} value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
@@ -45,9 +57,10 @@
                     </div>
                 </div>
             </form>
+            <hr />
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-intro">
+                    <div class="section-intro mb-0">
                         <h3 class="section-title">Withdraw History<span class="color">.</span></h3>
                     </div>
                 </div>

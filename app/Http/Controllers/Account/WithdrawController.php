@@ -15,7 +15,13 @@ class WithdrawController extends Controller
     public function index()
     {
         $payouts = Payout::with('paymentSystem')->latest()->paginate(15);
-        $paymentSystems = PaymentSystem::active()->get();
+        $paymentSystems = PaymentSystem::active()
+            ->leftJoin('user_accounts', fn($join) => (
+                $join->on('payment_systems.id', '=', 'user_accounts.payment_system_id')
+                ->where('user_accounts.user_id', auth()->user()->id)
+            ))
+            ->get();
+
 
         return view('account.withdraw.form', compact('payouts', 'paymentSystems'));
     }
