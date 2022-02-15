@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 @foreach($plans as $plan)
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="pricingTable">
                         <div class="pricingTable-header">
                             <h3 class="heading">{{ $plan->name }}</h3>
