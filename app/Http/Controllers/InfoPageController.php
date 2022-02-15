@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\Plan;
+use App\Models\PlanLimit;
 use Illuminate\Http\Request;
 
 class InfoPageController extends Controller
@@ -24,5 +25,25 @@ class InfoPageController extends Controller
         $paymentSystems = PaymentSystem::active()->get();
 
         return view('investments', compact('plans', 'paymentSystems'));
+    }
+
+    public function faq()
+    {
+        $paymentSystems = PaymentSystem::active()->get();
+        $planLimits = PlanLimit::selectRaw('MIN(min_amount) AS min_amount, MAX(max_amount) AS max_amount, currency')->groupBy('currency')->get();
+
+        $minDepositLimits = [];
+        $maxDepositLimits = [];
+        foreach($planLimits as $planLimit) {
+            $minDepositLimits[] = $planLimit->min_amount . ' ' . $planLimit->currency;
+            $maxDepositLimits[] = $planLimit->max_amount . ' ' . $planLimit->currency;
+        }
+
+        $withdrawMinimums = [];
+        foreach($paymentSystems->pluck('withdraw_minimum', 'currency') as $currency => $minimum) {
+            $withdrawMinimums[] = round($minimum, 8) . ' ' . $currency;
+        }
+
+        return view('faq', compact('paymentSystems', 'minDepositLimits', 'maxDepositLimits', 'withdrawMinimums'));
     }
 }

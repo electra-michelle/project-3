@@ -34,7 +34,7 @@ class PaymentSystemsSeeder extends Seeder
             'currency'			=>	'BTC',
             'is_active'			=>	true,
             'payouts_enabled'	=>	true,
-            'withdraw_minimum'	=>	0.0001,
+            'withdraw_minimum'	=>	0.00005,
         ]);
 
         PaymentSystem::firstOrCreate([
@@ -45,7 +45,7 @@ class PaymentSystemsSeeder extends Seeder
             'currency'			=>	'BCH',
             'is_active'			=>	true,
             'payouts_enabled'	=>	true,
-            'withdraw_minimum'	=>	0.0001,
+            'withdraw_minimum'	=>	0.005,
         ]);
 
         PaymentSystem::firstOrCreate([
@@ -56,7 +56,7 @@ class PaymentSystemsSeeder extends Seeder
             'currency'			=>	'LTC',
             'is_active'			=>	true,
             'payouts_enabled'	=>	true,
-            'withdraw_minimum'	=>	0.001,
+            'withdraw_minimum'	=>	0.01,
         ]);
 
 
@@ -68,7 +68,7 @@ class PaymentSystemsSeeder extends Seeder
             'currency'			=>	'DOGE',
             'is_active'			=>	true,
             'payouts_enabled'	=>	true,
-            'withdraw_minimum'	=>	10,
+            'withdraw_minimum'	=>	5,
         ]);
     }
 }

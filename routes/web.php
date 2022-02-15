@@ -18,13 +18,15 @@ use App\Http\Controllers\InfoPageController;
 
 Route::get('/', function () {return view('home');})->name('home');
 Route::get('/affiliate', function () {return view('home');})->name('affiliate');
-Route::get('/faq', function () {return view('faq');})->name('faq');
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact', 'show')->name('contact');
     Route::post('/contact', 'sendMessage');
 });
 
-Route::get('/investments', [InfoPageController::class, 'investments'])->name('investments');
+Route::controller(InfoPageController::class)->group(function () {
+    Route::get('/investments', 'investments')->name('investments');
+    Route::get('/faq', 'faq')->name('faq');
+});
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);

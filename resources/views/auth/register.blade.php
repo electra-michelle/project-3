@@ -75,7 +75,7 @@
                             </div>
                             @endforeach
                             {!! htmlFormSnippet() !!}
-                            <button class="custom-btn full">Register</button>
+                            <button class="custom-btn full">Create Account</button>
                             <div class="text-right">
                                 Already have an account? <a href="{{ route('login') }}">Login</a>
                             </div>
