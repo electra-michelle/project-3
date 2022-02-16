@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Investments',
-        'description' => 'You have questions? We have answers!'
+        'description' => 'Earn your passive income now'
     ])
 
     <section class="testimonial-2  section-padding">
@@ -13,10 +13,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-intro">
-                        <h2 class="section-title">What Our Loving
-                            Clients Saying<span class="color">.</span></h2>
-                        <p>Lorem Ipsum available the majority have suffered alteration
-                            in some form, by injected humour, or randomised.</p>
+                        <h2 class="section-title">Explore Our Investment Plans<span class="color">.</span></h2>
+                        <p>Become a member and start your alternative investment journey.
+Our services are designed with financial professionals in mind.</p>
                     </div>
                 </div>
             </div>
@@ -64,8 +63,7 @@
                 <div class="col-lg-12">
                     <div class="section-intro">
                         <h2 class="section-title">Calculate your income<span class="color">.</span></h2>
-                        <p>Lorem Ipsum available the majority have suffered alteration
-                            in some form, by injected humour, or randomised.</p>
+                        <p>You can use the calculator below to see your potential returns on your investment by selecting your preferred currency and investment plan.</p>
                     </div>
                 </div>
             </div>

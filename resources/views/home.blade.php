@@ -71,14 +71,13 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="about-business">
                     <h2 class="section-title">We connect people to opportunities<span class="color">.</span></h2>
-                    <p>Lorem Ipsum available the majority have suffered alteration in some form, by injected humour,
-                        or randomised</p>
-                    <ul>
-                        <li>Words which don't look even slightly believable!</li>
-                        <li>To use a passage of Lorem Ipsum, you be sure</li>
-                        <li>Anything embarrassing hidden in middle of text.</li>
+                    <p>{{ config('app.name') }} investment process has captured what we believe to be the most attractive opportunities across forex markets and through market cycles</p>
+                    <ul> 
+                        <li>Robust fundamental analysis to determine enterprise value</li>
+                        <li>Analysis of capital structure to ensure high margin of safety</li>
+                        <li>Identified catalysis to drive total return</li>
                     </ul>
-                    <a href="about.html" class="custom-btn mt-4">Read More</a>
+                    <a href="{{ route('investments') }}" class="custom-btn mt-4">See Investment Plans</a>
                 </div>
 
             </div>
