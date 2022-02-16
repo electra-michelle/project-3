@@ -70,5 +70,17 @@ class PaymentSystemsSeeder extends Seeder
             'payouts_enabled'	=>	true,
             'withdraw_minimum'	=>	5,
         ]);
+
+
+        PaymentSystem::firstOrCreate([
+            'value'				=>	'tron_trc20_usdt'
+        ], [
+            'name'				=>	'Tether (TRC20)',
+            'decimals'			=>	6,
+            'currency'			=>	'USDT',
+            'is_active'			=>	true,
+            'payouts_enabled'	=>	true,
+            'withdraw_minimum'	=>	0.01,
+        ]);
     }
 }
