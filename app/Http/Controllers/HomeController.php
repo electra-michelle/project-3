@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\PaymentSystems\PayKassa\Api as PayKassaApi;
+use App\PaymentSystems\PayKassa\Sci as PayKassaSci;
 use Illuminate\Http\Request;
-use App\Rules\TronNetworkRule;
+use App\Helpers\TronHelper;
 
 class HomeController extends Controller
 {
@@ -21,11 +22,9 @@ class HomeController extends Controller
 
     public function test(Request $request)
     {
-		$request->validate([
-			'test' => 
-		]);
 		
-		// $paykassa = new PayKassaApi();
+		$tronHelper = new TronHelper();
+		$tronHelper->validateAddress('TCzcGAq3k5hNt8LEtkrzRwGDfs5aDYRF3s');
 		// dd($paykassa->getBalance('tron_trc20_usdt'));
 
     }

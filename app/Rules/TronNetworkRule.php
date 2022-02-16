@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Helpers\TronHelper;
 
 class TronNetworkRule implements Rule
 {
@@ -16,8 +17,14 @@ class TronNetworkRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        // $nodeService = new CryptoNodeService($attribute);
-        // return $nodeService->validateAddress($value);
+		if($attribute == 'tron_trc20_usdt') {
+			if(substr($value,0,1) != "T" || strlen($value)!=34) {
+				return false;
+			}
+		}
+		
+		$tronHelper = new TronHelper($attribute);
+		return $tronHelper->validateAddress($value);
     }
 
     /**

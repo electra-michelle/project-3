@@ -69,8 +69,9 @@ stdout_logfile=/path/to/project/storage/logs/echo.log
 ## Adding paymentSystems
 1. view `deposit/details.blade.php`
 2. Confirm deposit Api/Command 
-3. Payout command (cron)
-4. Payouts in Admin\PayoutController (for custom payouts)
-5. StatusCheck command
-6. Services/PaymentSystemService.php
-7. Seeder for PaymentSystem + PlanLimit
+3. Confirm deposit Account/DepositController 
+4. Payout command (cron)
+5. Payouts in Admin\PayoutController (for custom payouts)
+6. StatusCheck command
+7. Services/PaymentSystemService.php
+8. Seeder for PaymentSystem + PlanLimit
