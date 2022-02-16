@@ -75,19 +75,24 @@ class Api
 	
 	public function statusCheck()
 	{
-		$balance = $this->makeRequest('', [
-			'func' => 'api_get_shop_balance',
-			'shop' => config('paykassa.sci.id')
-		]);
 		
-		if($balance->error) {
-			return [
-				'error' => true,
-				'message' => $balance->message
-			];
+		try {
+			$balance = $this->makeRequest('', [
+				'func' => 'api_get_shop_balance',
+				'shop' => config('paykassa.sci.id')
+			]);
+			
+			if($balance->error) {
+				return [
+					'error' => true,
+					'message' => $balance->message
+				];
+			}		
+			
+			return ['error' => false];
+		} catch (\Exception $exception) {
+			return json_decode(json_encode(['error' => $exception->getMessage()]));
 		}
-		
-		return ['error' => false];
 	}
 
 }

@@ -11,6 +11,7 @@ use App\Services\CryptoNodeService;
 use App\Services\DepositService;
 use App\Services\WalletBalanceService;
 use Illuminate\Support\Str;
+use App\PaymentSystems\PayKassa\Sci as PayKassaSci;
 
 class DepositController extends Controller
 {
@@ -77,6 +78,24 @@ class DepositController extends Controller
             'url' => $url,
             'deposit_address' => $depositAddress
         ]);
+		
+		if(in_array($paymentSystem->value, config('paykassa.crypto')) && $request->input('payment_method') == 'payment_processor') {
+			
+			$paykassa = new PayKassaSci();
+			$address = $paykassa->getCryptoAddress($deposit->id, $deposit->amount, $deposit->paymentSystem->currency);
+			if(!$address) {
+				$deposit->delete();
+				return redirect()->back()->withInput()
+                    ->withErrors([
+                        'message' => 'This payment method is currently unavailable. Please, try again later.'
+                    ]);
+					
+			} else {
+				$deposit->deposit_address = $address;
+				$deposit->save();
+			}
+
+		}
 
         if($request->input('payment_method') == 'account_balance') {
             $depositService = new DepositService();

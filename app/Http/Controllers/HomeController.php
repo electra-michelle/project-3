@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function test(Request $request)
     {
 		
-		$tronHelper = new TronHelper();
-		$tronHelper->validateAddress('TCzcGAq3k5hNt8LEtkrzRwGDfs5aDYRF3s');
+		$paykassa = new PayKassaSci();
+		$paykassa->getCryptoAddress(1, 10.000000, 'USDT');
 		// dd($paykassa->getBalance('tron_trc20_usdt'));
 
     }
