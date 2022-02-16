@@ -82,5 +82,25 @@ class Sci
 		}
 
 	}
+	
+	public function checkPayment($hash)
+	{
+		try {
+			$result = $this->makeRequest('', [
+				'func' => 'sci_confirm_order',
+				'private_hash' => $hash
+			]);
+
+			//dd($result);
+			if($result->error) {
+				return false;
+			}
+			
+			return $result->data;
+		} catch (\Exception $exception) {
+			 return false;
+		}
+		
+	}
 
 }
