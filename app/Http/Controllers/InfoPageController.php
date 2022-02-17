@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
 use App\Models\PlanLimit;
 use App\Services\PlanService;
@@ -31,7 +32,8 @@ class InfoPageController extends Controller
 
         $withdrawMinimums = [];
         foreach ($paymentSystems->pluck('withdraw_minimum', 'currency') as $currency => $minimum) {
-            $withdrawMinimums[] = round($minimum, 8) . ' ' . $currency;
+            $decimals = $paymentSystems->where('currency', $currency)->first();
+            $withdrawMinimums[] = CustomHelper::formatAmount($minimum, $decimals->decimals) . ' ' . $currency;
         }
 
         return view('faq', compact('paymentSystems', 'minDepositLimits', 'maxDepositLimits', 'withdrawMinimums'));
