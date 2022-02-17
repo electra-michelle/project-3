@@ -66,15 +66,20 @@ class DepositService
 
         $telegramConfig = config('telegram.bots.notifications');
         if($telegramConfig['chat_id'] && $telegramConfig['token']) {
-            Telegram::bot('notifications')
-                ->sendMessage([
-                    'chat_id' => config('telegram.bots.notifications.chat_id'),
-                    'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_deposit', [
-                            'username' => $deposit->user->username,
-                            'currency' => $deposit->paymentSystem->currency,
-                            'amount' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals)
-                        ])),
-                ]);
+            try {
+                Telegram::bot('notifications')
+                    ->sendMessage([
+                        'chat_id' => config('telegram.bots.notifications.chat_id'),
+                        'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_deposit', [
+                                'username' => Str::mask($deposit->user->username, '*', 5),
+                                'currency' => $deposit->paymentSystem->currency,
+                                'amount' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals)
+                            ])),
+                    ]);
+            } catch (\Exception $exception) {
+
+            }
+
         }
 
         if($deposit->user->upline) {
@@ -113,16 +118,20 @@ class DepositService
 
 
             if($telegramConfig['chat_id'] && $telegramConfig['token']) {
-                Telegram::bot('notifications')
-                    ->sendMessage([
-                        'chat_id' => config('telegram.bots.notifications.chat_id'),
-                        'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_commission', [
-                            'username' => $deposit->user->referredBy->username,
-                            'downline' => $deposit->user->username,
-                            'currency' => $deposit->paymentSystem->currency,
-                            'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals)
-                        ])),
-                    ]);
+                try {
+                    Telegram::bot('notifications')
+                        ->sendMessage([
+                            'chat_id' => config('telegram.bots.notifications.chat_id'),
+                            'text' => Emojify::text(trans('telegram.notification') . trans('telegram.new_commission', [
+                                    'username' => Str::mask($deposit->user->referredBy->username, '*', 5),
+                                    'downline' => Str::mask($deposit->user->username, '*', 5),
+                                    'currency' => $deposit->paymentSystem->currency,
+                                    'amount' => CustomHelper::formatAmount($commission, $deposit->paymentSystem->decimals)
+                                ])),
+                        ]);
+                } catch(\Exception $e) {
+
+                }
             }
 
             $deposit->user->referredBy->histories()->create([
