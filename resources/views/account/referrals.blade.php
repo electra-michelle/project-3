@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Referrals',
-        'description' => '12321321'
+        'description' => 'See your all referrals and earnings.'
     ])
     @include('account.__partials.nav')
 

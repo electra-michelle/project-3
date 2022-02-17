@@ -2,8 +2,8 @@
 
 @section('content')
     @include('layouts.breadcrumb', [
-        'title' => 'Reset password',
-        'description' => '>>>'])
+        'title' => 'Trouble signing in?',
+        'description' => 'Resetting your password is easy'])
 
 
     <div class="container">

@@ -128,8 +128,7 @@
                         <div class="f-logo mb-4">
                             <a href="{{ route('home') }}"><img src="/images/f-logo.png" alt="Logo"></a>
                         </div>
-                        <p>Lorem Ipsum available, but the majority suffered alteration in some form, by humour, or
-                            randomised words.</p>
+                        <p>{{ config('app.name') }} investment process has captured what we believe to be the most attractive opportunities across forex markets and through market cycles.</p>
                     </div>
 
                 </div>
@@ -138,9 +137,9 @@
                     <div class="footer-widget">
                         <h3 class="widget-title">Quick Links <span>.</span></h3>
                         <ul>
-                            <li><a href="contact.html">Make Appointment</a></li>
-                            <li><a href="service-details.html">Customer Services</a></li>
-                            <li><a href="about.html">About Company</a></li>
+                            <li><a href="{{ route('account.deposit') }}">Make Investment</a></li>
+                            <li><a href="{{ route('investments') }}">Calculate Your Profits</a></li>
+                            <li><a href="{{ route('register') }}">Register Now</a></li>
                         </ul>
                     </div>
                 </div>

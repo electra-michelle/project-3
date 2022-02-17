@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Withdraw',
-        'description' => '12321321'
+        'description' => 'Ready to withdraw your earnings?'
     ])
     @include('account.__partials.nav')
 

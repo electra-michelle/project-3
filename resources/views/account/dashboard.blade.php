@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Dashboard',
-        'description' => '12321321'
+        'description' => 'Welcome to your ' . config('app.name') . ' dashboard.'
     ])
     @include('account.__partials.nav')
 

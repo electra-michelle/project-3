@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Marketing tools',
-        'description' => '12321321'
+        'description' => 'Access our pre-made marketing tools'
     ])
     @include('account.__partials.nav')
     <section class="growth-section section-padding">

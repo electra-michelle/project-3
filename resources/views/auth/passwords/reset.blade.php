@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Reset Password',
-        'description' => '???'])
+        'description' => 'Enter your new password below.'])
 
     <div class="container">
     <div class="row justify-content-center">

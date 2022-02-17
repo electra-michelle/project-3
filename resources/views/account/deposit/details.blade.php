@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Make deposit',
-        'description' => '12321321'
+        'description' => 'Best time to invest in your future'
     ])
     @include('account.__partials.nav')
 

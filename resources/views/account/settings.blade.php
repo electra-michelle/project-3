@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.breadcrumb', [
         'title' => 'Settings',
-        'description' => '12321321'
+        'description' => 'Need to change some settings?'
     ])
     @include('account.__partials.nav')
 
