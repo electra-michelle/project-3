@@ -6677,3 +6677,44 @@ div#checkoutCouponform {
 .table-striped>tbody>tr:nth-of-type(even) {
     background: #d6f1e8;
 }
+
+.break-all {
+    word-break: break-all;
+}
+
+.wallets a {
+    color: #33b98a;
+    font-weight: 600;
+}
+
+.wallets small {
+    color: #00415D;
+    font-weight: 400;
+}
+
+#withdrawForm .form-group .custom-btn {
+    margin-top: 0
+}
+#withdrawForm .form-group label {
+    font-weight: bold;
+}
+
+#withdrawForm .form-group select.form-control {
+    padding: 16px 20px;
+    background: #f6f6f6 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2333b98a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center;
+    background-size: 16px 12px
+}
+
+
+#withdrawForm .form-group .form-control {
+    border-color: #33b98a;
+    border-width: 2px;
+}
+#withdrawForm .form-group .input-group-text {
+    background: #33b98a;
+    border-color: #33b98a;
+    border-width: 2px;
+    color: #fff;
+    font-weight: 600;
+}
+

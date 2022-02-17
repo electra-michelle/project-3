@@ -89,7 +89,7 @@
         var plansData = {!! CustomHelper::formatCalculatorJson($plans) !!};
 
         function calculate() {
-            var currency =$('#payment_system option:selected').data('currency');
+            var currency = $('#payment_system option:selected').data('currency');
             var amount = parseFloat($('#amount').val());
             var investment_plan = $('#investment_plan option:selected').val();
             var planData = plansData[investment_plan];
