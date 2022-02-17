@@ -62,7 +62,6 @@ class Sci extends BasePayKassa  implements PayKassaInterface
                 'private_hash' => $hash
             ]);
 
-            //dd($result);
             if ($result->error) {
                 return false;
             }

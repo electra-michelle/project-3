@@ -45,7 +45,6 @@ class Api extends BasePayKassa  implements PayKassaInterface
 
     public function statusCheck()
     {
-
         try {
             $balance = $this->makeRequest('', [
                 'func' => 'api_get_shop_balance',
