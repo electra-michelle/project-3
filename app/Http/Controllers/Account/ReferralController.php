@@ -36,8 +36,8 @@ class ReferralController extends Controller
         $earnedCommission = 0;
         foreach ($histories as $history) {
             $data = json_decode($history->data);
-            $rate = json_decode($exchangeRates[$data->currency] ?? [], true);
-            $earnedCommission += $data->currency == 'USD' ? $data->amount : ($data->amount * $rate['USD'] ?? 1);
+            $rate = json_decode($exchangeRates[$data->currency] ?? '', true);
+            $earnedCommission += $data->currency == 'USD' ? $data->amount : $data->amount * ($rate['USD'] ?? 1);
         }
 
         $earnedCommission = round($earnedCommission, 2);
