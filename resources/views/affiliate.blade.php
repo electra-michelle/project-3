@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="single-benifit">
-                                <span><i class="flaticon-project"></i></span>
+                                <span><i class="flaticon-review"></i></span>
                                 <div class="sb-txt">
                                     <h3>Support</h3>
                                     <p>Enjoy a great self-converting product with conversion optimised content, and
@@ -63,7 +63,9 @@
     </section>
     <!-- Benifit Section End -->
     <!-- Growth Section End -->
-    <section class="team">
+    <section class="team join-team">
+        <img src="/images/dot-graphic.png" alt="" class="anim-img">
+        <img src="/images/dot-graphic.png" alt="" class="anim-img anim-2">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-6 col-md-6">
