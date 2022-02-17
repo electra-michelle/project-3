@@ -77,6 +77,15 @@ class DashboardController extends Controller
 
         $data['inBalances'] = $statisticsService->convertedAvailableBalance();
 
+		$data['latestDeposits'] = Deposit::with(['paymentSystem', 'plan', 'user'])
+		->where(fn($query) => (
+			$query->where('status', 'active')
+				->orWhere('status', 'finished')
+		))->orderBy('confirmed_at', 'DESC')
+		->withMax('planPeriod', 'period_end')
+		->take(10)
+		->get();
+		
         return view('admin.dashboard', $data);
     }
 }

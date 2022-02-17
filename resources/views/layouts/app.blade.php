@@ -57,8 +57,8 @@
                 <div class="col-lg-12">
                     <div class="header-social">
                         <ul>
-                            <li><a href="#"><i class="fab fa-fw fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-fw fa-telegram-plane"></i></a></li>
+                            <li><a href="{{ config('socials.facebook') }}" target="_blank"><i class="fab fa-fw fa-facebook-f"></i></a></li>
+                            <li><a href="{{ config('socials.telegram') }}" target="_blank"><i class="fab fa-fw fa-telegram-plane"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,8 +149,8 @@
                     <div class="footer-widget contact-widget">
                         <h3 class="widget-title">Follow us <span>.</span></h3>
                         <div class="footer-contact">
-                            <p><a href=""><i class="fab fa-fw fa-facebook-f"></i> Facebook</a></p>
-                            <p><a href=""><i class="fab fa-fw fa-telegram-plane"></i> Telegram</a></p>
+                            <p><a href="{{ config('socials.facebook') }}"  target="_blank"><i class="fab fa-fw fa-facebook-f"></i> Facebook</a></p>
+                            <p><a href="{{ config('socials.telegram') }}"  target="_blank"><i class="fab fa-fw fa-telegram-plane"></i> Telegram</a></p>
                         </div>
                     </div>
                 </div>

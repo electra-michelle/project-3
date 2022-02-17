@@ -27,6 +27,61 @@
             <x-adminlte-info-box title="Pending Withdraws" text="≈{{ $pendingPayouts }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
         </div>
     </div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+                <div class="card-header">Latest deposits</div>
+                <div class="card-body">
+					<div class="table-responsive">
+						<table class="table text-nowrap">
+							<thead>
+							<tr>
+								<th>ID</th>
+								<th>Date</th>
+								<th>Status</th>
+								<th>Plan</th>
+								<th>Amount</th>
+								<th>User</th>
+								<th>Action</th>
+							</tr>
+							</thead>
+							<tbody>
+							@if(count($latestDeposits))
+								@foreach($latestDeposits as $deposit)
+									<tr>
+										<td>{{ $deposit->id }}</td>
+										<td>
+											{{ $deposit->confirmed_at->diffForHumans() }}
+										</td>
+										<td><span
+												class="badge badge-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span>
+										</td>
+										<td>{{ $deposit->plan->name }} <small>({{ $deposit->period_passed }}
+												/{{ $deposit->plan_period_max_period_end }})</small></td>
+										<td>
+											{{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }}
+											<small>({{ $deposit->paymentSystem->name }})</small>
+										</td>
+										<td><a target="_blank"
+											   href="{{ route('admin.users.show', $deposit->user_id) }}">{{ $deposit->user->username }}</a>
+										</td>
+										<td>
+											@include('admin.deposits.__partials.actions', ['deposit' => $deposit])
+										</td>
+									</tr>
+								@endforeach
+							@else
+								<tr>
+									<td colspan="7" class="text-center">Deposit list is empty</td>
+								</tr>
+							@endif
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <div class="row">
         <div class="col-md-6">
             <div class="card">

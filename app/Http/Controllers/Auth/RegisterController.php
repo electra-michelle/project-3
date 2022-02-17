@@ -154,7 +154,12 @@ class RegisterController extends Controller
     {
         $paymentSystems = $this->paymentSystems;
 
-        return view('auth.register', compact('paymentSystems'));
+		$upline = null;
+		if(session()->has('ref')) {
+			$upline = User::find(session('ref'));
+		}
+	
+        return view('auth.register', compact('paymentSystems', 'upline'));
     }
 
 
