@@ -78,18 +78,18 @@ class DepositController extends Controller
             'url' => $url,
             'deposit_address' => $depositAddress
         ]);
-		
+
 		if(in_array($paymentSystem->value, config('paykassa.crypto')) && $request->input('payment_method') == 'payment_processor') {
-			
+
 			$paykassa = new PayKassaSci();
-			$address = $paykassa->getCryptoAddress($deposit->id, $deposit->amount, $deposit->paymentSystem->currency);
+			$address = $paykassa->getCryptoAddress($deposit->id, $deposit->amount, $deposit->paymentSystem->currency, $deposit->paymentSystem->value);
 			if(!$address) {
 				$deposit->delete();
 				return redirect()->back()->withInput()
                     ->withErrors([
                         'message' => 'This payment method is currently unavailable. Please, try again later.'
                     ]);
-					
+
 			} else {
 				$deposit->deposit_address = $address;
 				$deposit->save();

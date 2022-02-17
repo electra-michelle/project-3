@@ -30,7 +30,7 @@ class Sci extends BasePayKassa  implements PayKassaInterface
     }
 
 
-    public function getCryptoAddress($orderId, $amount, $currency)
+    public function getCryptoAddress($orderId, $amount, $currency, $paymentSystemValue)
     {
         try {
             $result = $this->makeRequest('', [
@@ -38,7 +38,7 @@ class Sci extends BasePayKassa  implements PayKassaInterface
                 'order_id' => $orderId,
                 'amount' => $amount,
                 'currency' => $currency,
-                'system' => 30,
+                'system' => $this->paymentSystemMappings($paymentSystemValue),
                 'comment' => $this->config['description'] . ' #' . $orderId,
                 'phone' => false,
                 'paid_commission' => '',
@@ -47,6 +47,7 @@ class Sci extends BasePayKassa  implements PayKassaInterface
             if ($result->error) {
                 return false;
             }
+
             return $result->data->wallet;
         } catch (\Exception $exception) {
             return false;
