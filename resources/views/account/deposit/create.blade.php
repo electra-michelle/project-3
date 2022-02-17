@@ -9,22 +9,12 @@
 
     <section class="section-padding">
         <div class="container">
-            <form action="{{ route('account.deposit') }}" method="POST">
+            <form id="depositForm" action="{{ route('account.deposit') }}" method="POST">
                 @foreach($errors->all() as $error)
                     <div class="alert alert-danger">{{ $error }}</div>
                 @endforeach
                 @csrf
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="amount">Amount</label>
-                            <div class="input-group">
-                                <input id="amount" type="text" class="form-control" name="amount"
-                                       value="{{ old('amount', request()->input('amount')) }}">
-                                <div class="input-group-text">USD</div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="amount">Investment plan</label>
@@ -60,6 +50,16 @@
                                         {{ old('payment_system', request()->input('payment_system')) == $paymentSystem->value ? 'selected' : '' }} value="{{ $paymentSystem->value }}">{{ $paymentSystem->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <div class="input-group">
+                                <input id="amount" type="text" class="form-control" name="amount"
+                                       value="{{ old('amount', request()->input('amount')) }}">
+                                <div class="input-group-text">USD</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12 text-center">

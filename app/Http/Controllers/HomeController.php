@@ -36,10 +36,10 @@ class HomeController extends Controller
 
     public function test(Request $request)
     {
-		
-		$paykassa = new PayKassaSci();
-		$paykassa->getCryptoAddress(1, 10.000000, 'USDT');
-		// dd($paykassa->getBalance('tron_trc20_usdt'));
+
+		//$paykassa = new PayKassaApi();
+		//$paykassa->getCryptoAddress(1, 10.000000, 'USDT');
+		//dd($paykassa->getBalance('tron_trc20_usdt'));
 
     }
 }

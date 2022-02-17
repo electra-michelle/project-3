@@ -13,7 +13,7 @@
                 @foreach($paymentSystems as $paymentSystem)
                     <div class="col-lg-4 col-md-6 mb-2 wallets">
                         <div class="quick-call">
-                            <div class="mb-3"><img src="/ps/{{$paymentSystem->value }}.png"
+                            <div class="mb-3"><img style="height: 50px" src="/ps/{{$paymentSystem->value }}.png"
                                                    alt="{{$paymentSystem->name }}"/></div>
                             <div class="qc-txt">
                                 <p>Available balance</p>

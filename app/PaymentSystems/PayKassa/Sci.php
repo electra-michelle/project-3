@@ -4,13 +4,9 @@ namespace App\PaymentSystems\PayKassa;
 
 use GuzzleHttp\Client;
 
-class Sci
+class Sci extends BasePayKassa  implements PayKassaInterface
 {
     public $version = "0.4";
-
-    private $client;
-
-    private $config;
 
     public function __construct()
     {
@@ -24,7 +20,7 @@ class Sci
     /**
      * @return array
      */
-    private function defaultRequestData()
+    public function defaultRequestData() : array
     {
         return [
             'sci_id' => (int)$this->config['id'],
@@ -33,31 +29,6 @@ class Sci
         ];
     }
 
-    /**
-     * @param $uri
-     * @param array $data
-     * @param string $method
-     * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    private function makeRequest($uri, $data = [], $method = 'POST')
-    {
-        $data = array_merge(
-            $this->defaultRequestData(),
-            $data
-        );
-
-        $requestOptions = [
-            ($method == 'GET' ? 'query' : 'form_params') => $data,
-            'headers' => [
-                'Content-type' => 'application/x-www-form-urlencoded',
-            ]
-        ];
-
-        $response = $this->client->request($method, $uri, $requestOptions);
-
-        return json_decode($response->getBody()->__toString());
-    }
 
     public function getCryptoAddress($orderId, $amount, $currency)
     {

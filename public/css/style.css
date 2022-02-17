@@ -6692,13 +6692,18 @@ div#checkoutCouponform {
     font-weight: 400;
 }
 
+
+#depositForm .form-group .custom-btn,
 #withdrawForm .form-group .custom-btn {
     margin-top: 0
 }
+
+#depositForm .form-group label,
 #withdrawForm .form-group label {
     font-weight: bold;
 }
 
+#depositForm .form-group select.form-control,
 #withdrawForm .form-group select.form-control {
     padding: 16px 20px;
     background: #f6f6f6 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2333b98a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center;
@@ -6706,14 +6711,18 @@ div#checkoutCouponform {
 }
 
 
+#depositForm .form-group .form-control ,
 #withdrawForm .form-group .form-control {
+    color: #455359;
+    font-weight: 600;
     border-color: #33b98a;
-    border-width: 2px;
+    border-width: 1px;
 }
+#depositForm .form-group .input-group-text,
 #withdrawForm .form-group .input-group-text {
     background: #33b98a;
     border-color: #33b98a;
-    border-width: 2px;
+    border-width: 1px;
     color: #fff;
     font-weight: 600;
 }
