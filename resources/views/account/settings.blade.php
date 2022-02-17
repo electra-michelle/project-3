@@ -25,17 +25,36 @@
                             @endforeach
                             <h3 class="section-title">Profile information</h3>
                             <div class="form-inner">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Username</label>
-                                    <input type="text" id="username" value="{{ $user->username }}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">E-Mail</label>
-                                    <input type="text" id="email" value="{{ $user->email }}" readonly>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" name="name" id="name"
+                                                   value="{{ old('name', $user->name) }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <input type="text" name="country" id="country"
+                                                   value="{{ old('country', $user->country) }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Username</label>
+                                            <input type="text" id="username" value="{{ $user->username }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">E-Mail</label>
+                                            <input type="text" id="email" value="{{ $user->email }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
                                 </div>
                             </div>
                             <hr/>
@@ -63,17 +82,21 @@
                             </div>
                             <hr/>
                             <h3 class="section-title">Wallets</h3>
-                            @foreach($paymentSystems as $paymentSystem)
-                                <div class="form-inner">
-                                    <div class="form-group">
-                                        <label for="email">{{ $paymentSystem->name }} Wallet</label>
-                                        <input type="text" id="{{ $paymentSystem->value }}"
-                                               name="{{ $paymentSystem->value }}"
-                                               value="{{ old($paymentSystem->value, $wallets[$paymentSystem->id] ?? null) }}">
-                                    </div>
+                            <div class="form-inner">
+                                <div class="row">
+                                    @foreach($paymentSystems as $paymentSystem)
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">{{ $paymentSystem->name }} Wallet</label>
+                                                <input type="text" id="{{ $paymentSystem->value }}"
+                                                       name="{{ $paymentSystem->value }}"
+                                                       value="{{ old($paymentSystem->value, $wallets[$paymentSystem->id] ?? null) }}">
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                        @endforeach
-                        <!--// Different Address Form -->
+                            </div>
+                            <!--// Different Address Form -->
                             <div class="mt-3">
                                 <button class="custom-btn">Save settings</button>
                             </div>
