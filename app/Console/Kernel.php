@@ -42,7 +42,6 @@ class Kernel extends ConsoleKernel
             ->appendOutputTo(storage_path('logs/crypto/'. now()->format('d-m-Y') . '-accept.log'));
 
 
-
         $schedule->command('payouts:crypto')
             ->everyMinute()
             ->withoutOverlapping()
@@ -52,6 +51,11 @@ class Kernel extends ConsoleKernel
             ->everyMinute()
             ->withoutOverlapping()
             ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-epaycore.log'));
+
+        $schedule->command('payouts:paykassa')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-paykassa.log'));
 
     }
 

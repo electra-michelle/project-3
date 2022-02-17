@@ -65,32 +65,26 @@ class Api extends BasePayKassa  implements PayKassaInterface
     }
 
 
-	public function send($wallet, $amount, $currency, $paymentSystemValue, $data = [])
+	public function send($paymentId, $wallet, $amount, $currency, $paymentSystemValue, $data = [])
 	{
 
 		try {
-			$balance = $this->makeRequest('', [
+			return $this->makeRequest('', [
 				'func' => 'api_payment',
 				'shop' => config('paykassa.sci.id'),
 				'amount'   => $amount,
 				'currency' => $currency,
+                'comment' => $this->config['description'] . '#' . $paymentId,
 				'system' => $this->paymentSystemMappings($paymentSystemValue),
 				'paid_commission' => $data['commission'] ?? '',
 				'number' => $wallet,
 				'tag' => $data['tag'] ?? '',
-				'priority' =>  $data['priority'] ?? '',
+				'priority' =>  $data['priority'] ?? 'medium',
 			]);
 
-			if($balance->error) {
-				return [
-					'error' => true,
-					'message' => $balance->message
-				];
-			}
 
-			return ['error' => false];
 		} catch (\Exception $exception) {
-			return json_decode(json_encode(['error' => $exception->getMessage()]));
+			return json_encode(['error' => true, 'Information' => $exception->getMessage()]);
 		}
 	}
 
