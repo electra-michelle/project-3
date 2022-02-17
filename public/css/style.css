@@ -6745,3 +6745,8 @@ div#checkoutCouponform {
 .join-team .section-intro .section-title,
 .join-team .section-intro p {
     color: #fff; }
+
+
+.promo-section {
+    overflow-x: hidden;
+}
