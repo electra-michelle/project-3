@@ -2,25 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CustomHelper;
 use App\Models\PaymentSystem;
-use App\Models\Plan;
 use App\Models\PlanLimit;
-use Illuminate\Http\Request;
+use App\Services\PlanService;
 
 class InfoPageController extends Controller
 {
-    public function investments()
+    public function investments(PlanService $planService)
     {
-        $plans = Plan::with(['limits' => function ($query) {
-            $query->select('min_amount', 'max_amount', 'decimals', 'plan_limits.currency', 'plan_id')
-                ->join('payment_systems', function ($join) {
-                    $join->on('payment_systems.currency', '=', 'plan_limits.currency');
-                });
-        }])
-            ->withMax('periods', 'period_end')
-            ->withAvg('periods', 'interest')
-            ->get();
+        $plans = $planService->getPlanData();
 
         $paymentSystems = PaymentSystem::active()->get();
 
