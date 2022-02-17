@@ -58,7 +58,7 @@
 <!-- Service Section End -->
 
 <!-- Business Section Start -->
-<section class="business-section">
+<section class="business-section section-padding pt-0">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-sm-12 order-lg-1">
@@ -86,21 +86,22 @@
     </div>
 </section>
 <!-- Business Section End -->
-@include('plans')
 
 <!-- Talk Section Start -->
 <section class="talk-section">
     <div class="talk-bg" style="background-image: url('images/talk-bg.jpg');">
-		<div class="container">
-                <div class="talk-txt text-center">
-                    <h2 class="section-title">Ready to explore {{ config('app.name') }} platform?</h2>
-                    <p> Access third-party institutional private equity & hedge funds with low investment minimums. Build custom portfolios by using our turn-key alternative investment platform.</p>
-                    <a href="{{ route('register') }}" class="custom-btn">Access Now </a>
-                </div>
-			</div>
+        <div class="container py-5">
+            <div class="talk-txt text-center">
+                <h2 class="section-title">Ready to explore {{ config('app.name') }} platform?</h2>
+                <p> Access third-party institutional private equity & hedge funds with low investment minimums. Build custom portfolios by using our turn-key alternative investment platform.</p>
+                <a href="{{ route('register') }}" class="custom-btn">Access Now </a>
+            </div>
+        </div>
     </div>
 </section>
 <!-- Talk Section End -->
+@include('plans')
+
 
 @endsection
 @section('js')

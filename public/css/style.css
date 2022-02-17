@@ -2910,7 +2910,6 @@ article.service-content p {
 .talk-section {
   position: relative; }
   .talk-section .talk-bg {
-    min-height: 500px;
     background-size: cover;
     background-attachment: fixed; }
     .talk-section .talk-bg .video-block {
@@ -2925,8 +2924,7 @@ article.service-content p {
     padding: 60px;
     position: relative;
     z-index: 1;
-    background: #fff;
-    margin-top: -90px; }
+    background: #fff; }
     .talk-section .talk-txt .section-title {
       font-size: 36px; }
     .talk-section .talk-txt p {
@@ -2936,7 +2934,6 @@ article.service-content p {
       font-size: 18px; }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .talk-section .talk-bg {
-      min-height: 400px;
       background-position: center; }
     .talk-section .talk-txt .section-title {
       font-size: 32px; }
@@ -6726,3 +6723,6 @@ div#checkoutCouponform {
     font-weight: 600;
 }
 
+.banner-affiliate {
+
+}

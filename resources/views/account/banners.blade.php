@@ -10,6 +10,9 @@
         <img src="/images/testmonial-shape.png" alt="" class="anim-img">
         <img src="/images/testmonial-shape.png" alt="" class="anim-img anim-2">
         <div class="container">
+            <div class="banner text-center" style="color: #00415D">
+                <strong>Affiliate link:</strong> {{ route('referral', auth()->user()->ref_url) }}
+            </div>
             <div class="banner">
                 <h3 class="section-title">120x120px banner</h3>
                 <hr/>
