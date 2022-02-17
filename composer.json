@@ -8,6 +8,7 @@
         "php": "^8.0",
         "astrotomic/laravel-translatable": "^11.10",
         "biscolab/laravel-recaptcha": "^5.3",
+        "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "irazasyed/telegram-bot-sdk": "^3.5",
@@ -19,8 +20,7 @@
         "mews/purifier": "^3.3",
         "predis/predis": "^1.1",
         "propaganistas/laravel-disposable-email": "^2.1",
-        "simplesoftwareio/simple-qrcode": "^4.2",
-        "fakerphp/faker": "^1.9.1"
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

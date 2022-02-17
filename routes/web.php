@@ -19,6 +19,7 @@ use App\Http\Controllers\ReferralController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/ref/{referralUrl}', [ReferralController::class, 'store'])->name('referral');
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact', 'show')->name('contact');

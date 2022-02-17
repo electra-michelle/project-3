@@ -6073,7 +6073,7 @@ div#checkoutCouponform {
   font-weight: 400;
   margin-bottom: 20px;
   font-size: 14px; }
-  .checkout-coupon h6 button {
+  .checkout-coupon h6 span {
     border: none;
     background: none;
     font-size: 16px;

@@ -6,6 +6,7 @@ use App\Models\PaymentSystem;
 use App\PaymentSystems\ePayCore;
 use App\Services\CryptoNodeService;
 use Illuminate\Console\Command;
+use App\PaymentSystems\PayKassa\Api as PayKassaApi;
 
 class StatusCheck extends Command
 {
@@ -55,6 +56,11 @@ class StatusCheck extends Command
 
             } else {
                 switch ($paymentSystem->value) {
+					case 'tron_trc20_usdt':
+						$paykassa = new PayKassaApi();
+						$status = $paykassa->statusCheck();
+						$status['error'] ? $this->errorMessage($status['message']) : $this->statusOk();
+						break;
                     case 'epaycore':
                         $epaycore = new ePayCore();
                         $status = $epaycore->checkStatus();

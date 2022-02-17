@@ -13,6 +13,12 @@
                 <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                     <div class="acount-wrap login-wrap">
                         <form action="{{ route('register') }}" method="post">
+						<div class="checkout-coupon">
+
+							<h6> Your upline:
+								<span>{{ $upline->username ?? 'n/a' }}</span>
+							</h6>
+						</div>
                             @error(recaptchaFieldName())
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

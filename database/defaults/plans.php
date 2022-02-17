@@ -33,6 +33,10 @@ return [
                 'min_amount' => 65,
                 'max_amount' => 6500
             ],
+            'USDT' => [
+                'min_amount' => 10,
+                'max_amount' => 1000
+            ],
         ]
     ],
     'standard' => [
@@ -49,6 +53,10 @@ return [
         ],
         'limits' => [
             'USD' => [
+                'min_amount' => 10,
+                'max_amount' => 5000
+            ],
+            'USDT' => [
                 'min_amount' => 10,
                 'max_amount' => 5000
             ],
@@ -84,6 +92,10 @@ return [
         ],
         'limits' => [
             'USD' => [
+                'min_amount' => 10,
+                'max_amount' => 10000
+            ],
+            'USDT' => [
                 'min_amount' => 10,
                 'max_amount' => 10000
             ],
