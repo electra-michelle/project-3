@@ -38,7 +38,7 @@ stopwaitsecs=3600
 
 
 ##Notification bot setup
-1.Create new bot with BotFather and disable bots privacy mode
+1. Create new bot with BotFather and disable bots privacy mode
 2. Fill `.env` config with `TELEGRAM_BOT_NOTIFICATIONS_TOKEN=` newly generated token
 3. Fill `.env` config with `TELEGRAM_BOT_NOTIFICATIONS_WEBHOOK_URL=https://{domain}/api/telegram/setup`
 4. run `php artisan telegram:webhook notifications --setup`

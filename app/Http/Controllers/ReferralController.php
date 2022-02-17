@@ -10,7 +10,7 @@ class ReferralController extends Controller
     public function store($referralUrl)
     {
         $upline = User::where('ref_url', $referralUrl)->first();
-        if($upline && auth()->guest()) {
+        if ($upline && auth()->guest()) {
             session(['ref' => $upline->id]);
         }
 

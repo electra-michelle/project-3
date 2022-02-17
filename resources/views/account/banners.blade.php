@@ -12,31 +12,39 @@
         <div class="container">
             <div class="banner">
                 <h3 class="section-title">120x120px banner</h3>
-                <hr />
-                <img src="https://via.placeholder.com/120x120.gif" alt="{{ config('app.name') }}" /><hr />
+                <hr/>
+                <img src="https://via.placeholder.com/120x120.gif" alt="{{ config('app.name') }}"/>
+                <hr/>
                 <h6>HTML code:</h6>
-                <pre><code class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/120x120.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
+                <pre><code
+                        class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/120x120.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
             </div>
             <div class="banner">
                 <h3 class="section-title">125x125px banner</h3>
-                <hr />
-                <img src="https://via.placeholder.com/125x125.gif" alt="{{ config('app.name') }}" /><hr />
+                <hr/>
+                <img src="https://via.placeholder.com/125x125.gif" alt="{{ config('app.name') }}"/>
+                <hr/>
                 <h6>HTML code:</h6>
-                <pre><code class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/125x125.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
+                <pre><code
+                        class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/125x125.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
             </div>
             <div class="banner">
                 <h3 class="section-title">468x60px banner</h3>
-                <hr />
-                <img src="https://via.placeholder.com/468x60.gif" alt="{{ config('app.name') }}" /><hr />
+                <hr/>
+                <img src="https://via.placeholder.com/468x60.gif" alt="{{ config('app.name') }}"/>
+                <hr/>
                 <h6>HTML code:</h6>
-                <pre><code class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/468x60.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
+                <pre><code
+                        class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/468x60.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
             </div>
             <div class="banner">
                 <h3 class="section-title">728x90px banner</h3>
-                <hr />
-                <img src="https://via.placeholder.com/728x90.gif" alt="{{ config('app.name') }}" /><hr />
+                <hr/>
+                <img src="https://via.placeholder.com/728x90.gif" alt="{{ config('app.name') }}"/>
+                <hr/>
                 <h6>HTML code:</h6>
-                <pre><code class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/727x90.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
+                <pre><code
+                        class="language-html">{{ '<a href="' . route('referral', auth()->user()->ref_url) . '"><img src="https://via.placeholder.com/727x90.gif" alt="' . config('app.name') . '" /></a>' }}</code></pre>
             </div>
         </div>
     </section>

@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-intro mb-0 mt-3">
@@ -70,15 +70,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($user->deposits as $deposit)
-                            <tr>
-                                <td>{{ $deposit->id }}</td>
-                                <td><span class="badge bg-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span></td>
-                                <td>{{ $deposit->status == 'pending' ? $deposit->created_at : $deposit->confirmed_at }}</td>
-                                <td>{{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }} ({{ $deposit->paymentSystem->name }})</td>
-                                <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($user->deposits as $deposit)
+                        <tr>
+                            <td>{{ $deposit->id }}</td>
+                            <td><span
+                                    class="badge bg-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span>
+                            </td>
+                            <td>{{ $deposit->status == 'pending' ? $deposit->created_at : $deposit->confirmed_at }}</td>
+                            <td>{{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }}
+                                ({{ $deposit->paymentSystem->name }})
+                            </td>
+                            <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

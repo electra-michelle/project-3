@@ -10,7 +10,6 @@ use App\Notifications\NewReferralNotification;
 use App\Notifications\RegistrationNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Rules\CryptoNodeRule;
 use App\Services\PaymentSystemService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -57,7 +56,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -73,7 +72,7 @@ class RegisterController extends Controller
         foreach ($this->paymentSystems as $paymentSystem) {
             $rules[$paymentSystem->value] = ['nullable', 'string', 'max:255'];
             $rule = PaymentSystemService::getValidationRule($paymentSystem->value);
-            if($rule) {
+            if ($rule) {
                 $rules[$paymentSystem->value][] = $rule;
             }
 
@@ -88,7 +87,7 @@ class RegisterController extends Controller
     protected function findUpline()
     {
         $upline = null;
-        if(session()->has('ref')) {
+        if (session()->has('ref')) {
             $upline = User::find(session('ref'))?->id;
 
             session()->forget('ref');
@@ -104,17 +103,17 @@ class RegisterController extends Controller
     {
         $ref_url = Str::random(12);
         $count = User::where('ref_url', '=', $ref_url)->count();
-        if($count > 0) {
+        if ($count > 0) {
             $ref_url = $this->generateReferralUrl();
         }
 
-       return $ref_url;
+        return $ref_url;
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)
@@ -130,7 +129,7 @@ class RegisterController extends Controller
         ]);
 
         foreach ($this->paymentSystems as $paymentSystem) {
-            if(isset($data[$paymentSystem->value])) {
+            if (isset($data[$paymentSystem->value])) {
                 $user->wallets()->create([
                     'wallet' => $data[$paymentSystem->value],
                     'payment_system_id' => $paymentSystem->id
@@ -154,11 +153,11 @@ class RegisterController extends Controller
     {
         $paymentSystems = $this->paymentSystems;
 
-		$upline = null;
-		if(session()->has('ref')) {
-			$upline = User::find(session('ref'));
-		}
-	
+        $upline = null;
+        if (session()->has('ref')) {
+            $upline = User::find(session('ref'));
+        }
+
         return view('auth.register', compact('paymentSystems', 'upline'));
     }
 
@@ -166,17 +165,17 @@ class RegisterController extends Controller
     /**
      * The user has been registered.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $user
      * @return mixed
      */
     protected function registered(Request $request, $user)
     {
-        if(CustomHelper::isEmailNotificationEnabled('registered')) {
+        if (CustomHelper::isEmailNotificationEnabled('registered')) {
             $user->notify(new RegistrationNotification());
         }
 
-        if(CustomHelper::isBroadcastNotificationEnabled('new_account')) {
+        if (CustomHelper::isBroadcastNotificationEnabled('new_account')) {
             StatisticsEvent::dispatch([
                 'type' => 'new_account',
                 'username' => Str::mask($user->username, '*', 4),
@@ -186,8 +185,8 @@ class RegisterController extends Controller
             ]);
         }
 
-        if($user->upline) {
-            if(CustomHelper::isEmailNotificationEnabled('new_referral')) {
+        if ($user->upline) {
+            if (CustomHelper::isEmailNotificationEnabled('new_referral')) {
                 $user->referredBy->notify(new NewReferralNotification($user->username));
             }
 

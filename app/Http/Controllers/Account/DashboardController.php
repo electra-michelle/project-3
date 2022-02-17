@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $user->load(['deposits' => fn($query) => (
-            $query->where('status', '<>', 'cancelled')
+        $query->where('status', '<>', 'cancelled')
             ->latest()
         ), 'deposits.paymentSystem']);
 

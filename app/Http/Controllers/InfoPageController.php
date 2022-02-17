@@ -18,9 +18,9 @@ class InfoPageController extends Controller
                     $join->on('payment_systems.currency', '=', 'plan_limits.currency');
                 });
         }])
-        ->withMax('periods', 'period_end')
-        ->withAvg('periods', 'interest')
-        ->get();
+            ->withMax('periods', 'period_end')
+            ->withAvg('periods', 'interest')
+            ->get();
 
         $paymentSystems = PaymentSystem::active()->get();
 
@@ -34,13 +34,13 @@ class InfoPageController extends Controller
 
         $minDepositLimits = [];
         $maxDepositLimits = [];
-        foreach($planLimits as $planLimit) {
+        foreach ($planLimits as $planLimit) {
             $minDepositLimits[] = $planLimit->min_amount . ' ' . $planLimit->currency;
             $maxDepositLimits[] = $planLimit->max_amount . ' ' . $planLimit->currency;
         }
 
         $withdrawMinimums = [];
-        foreach($paymentSystems->pluck('withdraw_minimum', 'currency') as $currency => $minimum) {
+        foreach ($paymentSystems->pluck('withdraw_minimum', 'currency') as $currency => $minimum) {
             $withdrawMinimums[] = round($minimum, 8) . ' ' . $currency;
         }
 

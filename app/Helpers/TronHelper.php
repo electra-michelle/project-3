@@ -7,17 +7,17 @@ use GuzzleHttp\Client;
 
 class TronHelper
 {
-	public $client;
-	
-	public function __construct()
+    public $client;
+
+    public function __construct()
     {
         $this->client = new Client([
             'base_uri' => 'https://api.trongrid.io/',
         ]);
 
     }
-	
-	    /**
+
+    /**
      * @param $uri
      * @param array $data
      * @param string $method
@@ -31,7 +31,7 @@ class TronHelper
             ($method == 'GET' ? 'query' : 'body') => $method == 'GET' ? $data : json_encode($data),
             'headers' => [
                 'content-type' => 'application/json',
-                'Accept'    => 'application/json',
+                'Accept' => 'application/json',
             ]
         ];
 
@@ -40,18 +40,18 @@ class TronHelper
         return json_decode($response->getBody()->__toString());
     }
 
-	
-	public function validateAddress($address)
-	{
-		try {
-			$response = $this->makeRequest('wallet/validateaddress', [
-				'address' => $address
-			]);
-			
-			return $response->result;
-		} catch(\Exception $e) {
-			 return false;
-		}
-		
-	}
+
+    public function validateAddress($address)
+    {
+        try {
+            $response = $this->makeRequest('wallet/validateaddress', [
+                'address' => $address
+            ]);
+
+            return $response->result;
+        } catch (\Exception $e) {
+            return false;
+        }
+
+    }
 }

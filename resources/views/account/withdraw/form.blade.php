@@ -13,7 +13,8 @@
                 @foreach($paymentSystems as $paymentSystem)
                     <div class="col-lg-4 col-md-3 mb-2">
                         <div class="quick-call">
-                            <div class="mb-3"><img src="/ps/{{$paymentSystem->value }}.png" alt="{{$paymentSystem->name }}" /></div>
+                            <div class="mb-3"><img src="/ps/{{$paymentSystem->value }}.png"
+                                                   alt="{{$paymentSystem->name }}"/></div>
                             <div class="qc-txt">
                                 <p>Available balance</p>
                                 <h4>{{ CustomHelper::formatAmount($paymentSystem->balance ?? 0, $paymentSystem->decimals) }} {{ $paymentSystem->currency }}</h4>
@@ -57,7 +58,7 @@
                     </div>
                 </div>
             </form>
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-intro mb-0">
@@ -81,9 +82,13 @@
                         @foreach($payouts as $payout)
                             <tr>
                                 <td>{{ $payout->id }}</td>
-                                <td><span class="badge bg-{{ $payout->status == 'paid' ? 'success' : 'warning' }}">{{ ucfirst($payout->status) }}</span></td>
+                                <td><span
+                                        class="badge bg-{{ $payout->status == 'paid' ? 'success' : 'warning' }}">{{ ucfirst($payout->status) }}</span>
+                                </td>
                                 <td>{{ $payout->status == 'pending' ? $payout->created_at : $payout->paid_at }}</td>
-                                <td>{{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }} ({{ $payout->paymentSystem->name }})</td>
+                                <td>{{ CustomHelper::formatAmount($payout->amount, $payout->paymentSystem->decimals) }} {{ $payout->paymentSystem->currency }}
+                                    ({{ $payout->paymentSystem->name }})
+                                </td>
                                 <td>{{ $payout->transaction_id }}</td>
                             </tr>
                         @endforeach

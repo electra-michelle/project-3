@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-3">
-                <table class="table table-striped" >
+                <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Joined</th>
@@ -42,7 +42,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if(count($referrals))
+                    @if(count($referrals))
                         @foreach($referrals as $referral)
                             <tr>
                                 <td>{{ $referral->created_at }}</td>
@@ -61,11 +61,11 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @else
-                            <tr>
-                                <td colspan="3" class="text-center">Referral list is empty</td>
-                            </tr>
-                        @endif
+                    @else
+                        <tr>
+                            <td colspan="3" class="text-center">Referral list is empty</td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>

@@ -42,7 +42,7 @@ class CustomHelper
     {
         $depositAddress = str_replace($paymentSystemValue . ':', '', $depositAddress);
 
-        return $paymentSystemValue . ':' .$depositAddress;
+        return $paymentSystemValue . ':' . $depositAddress;
     }
 
     public static function formatCalculatorJson(Collection $plans): string
