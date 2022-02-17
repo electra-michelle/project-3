@@ -72,12 +72,12 @@
                 <div class="about-business">
                     <h2 class="section-title">We connect people to opportunities<span class="color">.</span></h2>
                     <p>{{ config('app.name') }} investment process has captured what we believe to be the most attractive opportunities across forex markets and through market cycles</p>
-                    <ul> 
+                    <ul>
                         <li>Robust fundamental analysis to determine enterprise value</li>
                         <li>Analysis of capital structure to ensure high margin of safety</li>
                         <li>Identified catalysis to drive total return</li>
                     </ul>
-                    <a href="{{ route('investments') }}" class="custom-btn mt-4">See Investment Plans</a>
+                    <a href="{{ route('register') }}" class="custom-btn mt-4">Invest now</a>
                 </div>
 
             </div>
@@ -93,7 +93,7 @@
     <div class="talk-bg" style="background-image: url('images/talk-bg.jpg');">
 		<div class="container">
                 <div class="talk-txt text-center">
-                    <h2 class="section-title">Ready to explore Forextion platform?</h2>
+                    <h2 class="section-title">Ready to explore {{ config('app.name') }} platform?</h2>
                     <p> Access third-party institutional private equity & hedge funds with low investment minimums. Build custom portfolios by using our turn-key alternative investment platform.</p>
                     <a href="{{ route('register') }}" class="custom-btn">Access Now </a>
                 </div>

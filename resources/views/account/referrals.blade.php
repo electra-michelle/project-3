@@ -13,7 +13,7 @@
                 <div class="col-12 mb-3">
                     @include('account.__partials.ref_link')
                 </div>
-                <div class="col-lg-6 mb-2">
+                <div class="col-md-4 mb-2">
                     <div class="quick-call">
                         <div class="mb-3"><span><i class="fas fa-users"></i></span></div>
                         <div class="qc-txt">
@@ -22,12 +22,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 mb-2">
+                <div class="col-md-4 mb-2">
                     <div class="quick-call">
                         <div class="mb-3"><span><i class="fas fa-user-check"></i></span></div>
                         <div class="qc-txt">
                             <p>Active Referrals</p>
                             <h4>{{ $activeReferrals }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="quick-call">
+                        <div class="mb-3"><span><i class="fas fa-user-check"></i></span></div>
+                        <div class="qc-txt">
+                            <p>Commission Earned</p>
+                            <h4>≈{{ CustomHelper::formatAmount($earnedCommission, 2) }} USD</h4>
                         </div>
                     </div>
                 </div>
@@ -50,7 +59,7 @@
                                 <td>
                                     @if(count($referral->depositSum))
                                         @foreach($referral->depositSum as $depositSum)
-                                            {{ round($depositSum->total_deposit, $depositSum->decimals) }} {{ $depositSum->currency }}
+                                            {{ CustomHelper::formatAmount($depositSum->total_deposit, $depositSum->decimals) }} {{ $depositSum->currency }}
                                             @if (!$loop->last)
                                                 <span>/</span>
                                             @endif

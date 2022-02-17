@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExchangeRate;
 
 class ReferralController extends Controller
 {
@@ -11,21 +12,37 @@ class ReferralController extends Controller
      */
     public function index()
     {
-        $referrals = auth()->user()->referrals()
+        $user = auth()->user();
+
+        $referrals = $user->referrals()
             ->latest()
             ->paginate(15);
 
-        $totalReferrals = auth()->user()->referrals()
+        $totalReferrals = $user->referrals()
             ->count();
 
-        $activeReferrals = auth()->user()->referrals()
+        $activeReferrals = $user->referrals()
             ->whereHas('deposits', fn($query) => (
                 $query->where('status', 'active')
                     ->orWhere('status', 'finished')
                 ))
             ->count();
 
-        return view('account.referrals', compact('referrals', 'totalReferrals', 'activeReferrals'));
+        $histories = $user->histories()
+            ->where('action', 'commission_earned')
+            ->get();
+
+        $exchangeRates = ExchangeRate::get()->pluck('rate', 'from');
+        $earnedCommission = 0;
+        foreach ($histories as $history) {
+            $data = json_decode($history->data);
+            $rate = json_decode($exchangeRates[$data->currency] ?? [], true);
+            $earnedCommission += $data->currency == 'USD' ? $data->amount : ($data->amount * $rate['USD'] ?? 1);
+        }
+
+        $earnedCommission = round($earnedCommission, 2);
+
+        return view('account.referrals', compact('referrals', 'totalReferrals', 'activeReferrals', 'earnedCommission'));
     }
 
     /**
