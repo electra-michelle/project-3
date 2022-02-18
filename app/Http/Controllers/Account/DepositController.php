@@ -36,6 +36,7 @@ class DepositController extends Controller
     public function details($depositUrl)
     {
         $deposit = auth()->user()->deposits()
+            ->withMax('planPeriod', 'period_end')
             ->where('url', $depositUrl)
             ->firstOrFail();
 

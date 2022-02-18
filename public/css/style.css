@@ -5180,20 +5180,8 @@ section.testimonial-2.service-testimonial {
 /* -------------------------------------
 20.1 Shop Sidebar
 --------------------------------------- */
-.sidebar {
-  padding-left: 40px; }
   .sidebar.left-sidebar {
     padding: 0 40px 0 0; }
-  @media only screen and (min-width: 992px) and (max-width: 1200px) {
-    .sidebar {
-      padding-left: 20px; } }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .sidebar {
-      padding-left: 0; } }
-  @media only screen and (max-width: 767px) {
-    .sidebar {
-      padding-left: 0;
-      margin-top: 50px; } }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .main-content .sidebar {
@@ -6822,4 +6810,12 @@ div#checkoutCouponform {
 
 #depositForm .form-group .form-control {
     border-color: #c1c1c1;
+}
+
+#details .widget.link-widget li::before {
+    display: none;
+}
+
+#details .widget.link-widget li{
+    padding: 15px 20px
 }
