@@ -98,8 +98,8 @@
                             </tr>
                         @endforeach
                     @else
-                        <tr colspan="5">
-                            <td>Deposit list is empty</td>
+                        <tr>
+                            <td class="text-center" colspan="5">Deposit list is empty</td>
                         </tr>
                     @endif
                     </tbody>
