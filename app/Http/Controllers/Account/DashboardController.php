@@ -19,7 +19,8 @@ class DashboardController extends Controller
 
         $totalDeposit = $statisticsService->convertedDepositSum($user->id);
         $totalPayout = $statisticsService->convertedPayoutSum($user->id);
+        $balance = $statisticsService->convertedAvailableBalance($user->id);
 
-        return view('account.dashboard', compact('user', 'totalPayout', 'totalDeposit', 'referrals'));
+        return view('account.dashboard', compact('user', 'totalPayout', 'totalDeposit', 'referrals', 'balance'));
     }
 }

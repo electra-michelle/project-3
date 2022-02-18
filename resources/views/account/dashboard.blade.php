@@ -18,7 +18,7 @@
                         <div class="mb-3"><span><i class="fas fa-download"></i></span></div>
                         <div class="qc-txt">
                             <p>Total Deposit</p>
-                            <h4>≈{{ $totalDeposit }} USD</h4>
+                            <h4>≈{{ CustomHelper::formatAmount($totalDeposit, 2) }} USD</h4>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                         <div class="mb-3"><span><i class="fas fa-upload"></i></span></div>
                         <div class="qc-txt">
                             <p>Total Withdraw</p>
-                            <h4>≈{{ $totalPayout }} USD</h4>
+                            <h4>≈{{ CustomHelper::formatAmount($totalPayout, 2) }} USD</h4>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="mb-3"><span><i class="fas fa-wallet"></i></span></div>
                         <div class="qc-txt">
                             <p>Available balance</p>
-                            <h4>≈{{ $referrals }} USD</h4>
+                            <h4>≈{{ $balance }} USD</h4>
                         </div>
                     </div>
                 </div>
