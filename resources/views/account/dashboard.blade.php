@@ -10,9 +10,22 @@
     <section class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-12 mb-3">
-                    @include('account.__partials.ref_link')
+                <div class="col-md-6">
+                    <div class="checkout-coupon">
+                        <h6> Welcome back,
+                            <span style="border: 0;">{{ $user->name }} </span>
+                        </h6>
+                    </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="checkout-coupon text-md-right">
+                        <h6> Your upline:
+                            <span style="border: 0;">{{ $user->referredBy->username ?? 'n/a' }} </span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-3 col-md-6 mb-2">
                     <div class="quick-call">
                         <div class="mb-3"><span><i class="fas fa-download"></i></span></div>

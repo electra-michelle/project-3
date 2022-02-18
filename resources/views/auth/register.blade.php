@@ -14,7 +14,6 @@
                     <div class="acount-wrap login-wrap">
                         <form action="{{ route('register') }}" method="post">
                             <div class="checkout-coupon">
-
                                 <h6> Your upline:
                                     <span>{{ $upline->username ?? 'n/a' }}</span>
                                 </h6>
