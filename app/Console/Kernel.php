@@ -24,12 +24,12 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('store:statistics')
             ->hourly()
-            ->withoutOverlapping()
-            ->appendOutputTo(storage_path('logs/calculate/'. now()->format('d-m-Y') . '.log'));
+            ->withoutOverlapping();
 
         $schedule->command('calculate:profit')
             ->everyMinute()
-            ->withoutOverlapping();
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/calculate/'. now()->format('d-m-Y') . '.log'));
 
         $schedule->command('crypto:transactions')
             ->everyMinute()
