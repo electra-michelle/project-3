@@ -6750,3 +6750,10 @@ div#checkoutCouponform {
 .promo-section {
     overflow-x: hidden;
 }
+
+
+@media(max-width: 767px) {
+    .btn-group-lg>.btn, .btn-lg {
+        padding: 0.3rem 0.7rem
+    }
+}
