@@ -9,6 +9,7 @@ use App\Models\PaymentSystem;
 use App\Models\Plan;
 use App\Services\CryptoNodeService;
 use App\Services\DepositService;
+use App\Services\PlanService;
 use App\Services\WalletBalanceService;
 use Illuminate\Support\Str;
 use App\PaymentSystems\PayKassa\Sci as PayKassaSci;
@@ -18,10 +19,12 @@ class DepositController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(PlanService $planService)
     {
         $paymentSystems = PaymentSystem::active()->get();
-        $plans = Plan::get();
+        //$plans = Plan::get();
+
+        $plans = $planService->getPlanData();
 
         return view('account.deposit.create', compact('paymentSystems', 'plans'));
     }

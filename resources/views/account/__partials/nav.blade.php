@@ -6,7 +6,7 @@
                    href="{{ route('account.dashboard') }}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ Route::currentRouteName() == 'account.deposit' ? ' active' : null }}"
+                <a class="nav-link{{ Route::currentRouteName() == 'account.deposit' || Route::currentRouteName() == 'account.deposit.details' ? ' active' : null }}"
                    href="{{ route('account.deposit') }}">Make deposit</a>
             </li>
             <li class="nav-item">

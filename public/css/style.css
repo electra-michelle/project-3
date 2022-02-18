@@ -6462,7 +6462,7 @@ div#checkoutCouponform {
     transition: all .5s ease 0s
 }
 
-.pricingTable:hover {
+#plans .pricingTable:hover {
     transform: scale(1.05);
     z-index: 1
 }
@@ -6812,4 +6812,14 @@ div#checkoutCouponform {
     .text-xl-center {
         text-align: center !important;
     }
+}
+
+.deposit-form {
+    background: #ececec;
+    padding: 30px;
+    border: 1px solid #c1c1c1;
+}
+
+#depositForm .form-group .form-control {
+    border-color: #c1c1c1;
 }

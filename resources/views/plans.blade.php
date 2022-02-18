@@ -11,7 +11,7 @@ Our services are designed with financial professionals in mind.</p>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div id="plans" class="row">
                 <div class="col-md-12 text-center mb-5">
                     <div id="limits" class="btn-group btn-group-lg" role="group">
                         @foreach($paymentSystems->pluck('currency')->unique() as $currency)
