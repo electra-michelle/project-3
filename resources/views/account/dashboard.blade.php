@@ -83,19 +83,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($user->deposits as $deposit)
-                        <tr>
-                            <td>{{ $deposit->id }}</td>
-                            <td><span
-                                    class="badge bg-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span>
-                            </td>
-                            <td>{{ $deposit->status == 'pending' ? $deposit->created_at : $deposit->confirmed_at }}</td>
-                            <td>{{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }}
-                                ({{ $deposit->paymentSystem->name }})
-                            </td>
-                            <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
+                    @if(count($user->deposits))
+                        @foreach($user->deposits as $deposit)
+                            <tr>
+                                <td>{{ $deposit->id }}</td>
+                                <td><span
+                                        class="badge bg-{{ CustomHelper::statusColor($deposit->status) }}">{{ ucfirst($deposit->status) }}</span>
+                                </td>
+                                <td>{{ $deposit->status == 'pending' ? $deposit->created_at : $deposit->confirmed_at }}</td>
+                                <td>{{ CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals) }} {{ $deposit->paymentSystem->currency }}
+                                    ({{ $deposit->paymentSystem->name }})
+                                </td>
+                                <td>{{ $deposit->transaction_id ?: 'Waiting for payment...' }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr colspan="5">
+                            <td>Deposit list is empty</td>
                         </tr>
-                    @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
