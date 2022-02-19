@@ -105,6 +105,7 @@ class CryptoTransactions extends Command
                     }
                 }
 
+                $deposit->transaction_id = $transaction['txid'];
                 $deposit->confirmations = $transaction['confirmations'];
                 $deposit->save();
 

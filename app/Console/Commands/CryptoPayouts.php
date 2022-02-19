@@ -79,7 +79,7 @@ class CryptoPayouts extends Command
             if(!empty($toSend) && !empty($payoutIds))
             {
                 $nodeService = new CryptoNodeService($paymentSystem->value);
-                $transaction = $nodeService->node->sendMany($nodeService->config['account'], $toSend);
+                $transaction = $nodeService->node->sendmany($nodeService->config['account'], $toSend);
 
                 if(!$transaction) {
                     $this->info('Node error: ' . $nodeService->node->error);
