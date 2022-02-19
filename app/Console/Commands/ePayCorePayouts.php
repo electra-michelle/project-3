@@ -68,7 +68,7 @@ class ePayCorePayouts extends Command
                 $transfer = $this->ePayCore->transfer(
                     $wallet,
                     $amount,
-                    config('epaycore.api.description') . ' #' . $payouts->id,
+                    config('epaycore.api.description') . ' #' . $payout->id,
                     $payout->id
                 );
                 if(isset($transfer->error) || !$transfer) {

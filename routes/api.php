@@ -17,6 +17,6 @@ use App\Http\Controllers\Api\TelegramController;
 |
 */
 
-Route::post('epaycore/status', [ePayCoreController::class, 'accept']);
+Route::any('epaycore', [ePayCoreController::class, 'accept']);
 Route::post('paykassa/status', [PayKassaController::class, 'accept']);
 Route::any('telegram/setup', [TelegramController::class, 'setupWebhook']);
