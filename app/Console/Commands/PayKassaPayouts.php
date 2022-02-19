@@ -77,8 +77,8 @@ class PayKassaPayouts extends Command
                         continue;
                     }
 
-                    $this->payoutService->setAsPaid($payout->id, $transfer->data->transaction);
-                    $this->info('PAYOUT #' . $payout->id . ' has been completed with batch ' .  $transfer->data->transaction);
+                    $this->payoutService->setAsPaid($payout->id, $transfer->data->txid);
+                    $this->info('PAYOUT #' . $payout->id . ' has been completed with batch ' .  $transfer->data->txid);
                 }
             }
         }
