@@ -204,7 +204,7 @@ Javascript
                     toastr.success('Someone has just earned ' + content.amount + ' ' + content.currency + ' referral commission.', content.username)
                     break;
                 case 'withdraw':
-                    toastr.success('Someone has just withdrawn ' + content.amount + ' ' + content.currency + ' with ' + content.method + 'wallet.', content.username)
+                    toastr.success('Someone has just withdrawn ' + content.amount + ' ' + content.currency + ' with ' + content.method + ' wallet.', content.username)
                     break;
                 case 'income':
                     toastr.success('Someone has just received ' + content.amount + ' ' + content.currency + ' daily income to ' + content.method + 'wallet.', content.username)
