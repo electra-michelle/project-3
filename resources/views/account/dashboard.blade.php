@@ -58,7 +58,7 @@
                         <div class="mb-3"><span><i class="fas fa-wallet"></i></span></div>
                         <div class="qc-txt">
                             <p>Available balance</p>
-                            <h4>≈{{ $balance }} USD</h4>
+                            <h4>≈{{ CustomHelper::formatAmount($balance, 2) }} USD</h4>
                         </div>
                     </div>
                 </div>

@@ -15,16 +15,16 @@
             <x-adminlte-info-box title="Unread Messages" text="{{ $messages }}" icon="fas fa-lg fa-envelope" icon-theme="secondary"/>
         </div>
         <div class="col-xl-2 col-lg-4">
-            <x-adminlte-info-box title="In balances" text="≈{{ $inBalances }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
+            <x-adminlte-info-box title="In balances" text="≈{{ CustomHelper::formatAmount($inBalances, 2) }} USD" icon="fas fa-lg fa-wallet" icon-theme="info"/>
         </div>
         <div class="col-xl-2 col-lg-4">
-            <x-adminlte-info-box title="Total deposit" text="≈{{ $depositSum }} USD" icon="fas fa-lg fa-download" icon-theme="green"/>
+            <x-adminlte-info-box title="Total deposit" text="≈{{ CustomHelper::formatAmount($depositSum, 2) }} USD" icon="fas fa-lg fa-download" icon-theme="green"/>
         </div>
         <div class="col-xl-2 col-lg-4">
-            <x-adminlte-info-box title="Total withdraw" text="≈{{ $payoutSum }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
+            <x-adminlte-info-box title="Total withdraw" text="≈{{ CustomHelper::formatAmount($payoutSum, 2) }} USD" icon="fas fa-lg fa-upload" icon-theme="red"/>
         </div>
         <div class="col-xl-2 col-lg-4">
-            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ $pendingPayouts }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
+            <x-adminlte-info-box title="Pending Withdraws" text="≈{{ CustomHelper::formatAmount($pendingPayouts, 2) }} USD" icon="fas fa-lg fa-business-time" icon-theme="yellow"/>
         </div>
     </div>
     <div class="row">
