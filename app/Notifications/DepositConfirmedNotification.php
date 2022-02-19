@@ -43,7 +43,7 @@ class DepositConfirmedNotification extends Notification  implements ShouldQueue
         return (new MailMessage)
             ->subject('Deposit Activated')
             ->greeting('Congratulations, ' . $notifiable->name)
-            ->line('Your deposit of ' . $this->amount . ' ' . $this->currency . ' (' . $this->wallet . ') has been successfully activated at ' . $this->plan . '.');
+            ->line('Your deposit of ' . $this->amount . ' ' . $this->currency . ' (' . $this->wallet . ') has been successfully activated at ' . $this->plan . ' investment plan.');
     }
 
     /**
