@@ -22,8 +22,6 @@ class ePayCoreController extends Controller
      */
     public function accept(Request $request)
     {
-		
-		info($request->all());
 
         # run only if epc_batch && epc_sign provided
         if(!$request->has(['epc_batch', 'epc_sign'])) {
