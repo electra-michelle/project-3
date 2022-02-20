@@ -33,10 +33,10 @@ return [
                 'min_amount' => 65,
                 'max_amount' => 6500
             ],
-            'USDT' => [
-                'min_amount' => 10,
-                'max_amount' => 1000
-            ],
+//            'USDT' => [
+//                'min_amount' => 10,
+//                'max_amount' => 1000
+//            ],
         ]
     ],
     'standard' => [
@@ -56,10 +56,6 @@ return [
                 'min_amount' => 10,
                 'max_amount' => 5000
             ],
-            'USDT' => [
-                'min_amount' => 10,
-                'max_amount' => 5000
-            ],
             'LTC' => [
                 'min_amount' => 0.08,
                 'max_amount' => 40
@@ -76,6 +72,10 @@ return [
                 'min_amount' => 65,
                 'max_amount' => 32500
             ],
+//            'USDT' => [
+//                'min_amount' => 10,
+//                'max_amount' => 5000
+//            ],
         ]
     ],
     'professional' => [
@@ -95,10 +95,6 @@ return [
                 'min_amount' => 10,
                 'max_amount' => 10000
             ],
-            'USDT' => [
-                'min_amount' => 10,
-                'max_amount' => 10000
-            ],
             'LTC' => [
                 'min_amount' => 0.08,
                 'max_amount' => 80
@@ -115,6 +111,10 @@ return [
                 'min_amount' => 65,
                 'max_amount' => 65000
             ],
+//            'USDT' => [
+//                'min_amount' => 10,
+//                'max_amount' => 10000
+//            ],
         ]
     ],
 ];

@@ -17,7 +17,16 @@ class PaymentSystem extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'value', 'decimals', 'currency', 'is_active', 'payouts_enabled', 'withdraw_minimum', 'last_large_cron', 'last_visited_block'
+        'name',
+        'value',
+        'decimals',
+        'currency',
+        'is_active',
+        'payouts_enabled',
+        'withdraw_minimum',
+        'last_large_cron',
+        'last_visited_block',
+        'process_type'
     ];
 
 

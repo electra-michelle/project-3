@@ -19,6 +19,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'perfect_money',
         ], [
             'name'				=>	'Perfect Money',
+            'process_type'      => 'perfect_money',
             'decimals'			=>	2,
             'currency'			=>	'USD',
             'is_active'			=>	true,
@@ -30,6 +31,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'epaycore',
         ], [
             'name'				=>	'ePayCore',
+            'process_type'      => 'epaycore',
             'decimals'			=>	2,
             'currency'			=>	'USD',
             'is_active'			=>	true,
@@ -41,6 +43,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'bitcoin',
         ], [
             'name'				=>	'Bitcoin',
+            'process_type'      =>  'node',
             'decimals'			=>	8,
             'currency'			=>	'BTC',
             'is_active'			=>	true,
@@ -52,6 +55,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'bitcoincash',
         ], [
             'name'				=>	'Bitcoin Cash',
+            'process_type'      =>  'node',
             'decimals'			=>	8,
             'currency'			=>	'BCH',
             'is_active'			=>	true,
@@ -63,6 +67,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'litecoin',
         ], [
             'name'				=>	'Litecoin',
+            'process_type'      =>  'node',
             'decimals'			=>	8,
             'currency'			=>	'LTC',
             'is_active'			=>	true,
@@ -75,6 +80,7 @@ class PaymentSystemsSeeder extends Seeder
             'value'				=>	'dogecoin'
         ], [
             'name'				=>	'Dogecoin',
+            'process_type'      =>  'node',
             'decimals'			=>	8,
             'currency'			=>	'DOGE',
             'is_active'			=>	true,

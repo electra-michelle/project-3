@@ -24,6 +24,7 @@ return new class extends Migration
 			$table->decimal('withdraw_minimum', 15, 8)->default(0.00000000);
 			$table->string('last_visited_block')->nullable();
 			$table->timestamp('last_large_cron')->nullable();
+            $table->enum('process_type', ['perfect_money', 'paykassa', 'node', 'epaycore']);
         });
     }
 
