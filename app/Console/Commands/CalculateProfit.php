@@ -86,7 +86,7 @@ class CalculateProfit extends Command
 
                     $balanceService->addBalance($userAccount, $profit, $deposit->paymentSystem->decimals);
 
-                    $this->info(' Added income of ' . $profit . ' ' . $deposit->paymentSystem->currency . ' from deposit #' . $deposit->id . ' to user #' . $deposit->user_id . ' - ' . $deposit->paymentSysten->username);
+                    $this->info(' Added income of ' . $profit . ' ' . $deposit->paymentSystem->currency . ' from deposit #' . $deposit->id . ' to user #' . $deposit->user_id . ' - ' . $deposit->user->username);
 
                     $deposit->user->histories()->create([
                         'action' => 'daily_income',
