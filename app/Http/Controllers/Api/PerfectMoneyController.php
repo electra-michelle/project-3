@@ -19,8 +19,8 @@ class PerfectMoneyController extends Controller
      */
     public function accept(Request $request)
     {
+		
         $hash = $this->perfectMoney->generateHash($request);
-
         if ($hash != $request->input('V2_HASH')) {
             return 'ok';
         }
@@ -43,7 +43,7 @@ class PerfectMoneyController extends Controller
             $deposit->save();
 
             $timestamp = Carbon::createFromTimestamp($request->input('TIMESTAMPGMT'));
-            $history = $this->perfectMoney->getHistory(
+            $histories = $this->perfectMoney->getHistory(
                 $timestamp->format('d'), $timestamp->format('m'),
                 $timestamp->format('Y'), $timestamp->format('d'),
                 $timestamp->format('m'), $timestamp->format('Y'),
@@ -54,18 +54,18 @@ class PerfectMoneyController extends Controller
                 ]
             );
 
-            if ($history['status'] == 'success') {
+            if ($histories['status'] == 'success') {
 
                 /* ...insert some code to proccess valid payments here... */
-                foreach ($history['history'] as $history_data) {
+                foreach ($histories['history'] as $history) {
                     if (
-                        $history_data['batch'] == $request->input('PAYMENT_BATCH_NUM') &&
-                        $history_data['payment_id'] == $request->input('PAYMENT_ID') &&
-                        $history_data['type'] == 'Income' &&
-                        $request->input('PAYEE_ACCOUNT') == $history_data['payer_account'] &&
-                        $request->input('PAYMENT_AMOUNT') == $history_data['amount'] &&
-                        $request->input('PAYMENT_UNITS') == $history_data['currency'] &&
-                        $request->input('PAYER_ACCOUNT') == $history_data['payee_account']
+                        $history['batch'] == $request->input('PAYMENT_BATCH_NUM') &&
+                        $history['payment_id'] == $request->input('PAYMENT_ID') &&
+                        $history['type'] == 'Income' &&
+                        $request->input('PAYEE_ACCOUNT') == $history['payee_account'] &&
+                        $request->input('PAYMENT_AMOUNT') == $history['amount'] &&
+                        $request->input('PAYMENT_UNITS') == $history['currency'] &&
+                        $request->input('PAYER_ACCOUNT') == $history['payer_account']
                     ) {
 
                         $this->depositService->acceptDeposit($deposit, $request->input('PAYMENT_BATCH_NUM'));
