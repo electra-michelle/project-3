@@ -54,6 +54,30 @@ class Sci extends BasePayKassa  implements PayKassaInterface
         }
 
     }
+	
+	public function getRedirectUrl($orderId, $amount, $currency, $paymentSystemValue)
+	{
+        try {
+            $result = $this->makeRequest('', [
+                'func' => 'sci_create_order',
+                'order_id' => $orderId,
+                'amount' => $amount,
+                'currency' => $currency,
+                'system' => $this->paymentSystemMappings($paymentSystemValue),
+                'comment' => $this->config['description'] . ' #' . $orderId,
+                'phone' => false,
+                'paid_commission' => '',
+            ]);
+
+            if ($result->error) {
+                return false;
+            }
+
+            return $result->data->url	;
+        } catch (\Exception $exception) {
+            return false;
+        }
+	}
 
     public function checkPayment($hash)
     {

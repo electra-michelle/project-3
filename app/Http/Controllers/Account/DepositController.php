@@ -83,10 +83,16 @@ class DepositController extends Controller
             'deposit_address' => $depositAddress
         ]);
 
-		if(in_array($paymentSystem->value, config('paykassa.crypto')) && $request->input('payment_method') == 'payment_processor') {
+		if($paymentSystem->process_type == 'paykassa' && $request->input('payment_method') == 'payment_processor') {
 
 			$paykassa = new PayKassaSci();
-			$address = $paykassa->getCryptoAddress($deposit->id, $deposit->amount, $deposit->paymentSystem->currency, $deposit->paymentSystem->value);
+			if(in_array($paymentSystem->value, config('paykassa.crypto'))) {
+				$address = $paykassa->getCryptoAddress($deposit->id, $deposit->amount, $deposit->paymentSystem->currency, $deposit->paymentSystem->value);
+			} else {
+				$address = $paykassa->getRedirectUrl($deposit->id, $deposit->amount, $deposit->paymentSystem->currency, $deposit->paymentSystem->value);
+			}
+			
+			
 			if(!$address) {
 				$deposit->delete();
 				return redirect()->back()->withInput()

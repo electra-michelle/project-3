@@ -23,6 +23,7 @@ class PayKassaController extends Controller
      */
     public function accept(Request $request)
     {
+		
         if(!$request->has(['private_hash'])) {
             abort(404);
         }

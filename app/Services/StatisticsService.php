@@ -156,7 +156,7 @@ class StatisticsService
                 'balance' => 0
             ];
 
-            $walletData[$paymentSystem->value]['balance'] = PaymentSystemService::getBalance($paymentSystem->value);
+            $walletData[$paymentSystem->value]['balance'] = PaymentSystemService::getBalance($paymentSystem->value, $paymentSystem->process_type);
 
             if($paymentSystem->currency != 'USD') {
                 $exchangeRate = ExchangeRate::where('from', $paymentSystem->currency)->first();

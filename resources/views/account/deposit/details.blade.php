@@ -34,7 +34,7 @@
                                     @if($deposit->paymentSystem->process_type == 'perfect_money')
                                         {{ \App\PaymentSystems\PerfectMoney::render(['PAYMENT_ID' => $deposit->id, 'PAYMENT_AMOUNT' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals), 'SUGGESTED_MEMO' => config('perfectmoney.suggested_memo') .  " ID: "  .  $deposit->id, 'PAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?success',  'NOPAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?fail']) }}
                                 @else
-
+									@include('paymentsystems.paykassa')
                                 @endif
                                     @break
                                 @case('epaycore')

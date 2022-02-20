@@ -57,10 +57,10 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping()
             ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-perfectmoney.log'));
 
-//        $schedule->command('payouts:paykassa')
-//            ->everyMinute()
-//            ->withoutOverlapping()
-//            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-paykassa.log'));
+        $schedule->command('payouts:paykassa')
+            ->everyMinute()
+            ->withoutOverlapping()
+            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-paykassa.log'));
 
     }
 

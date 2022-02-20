@@ -40,7 +40,7 @@ class BasePayKassa
     protected function paymentSystemMappings($paymentSystemValue)
     {
         $systemId = [
-            "perfectmoney" => 2, // supported currencies USD
+            "perfect_money" => 2, // supported currencies USD
             "berty" => 7, // supported currencies RUB, USD
             "bitcoin" => 11, // supported currencies BTC
             "ethereum" => 12, // supported currencies ETH

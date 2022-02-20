@@ -36,7 +36,7 @@ class PaymentSystemService
 
     }
 
-    public static function getBalance(string $paymentSystemValue)
+    public static function getBalance(string $paymentSystemValue, string $processType)
     {
         switch ($paymentSystemValue) {
             case 'epaycore':
@@ -46,9 +46,14 @@ class PaymentSystemService
 				$paykassa = new PayKassaApi();
 				return $paykassa->getBalance($paymentSystemValue);
 			case 'perfect_money':
-                $perfectMoney = new PerfectMoney;
-                $perfectMoneyBalance = $perfectMoney->getBalance();
-                return $perfectMoneyBalance['status'] == 'success' ? $perfectMoneyBalance['balance'][config('perfectmoney.marchant_id')] : 0;
+				if($processType == 'paykassa') {
+					$paykassa = new PayKassaApi();
+					return $paykassa->getBalance('perfectmoney_usd');
+				} else {
+					$perfectMoney = new PerfectMoney;
+					$perfectMoneyBalance = $perfectMoney->getBalance();
+					return $perfectMoneyBalance['status'] == 'success' ? $perfectMoneyBalance['balance'][config('perfectmoney.marchant_id')] : 0;
+				}
             case 'bitcoin':
             case 'bitcoincash':
             case 'dash':

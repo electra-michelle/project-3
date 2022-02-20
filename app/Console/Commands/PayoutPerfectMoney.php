@@ -44,6 +44,7 @@ class PayoutPerfectMoney extends Command
     {
         $paymentSystem = PaymentSystem::where('value', 'perfect_money')
             ->where('payouts_enabled', true)
+			->where('process_type', 'perfect_money')
             ->active()
             ->first();
 

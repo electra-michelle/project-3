@@ -42,7 +42,7 @@ class PayKassaPayouts extends Command
      */
     public function handle()
     {
-        $paymentSystems = PaymentSystem::whereIn('value', config('paykassa.crypto'))
+        $paymentSystems = PaymentSystem::where('process_type', 'paykassa')
             ->where('payouts_enabled', true)
             ->active()
             ->get();
@@ -71,14 +71,16 @@ class PayKassaPayouts extends Command
                         $paymentSystem->currency,
                         $paymentSystem->value
                     );
-
+					
                     if($transfer->error) {
                         $this->info('PAYOUT #' . $payout->id . ' sending failed with message: ' . $transfer->Information ?? '' );
                         continue;
                     }
+					
+					$transactionId = $transfer->data->txid ?: $transfer->data->transaction;
 
-                    $this->payoutService->setAsPaid($payout->id, $transfer->data->txid);
-                    $this->info('PAYOUT #' . $payout->id . ' has been completed with batch ' .  $transfer->data->txid);
+                    $this->payoutService->setAsPaid($payout->id, $transactionId);
+                    $this->info('PAYOUT #' . $payout->id . ' has been completed with batch ' .  $transactionId);
                 }
             }
         }
