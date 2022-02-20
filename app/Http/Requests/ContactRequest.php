@@ -24,8 +24,8 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => ['required', 'min:10', 'max:50'],
-            'email' => ['required', 'min:10', 'email'],
+            'name'  => ['required', 'min:5', 'max:50'],
+            'email' => ['required', 'min:5', 'email', 'indisposable'],
             'subject' => ['required', 'min:3', 'max:50'],
             'message' => ['required', 'min:10'],
             recaptchaFieldName() => recaptchaRuleName()
