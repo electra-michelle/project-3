@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ePayCoreController;
+use App\Http\Controllers\Api\PerfectMoneyController;
 use App\Http\Controllers\Api\PayKassaController;
 use App\Http\Controllers\Api\TelegramController;
 
@@ -18,5 +19,7 @@ use App\Http\Controllers\Api\TelegramController;
 */
 
 Route::any('epaycore', [ePayCoreController::class, 'accept']);
+Route::any('perfectmoney', [PerfectMoneyController::class, 'accept']);
 Route::post('paykassa/status', [PayKassaController::class, 'accept']);
 Route::any('telegram/setup', [TelegramController::class, 'setupWebhook']);
+

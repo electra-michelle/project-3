@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\PaymentSystems\ePayCore;
+use App\PaymentSystems\PerfectMoney;
 use App\Rules\CryptoNodeRule;
 use App\Rules\TronNetworkRule;
 use App\PaymentSystems\PayKassa\Api as PayKassaApi;
@@ -12,7 +13,7 @@ class PaymentSystemService
 
     /**
      * @param string $paymentSystemValue
-     * @return CryptoNodeRule|string|void
+     * @return CryptoNodeRule|TronNetworkRule|string|null
      */
     public static function getValidationRule(string $paymentSystemValue)
     {
@@ -27,6 +28,8 @@ class PaymentSystemService
 				return new TronNetworkRule();
             case 'epaycore':
                 return 'regex:/^[Ee][\d]{6,9}$/';
+            case 'perfect_money':
+                return 'regex:/^U[0-9]+/';
             default:
                 return null;
         }
@@ -42,6 +45,10 @@ class PaymentSystemService
 			case 'tron_trc20_usdt':
 				$paykassa = new PayKassaApi();
 				return $paykassa->getBalance($paymentSystemValue);
+			case 'perfect_money':
+                $perfectMoney = new PerfectMoney;
+                $perfectMoneyBalance = $perfectMoney->getBalance();
+                return $perfectMoneyBalance['status'] == 'success' ? $perfectMoneyBalance['balance'][config('perfectmoney.marchant_id')] : 0;
             case 'bitcoin':
             case 'bitcoincash':
             case 'dash':

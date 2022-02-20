@@ -16,6 +16,17 @@ class PaymentSystemsSeeder extends Seeder
     {
 
         PaymentSystem::firstOrCreate([
+            'value'				=>	'perfect_money',
+        ], [
+            'name'				=>	'Perfect Money',
+            'decimals'			=>	2,
+            'currency'			=>	'USD',
+            'is_active'			=>	true,
+            'payouts_enabled'	=>	true,
+            'withdraw_minimum'	=>	0.10,
+        ]);
+
+        PaymentSystem::firstOrCreate([
             'value'				=>	'epaycore',
         ], [
             'name'				=>	'ePayCore',
@@ -72,15 +83,15 @@ class PaymentSystemsSeeder extends Seeder
         ]);
 
 
-        PaymentSystem::firstOrCreate([
-            'value'				=>	'tron_trc20_usdt'
-        ], [
-            'name'				=>	'Tether (TRC20)',
-            'decimals'			=>	6,
-            'currency'			=>	'USDT',
-            'is_active'			=>	true,
-            'payouts_enabled'	=>	true,
-            'withdraw_minimum'	=>	0.01,
-        ]);
+//        PaymentSystem::firstOrCreate([
+//            'value'				=>	'tron_trc20_usdt'
+//        ], [
+//            'name'				=>	'Tether (TRC20)',
+//            'decimals'			=>	6,
+//            'currency'			=>	'USDT',
+//            'is_active'			=>	true,
+//            'payouts_enabled'	=>	true,
+//            'withdraw_minimum'	=>	0.01,
+//        ]);
     }
 }

@@ -52,10 +52,15 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping()
             ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-epaycore.log'));
 
-        $schedule->command('payouts:paykassa')
+        $schedule->command('payouts:perfectmoney')
             ->everyMinute()
             ->withoutOverlapping()
-            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-paykassa.log'));
+            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-perfectmoney.log'));
+
+//        $schedule->command('payouts:paykassa')
+//            ->everyMinute()
+//            ->withoutOverlapping()
+//            ->appendOutputTo(storage_path('logs/payouts/'. now()->format('d-m-Y') . '-paykassa.log'));
 
     }
 
