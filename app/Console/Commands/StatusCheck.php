@@ -48,7 +48,7 @@ class StatusCheck extends Command
         {
             $this->line('Checking ' . $paymentSystem->name);
 
-            if(in_array($paymentSystem->value, array_keys(config('crypto')))) {
+            if($paymentSystem->process_type == 'node') {
                 $nodeService = new CryptoNodeService($paymentSystem->value);
                 $walletInfo = $nodeService->node->getwalletinfo();
 

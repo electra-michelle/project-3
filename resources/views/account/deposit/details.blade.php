@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 @if($deposit->status == 'pending')
-                    @if(in_array($deposit->paymentSystem->value, array_keys(config('crypto'))) || in_array($deposit->paymentSystem->value, config('paykassa.crypto')))
+                    @if($deposit->paymentSystem->process_type == 'node' || in_array($deposit->paymentSystem->value, config('paykassa.crypto')))
                         @include('paymentsystems.crypto', [
                             'imageDepositAddress' => in_array($deposit->paymentSystem->value, array_keys(config('crypto'))) ? CustomHelper::formatDepositAddress($deposit->deposit_address, $deposit->paymentSystem->value) : $deposit->deposit_address
                         ])
@@ -31,8 +31,12 @@
                         <div class="widget brochur-widget text-center">
                             @switch($deposit->paymentSystem->value)
                                 @case('perfect_money')
-                                    {{ \App\PaymentSystems\PerfectMoney::render(['PAYMENT_ID' => $deposit->id, 'PAYMENT_AMOUNT' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals), 'SUGGESTED_MEMO' => config('perfectmoney.suggested_memo') .  " ID: "  .  $deposit->id, 'PAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?success',  'NOPAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?fail']) }}
-                                        @break
+                                    @if($deposit->paymentSystem->process_type == 'perfect_money')
+                                        {{ \App\PaymentSystems\PerfectMoney::render(['PAYMENT_ID' => $deposit->id, 'PAYMENT_AMOUNT' => CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals), 'SUGGESTED_MEMO' => config('perfectmoney.suggested_memo') .  " ID: "  .  $deposit->id, 'PAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?success',  'NOPAYMENT_URL'  => route('account.deposit.details', $deposit->url) . '?fail']) }}
+                                @else
+
+                                @endif
+                                    @break
                                 @case('epaycore')
                                     {{ \App\PaymentSystems\ePayCore::renderForm(CustomHelper::formatAmount($deposit->amount, $deposit->paymentSystem->decimals), $deposit->id) }}
                                         @break

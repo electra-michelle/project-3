@@ -37,7 +37,7 @@ class AcceptCryptoTransactions extends Command
     public function handle()
     {
 
-        $paymentSystems = PaymentSystem::whereIn('value', collect(config('crypto'))->keys()->toArray())
+        $paymentSystems = PaymentSystem::where('process_type', 'node')
             ->active()
             ->get();
 
