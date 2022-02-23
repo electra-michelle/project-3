@@ -26,6 +26,10 @@ class PerfectMoneyController extends Controller
         }
 
         $deposit = Deposit::where('status', 'pending')
+			->whereHas('paymentSystem', function ($query) {
+				$query->where('value', 'perfect_money')
+					->where('process_type', 'perfect_money');
+			})
             ->findOrFail($request->input('PAYMENT_ID'));
 
         if (!$deposit) {

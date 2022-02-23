@@ -37,6 +37,9 @@ class ePayCoreController extends Controller
         }
 
         $deposit = Deposit::where('status', 'pending')
+			->whereHas('paymentSystem', function ($query) {
+				$query->where('value', 'epaycore');
+			})
             ->findOrFail($request->input('epc_order_id'));
 
         if(round($deposit->amount, 2) == round($request->input('epc_amount'), 2)) {

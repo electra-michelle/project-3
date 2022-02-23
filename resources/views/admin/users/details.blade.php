@@ -111,7 +111,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="deposits">
-                            <x-adminlte-datatable id="table-deposits" :heads="['ID','Date','Status','Plan','Amount','Type','Transaction ID','Action']">
+                            <x-adminlte-datatable id="table-deposits" :heads="['ID','Date','Status','Plan','Amount','Type','Action']">
                                 @foreach($user->deposits as $deposit)
                                     <tr>
                                         <td>{{ $deposit->id }}</td>

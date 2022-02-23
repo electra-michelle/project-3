@@ -34,6 +34,9 @@ class PayKassaController extends Controller
         }
 		
         $deposit = Deposit::where('status', 'pending')
+			->whereHas('paymentSystem', function (Builder $query) {
+				$query->where('process_type', 'paykassa');
+			})
             ->findOrFail($responseStatus->order_id);
 
         if( 
